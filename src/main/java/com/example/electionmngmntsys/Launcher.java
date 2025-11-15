@@ -1,8 +1,11 @@
-package com.example.electionmngmntsys;
+package main.java.com.example.electionmngmntsys;
 
-import javafx.application.Application;
+import main.java.com.example.electionmngmntsys.mhashmap.mHashMap;
+
+import java.util.Random;
 
 public class Launcher {
     public static void main(String[] args) {
+        mHashMap bee = new mHashMap();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.electionmngmntsys.mlinkedlist;
+package main.java.com.example.electionmngmntsys.mlinkedlist;
 
 import java.util.Iterator;
 
@@ -65,6 +65,19 @@ public class mLinkedList<T> implements Iterable<T>{
         }
         return (current != null) ? current.data : null;
     }
+    public int getIndex(T obj){
+        mNodeL<T> current = head;
+        int index = 0;
+        while(current != null){
+            if(current == obj) return index;
+            else{
+                current = current.next;
+                index++;
+            }
+
+        }
+        return -1;
+    }
 
     @Override
     public Iterator<T> iterator() {
@@ -83,4 +96,5 @@ public class mLinkedList<T> implements Iterable<T>{
             }
         };
     }
+
 }

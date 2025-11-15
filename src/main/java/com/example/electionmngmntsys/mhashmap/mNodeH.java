@@ -1,4 +1,4 @@
-package com.example.electionmngmntsys.mhashmap;
+package main.java.com.example.electionmngmntsys.mhashmap;
 
 public class mNodeH <X, Y>{
     X key;
@@ -12,4 +12,27 @@ public class mNodeH <X, Y>{
 
     }
 
+    public X getKey() {
+        return key;
+    }
+
+    public void setKey(X key) {
+        this.key = key;
+    }
+
+    public Y getValue() {
+        return value;
+    }
+
+    public void setValue(Y value) {
+        this.value = value;
+    }
+
+    public mNodeH<X, Y> getNext() {
+        return next;
+    }
+
+    public void setNext(mNodeH<X, Y> next) {
+        this.next = next;
+    }
 }
