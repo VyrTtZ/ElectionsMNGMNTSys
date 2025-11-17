@@ -1,4 +1,4 @@
-package electionmngmntsys.mlinkedlist;
+package main.electionmngmntsys.mlinkedlist;
 
 public class mNodeL <T>{
     public T data;

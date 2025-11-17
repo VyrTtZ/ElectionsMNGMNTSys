@@ -1,6 +1,7 @@
-package electionmngmntsys.mlinkedlist;
+package main.electionmngmntsys.mlinkedlist;
 
 import java.util.Iterator;
+
 
 public class mLinkedList<T> implements Iterable<T>{
     private mNodeL<T> head;

@@ -1,6 +1,8 @@
-package electionmngmntsys.mhashmap;
+package main.electionmngmntsys.mhashmap;
 
-import electionmngmntsys.mlinkedlist.*;
+import main.electionmngmntsys.mlinkedlist.mLinkedList;
+
+import main.electionmngmntsys.mlinkedlist.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

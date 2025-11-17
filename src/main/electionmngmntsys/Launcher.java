@@ -1,6 +1,6 @@
-package electionmngmntsys;
+package main.electionmngmntsys;
 
-import electionmngmntsys.mhashmap.mHashMap;
+import main.electionmngmntsys.mhashmap.mHashMap;
 
 public class Launcher {
     public static void main(String[] args) {
