@@ -1,4 +1,4 @@
-package main.java.com.example.electionmngmntsys.mlinkedlist;
+package com.example.electionmngmntsys.mlinkedlist;
 
 public class mNodeL <T>{
     public T data;

@@ -1,6 +1,6 @@
-package main.java.com.example.electionmngmntsys.mhashmap;
+package com.example.electionmngmntsys.mhashmap;
 
-import main.java.com.example.electionmngmntsys.mlinkedlist.*;
+import com.example.electionmngmntsys.mlinkedlist.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,12 +8,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class mHashMap<X, Y> {
-    private final int INITIALCAPACITY =97;
+    private final int INITIALCAPACITY =11;
     private int CURRENTCAPACITY = INITIALCAPACITY;
     private mLinkedList<mNodeH>[] map;
     private mLinkedList<mNodeH>[] temp;
-    private final int seed1 = 0x5A3C7F1B;
-    private final int seed2 = 0x1F8E6D2A;
+    private final long seed1 = 0x5A3C7F1B8E6D2A1FL;
+    private final long seed2 = 0x1F8E6D2A5A3C7F9BL;
     private double loadFactor = 0;
 
 
@@ -22,41 +22,32 @@ public class mHashMap<X, Y> {
         for (int i = 0; i < CURRENTCAPACITY; i++) map[i] = new mLinkedList<>();
     }
 
-    private int hash(Object o) {
-        int temp = 0;
-        byte[] bytes = toByteArray((Serializable) o);//FREAKY SERIALIZABLE 🥵
+    private int hash(Object o) { //some garbage copy of wyhash, we get like approx 24% collisions on 100 String, String entries
+        if (o == null) return 0;
 
+        byte[] data = toByteArray((Serializable) o);
+        long h = 0x6D796D6D796D6D6DL ^ data.length;
 
-        for(int i = 0; i < bytes.length ; i++) temp += bytes[i];
-        int tempChunks = 0;
-        mLinkedList<Integer> chunks = new mLinkedList<>();
-
-
-        for(int i = 0; i < bytes.length; i++){
-            tempChunks += bytes[i] & 0xFF; //
-            if((i + 1) % 8 == 0 || i == bytes.length - 1){
-                chunks.add(tempChunks);
-                tempChunks = 0;
+        for (int i = 0; i < data.length; i += 8) {
+            long chunk = 0;
+            for (int j = 0; j < 8; j++) {
+                int index = i + j;
+                long b = (index < data.length) ? (data[index] & 0xFFL) : 0L;
+                chunk |= b << (j * 8);
             }
+
+            h ^= chunk;
+            h *= (i + 8 <= data.length) ? seed1 : seed2; // tail action inbound
         }
-        int tempSeedUno = seed1;
-        int tempSeedDos = seed2;
+        h ^= h >>> 33;
+        h *= 0xff51afd7ed558cc5L;
+        h ^= h >>> 33;
+        h *= 0xc4ceb9fe1a85ec53L;
+        h ^= h >>> 33;
 
-        long seed = tempSeedUno;
-        for (int chunk : chunks) {
-            seed += chunk;
-            seed = (seed ^ (seed >>> 7));
-            seed = (seed ^ (seed >>> 11));
-            seed = seed ^ (seed >>> 13);
-        }
-        tempSeedUno = (int) seed;
-        tempSeedDos = (int) (seed >>> 17);
-
-
-        System.out.println(((tempSeedUno + tempSeedDos)*temp));
-        return (tempSeedUno + tempSeedDos);
-
+        return (int)(h ^ (h >>> 32));
     }
+
 
     public byte[] toByteArray(Serializable obj) {//https://www.baeldung.com/object-to-byte-array
         try(ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -84,8 +75,8 @@ public class mHashMap<X, Y> {
 
         map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].add(node);
 
-        loadFactor = size()/CURRENTCAPACITY;
-        if(loadFactor > .55) resize();
+        loadFactor = (double) size() /CURRENTCAPACITY;
+        if(loadFactor > .60) resize();
 
     }
 
