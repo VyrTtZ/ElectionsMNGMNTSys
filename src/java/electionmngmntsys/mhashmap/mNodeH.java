@@ -1,4 +1,4 @@
-package com.example.electionmngmntsys.mhashmap;
+package electionmngmntsys.mhashmap;
 
 public class mNodeH <X, Y>{
     X key;

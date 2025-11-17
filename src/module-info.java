@@ -1,8 +1,8 @@
-module main.java.com.example.electionmngmntsys {
+module electionmngmntsys {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens main.java.com.example.electionmngmntsys to javafx.fxml;
-    exports main.java.com.example.electionmngmntsys;
+    opens electionmngmntsys to javafx.fxml;
+    exports electionmngmntsys;
 }

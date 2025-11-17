@@ -1,6 +1,6 @@
-package com.example.electionmngmntsys.mhashmap;
+package electionmngmntsys.mhashmap;
 
-import com.example.electionmngmntsys.mlinkedlist.*;
+import electionmngmntsys.mlinkedlist.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

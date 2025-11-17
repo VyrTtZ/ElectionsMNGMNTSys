@@ -1,4 +1,4 @@
-package com.example.electionmngmntsys.mlinkedlist;
+package electionmngmntsys.mlinkedlist;
 
 public class mNodeL <T>{
     public T data;
