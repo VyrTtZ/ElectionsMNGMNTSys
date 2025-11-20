@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electionmngmntsys.electionEdit">
+   <children>
+      <TextField layoutX="93.0" layoutY="95.0" prefHeight="26.0" prefWidth="414.0" promptText="Presidential" />
+      <Label alignment="CENTER" layoutX="93.0" layoutY="63.0" prefHeight="22.0" prefWidth="414.0" text="Name of election">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="21.0" layoutY="14.0" prefHeight="18.0" prefWidth="557.0" text="Add/Update an election" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="48.0" layoutY="148.0" prefHeight="22.0" prefWidth="175.0" text="Election date">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="48.0" layoutY="180.0" promptText="20/11/2025" />
+      <Label alignment="CENTER" layoutX="392.0" layoutY="151.0" prefHeight="22.0" prefWidth="175.0" text="Election type">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="392.0" layoutY="180.0" prefHeight="26.0" prefWidth="175.0" />
+      <Label alignment="CENTER" layoutX="48.0" layoutY="242.0" prefHeight="22.0" prefWidth="175.0" text="Election location">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="392.0" layoutY="245.0" prefHeight="22.0" prefWidth="175.0" text="Number of winners">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="172.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="Back" />
+      <Button layoutX="341.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="Finish" />
+      <Slider blockIncrement="1.0" layoutX="392.0" layoutY="274.0" majorTickUnit="5.0" max="10.0" minorTickCount="1" prefHeight="22.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Label alignment="CENTER" layoutX="355.0" layoutY="274.0" prefHeight="26.0" prefWidth="29.0" text="1" />
+      <TextField layoutX="48.0" layoutY="274.0" prefHeight="26.0" prefWidth="175.0" text="Waterford" />
+   </children>
+</AnchorPane>

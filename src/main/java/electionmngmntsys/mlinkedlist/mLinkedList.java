@@ -1,4 +1,4 @@
-package main.electionmngmntsys.mlinkedlist;
+package electionmngmntsys.mlinkedlist;
 
 import java.util.Iterator;
 

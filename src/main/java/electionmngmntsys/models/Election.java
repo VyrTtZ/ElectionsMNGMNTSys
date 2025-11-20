@@ -1,6 +1,6 @@
-package main.electionmngmntsys.models;
+package electionmngmntsys.models;
 
-import main.electionmngmntsys.mlinkedlist.mLinkedList;
+import electionmngmntsys.mlinkedlist.mLinkedList;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package main.electionmngmntsys.models;
+package electionmngmntsys.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
