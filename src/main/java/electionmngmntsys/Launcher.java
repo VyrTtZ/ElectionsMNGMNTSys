@@ -33,11 +33,13 @@ public class Launcher extends Application {
         electionEditController.setLauncher(this);
         electionEditController.setElectionListPage(electionListPageController);
         electionListPageController.setLauncher(this);
+        electionListPageController.setElectionEdit(electionEditController);
 
         electionList = new Scene(electionListParent, 1920, 1080);
         electionEdit = new Scene(electionEditParent, 1920, 1080);
         Launcher.stage = stage;
         stage.setTitle("Election List");
+        stage.setFullScreenExitHint("");
         stage.setScene(electionList);
         stage.setFullScreen(true);
         stage.show();

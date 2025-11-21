@@ -111,7 +111,7 @@
                            <children>
                               <ScrollPane prefHeight="295.2" prefWidth="584.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
-                                    <Canvas fx:id="electionCanvas" height="1000.0" width="1526.0" />
+                                    <Canvas fx:id="electionCanvas" height="1000.0" width="1920.0" />
                                  </content>
                               </ScrollPane>
                            </children>

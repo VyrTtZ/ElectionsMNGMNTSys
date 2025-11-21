@@ -14,4 +14,17 @@ public class Utilities {
         electionTypeReverseMap.put(2, "European");
         electionTypeReverseMap.put(3, "Presidential");
     }
+
+    public static boolean isValidInteger(String str)
+    {
+        boolean flag=false;
+        for (int i = 0; i < str.length(); i++)
+        {
+            if (!Character.isDigit(str.charAt(i)) && str.charAt(i) != '-' && str.charAt(i) != '+')
+                return false;
+            if (Character.isDigit(str.charAt(i)))
+                flag=true;
+        }
+        return flag;
+    }
 }
