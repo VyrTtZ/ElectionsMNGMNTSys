@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electionmngmntsys.electionEdit">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electionmngmntsys.ElectionEdit">
    <children>
-      <TextField layoutX="93.0" layoutY="95.0" prefHeight="26.0" prefWidth="414.0" promptText="Presidential" />
+      <TextField fx:id="electionName" layoutX="93.0" layoutY="95.0" prefHeight="26.0" prefWidth="414.0" promptText="Presidential" />
       <Label alignment="CENTER" layoutX="93.0" layoutY="63.0" prefHeight="22.0" prefWidth="414.0" text="Name of election">
          <font>
             <Font size="15.0" />
@@ -27,13 +27,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <DatePicker layoutX="48.0" layoutY="180.0" promptText="20/11/2025" />
+      <DatePicker fx:id="electionDate" layoutX="48.0" layoutY="180.0" promptText="20/11/2025" />
       <Label alignment="CENTER" layoutX="392.0" layoutY="151.0" prefHeight="22.0" prefWidth="175.0" text="Election type">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="392.0" layoutY="180.0" prefHeight="26.0" prefWidth="175.0" />
+      <ChoiceBox fx:id="electionType" layoutX="392.0" layoutY="180.0" prefHeight="26.0" prefWidth="175.0" />
       <Label alignment="CENTER" layoutX="48.0" layoutY="242.0" prefHeight="22.0" prefWidth="175.0" text="Election location">
          <font>
             <Font size="15.0" />
@@ -44,10 +44,10 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="172.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="Back" />
-      <Button layoutX="341.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="101.0" text="Finish" />
-      <Slider blockIncrement="1.0" layoutX="392.0" layoutY="274.0" majorTickUnit="5.0" max="10.0" minorTickCount="1" prefHeight="22.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Button layoutX="172.0" layoutY="343.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="101.0" text="Back" />
+      <Button layoutX="341.0" layoutY="343.0" mnemonicParsing="false" onAction="#submit" prefHeight="26.0" prefWidth="101.0" text="Finish" />
+      <Slider fx:id="electionWinnerCount" blockIncrement="1.0" layoutX="392.0" layoutY="274.0" majorTickUnit="5.0" max="10.0" minorTickCount="1" prefHeight="22.0" prefWidth="175.0" showTickLabels="true" showTickMarks="true" value="1.0" />
       <Label alignment="CENTER" layoutX="355.0" layoutY="274.0" prefHeight="26.0" prefWidth="29.0" text="1" />
-      <TextField layoutX="48.0" layoutY="274.0" prefHeight="26.0" prefWidth="175.0" text="Waterford" />
+      <TextField fx:id="electionLocation" layoutX="48.0" layoutY="274.0" prefHeight="26.0" prefWidth="175.0" promptText="Waterford" />
    </children>
 </AnchorPane>

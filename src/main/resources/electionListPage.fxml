@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electionmngmntsys.electionListPage">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electionmngmntsys.ElectionListPage">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -81,7 +80,7 @@
                                                    <children>
                                                       <HBox prefHeight="52.0" prefWidth="659.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
-                                                            <ChoiceBox fx:id="electionFilterType" prefHeight="210.0" prefWidth="376.0" />
+                                                            <ChoiceBox fx:id="electionFilterType" prefHeight="66.0" prefWidth="359.0" />
                                                             <TextField fx:id="electionFilterContent" prefHeight="443.0" prefWidth="306.0" promptText="Something">
                                                                <font>
                                                                   <Font size="23.0" />
@@ -95,7 +94,7 @@
                                                    <children>
                                                       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.8" prefWidth="347.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
-                                                            <ChoiceBox fx:id="electionSort" maxHeight="1.7976931348623157E308" prefHeight="251.0" prefWidth="347.0" />
+                                                            <ChoiceBox fx:id="electionSort" maxHeight="1.7976931348623157E308" prefHeight="82.0" prefWidth="347.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -112,7 +111,7 @@
                            <children>
                               <ScrollPane prefHeight="295.2" prefWidth="584.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
-                                    <Canvas fx:id="electionCanvas" height="367.0" width="582.0" />
+                                    <Canvas fx:id="electionCanvas" height="1000.0" width="1920.0" />
                                  </content>
                               </ScrollPane>
                            </children>
