@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.Date;
 import static javafx.application.Application.launch;
 
 public class Launcher extends Application {
-    public Scene electionList;
+    public Scene electionList, electionEdit;
     public static Stage stage;
     public ElectionEdit electionEditController;
     public ElectionListPage electionListPageController;
@@ -30,9 +31,11 @@ public class Launcher extends Application {
         electionListPageController = electionListLoader.getController();
 
         electionEditController.setLauncher(this);
+        electionEditController.setElectionListPage(electionListPageController);
         electionListPageController.setLauncher(this);
 
-        electionList = new Scene(electionListParent);
+        electionList = new Scene(electionListParent, 1920, 1080);
+        electionEdit = new Scene(electionEditParent, 1920, 1080);
         Launcher.stage = stage;
         stage.setTitle("Election List");
         stage.setScene(electionList);
@@ -41,5 +44,22 @@ public class Launcher extends Application {
     }
     public static void main(String[] args) {
         launch();
+    }
+    public void switchScene(String dest)
+    {
+        switch (dest)
+        {
+            case "electionForm":
+                stage.setScene(electionEdit);
+                stage.setTitle("Election Form");
+                stage.setFullScreen(true);
+                break;
+            case "electionList":
+                stage.setScene(electionList);
+                stage.setTitle("Election List");
+                electionListPageController.draw();
+                stage.setFullScreen(true);
+                break;
+        }
     }
 }

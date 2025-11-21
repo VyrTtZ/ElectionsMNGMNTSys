@@ -6,17 +6,25 @@ import java.io.Serializable;
 import java.time.LocalDate;
 public class Election implements Serializable {
     private int type; //Local = 1; Euro = 2; Presidential = 3;
-    private String location;
+    private String location, name;
     private LocalDate yearDate;
     private int numOfWinners;
     private mLinkedList<Candidate> candidates = new mLinkedList<Candidate>();
 
-    public Election(int type, String location, LocalDate yearDate, int numOfWinners, mLinkedList<Candidate> candidates) {
+    public Election(String name, int type, String location, LocalDate yearDate, int numOfWinners) {
+        this.name = name;
         this.type = type;
         this.location = location;
         this.yearDate = yearDate;
         this.numOfWinners = numOfWinners;
-        this.candidates = candidates;
+        this.candidates=new mLinkedList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getType() {
