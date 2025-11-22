@@ -2,11 +2,11 @@ package electionmngmntsys.mhashmap;
 
 import electionmngmntsys.mlinkedlist.mLinkedList;
 import electionmngmntsys.mlinkedlist.mNodeL;
+import electionmngmntsys.models.Candidate;
+import electionmngmntsys.models.Election;
+import electionmngmntsys.models.Politician;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Iterator;
 
 public class mHashMap<X, Y> {
@@ -24,10 +24,11 @@ public class mHashMap<X, Y> {
         for (int i = 0; i < CURRENTCAPACITY; i++) map[i] = new mLinkedList<>();
     }
 
-    private int hash(Object o) { //some garbage copy of wyhash, we get like approx 24% collisions on 100 String, String entries
+    public int hash(Object o) { //some garbage copy of wyhash, we get like approx 24% collisions on 100 String, String entries
         if (o == null) return 0;
 
         byte[] data = toByteArray((Serializable) o);
+        for(byte b : data) System.out.print(b + " ");
         long h = 0x6D796D6D796D6D6DL ^ data.length;
 
         for (int i = 0; i < data.length; i += 8) {
@@ -51,41 +52,92 @@ public class mHashMap<X, Y> {
     }
 
 
-    public byte[] toByteArray(Serializable obj) {//https://www.baeldung.com/object-to-byte-array
+    public static byte[] toByteArray(Serializable obj) {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
-             ObjectOutputStream oos = new ObjectOutputStream(bos)) {
-            oos.writeObject(obj);
+             DataOutputStream dos = new DataOutputStream(bos)) {
+
+            if (obj instanceof Election e) {
+                dos.writeUTF(e.getName() != null ? e.getName() : "");
+                dos.writeInt(e.getType());
+                dos.writeUTF(e.getLocation() != null ? e.getLocation() : "");
+                dos.writeUTF(e.getYearDate() != null ? e.getYearDate().toString() : "");
+                dos.writeInt(e.getNumOfWinners());
+            }
+            else if (obj instanceof Candidate c) {
+                dos.writeUTF(c.getName() != null ? c.getName() : "");
+                dos.writeUTF(c.getDateOfBirth() != null ? c.getDateOfBirth().toString() : "");
+                dos.writeUTF(c.getParty() != null ? c.getParty() : "");
+                dos.writeUTF(c.getHomeCountry() != null ? c.getHomeCountry() : "");
+                dos.writeUTF(c.getImageURL() != null ? c.getImageURL() : "");
+                dos.writeUTF(c.getElection() != null && c.getElection().getName() != null
+                        ? c.getElection().getName() : "");
+                dos.writeInt(c.getVotes());
+            }
+            else if (obj instanceof Politician p) {
+                dos.writeUTF(p.getName() != null ? p.getName() : "");
+                dos.writeUTF(p.getDateOfBirth() != null ? p.getDateOfBirth().toString() : "");
+                dos.writeUTF(p.getParty() != null ? p.getParty() : "");
+                dos.writeUTF(p.getHomeCountry() != null ? p.getHomeCountry() : "");
+                dos.writeUTF(p.getImageURL() != null ? p.getImageURL() : "");
+            }
+            else if (obj instanceof mLinkedList<?> list) {
+                for (Object item : list) {
+                    byte[] itemBytes = toByteArray((Serializable) item);
+                    dos.writeInt(itemBytes.length);
+                    dos.write(itemBytes);
+                }
+            }
+            else if (obj != null) {
+                dos.writeUTF(obj.toString());
+            }
+
+            dos.flush();
             return bos.toByteArray();
+
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
         }
     }
 
+
+
     public void put(X key, Y value) {
         putNode(new mNodeH<>(key, value));
     }
 
+    private static boolean bytesEqual(byte[] a, byte[] b) {
+        if (a == null || b == null) return a == b;
+        if (a.length != b.length) return false;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != b[i]) return false;
+        }
+        return true;
+    }
     public void putNode(mNodeH<X, Y> node) {
 
-        if(node.key == null){
-            System.out.println("Cannot add key equal to null");
-            return;
-        }
-        for (mNodeH<X, Y> n : map[Math.floorMod(hash(node.key), CURRENTCAPACITY)]) {
-            if (node.key.equals(n.key)) {
+        if (node.key == null) return;
+
+        byte[] nodeBytes = toByteArray((Serializable) node.key);
+
+        int index = Math.floorMod(hash(node.key), CURRENTCAPACITY);
+
+        for (mNodeH<X, Y> n : map[index]) {
+            byte[] existingBytes = toByteArray((Serializable) n.key);
+            if (bytesEqual(nodeBytes, existingBytes)) {
                 n.value = node.value;
+                System.out.println("been juked");
                 return;
             }
         }
-        if (!map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].isEmpty()) System.out.println("Collision");
 
-        map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].add(node);
+        if (!map[index].isEmpty()) System.out.println("Collision");
+        map[index].add(node);
 
         loadFactor = (double) size() / CURRENTCAPACITY;
-        if (loadFactor > .60) resize();
-
+        if (loadFactor > 0.60) resize();
     }
+
 
     public mNodeH<X, Y> get(X key) {
         for (mNodeH<X, Y> n : map[Math.floorMod(hash(key), CURRENTCAPACITY)]) {
@@ -103,7 +155,6 @@ public class mHashMap<X, Y> {
     }
 
     private void resize() {
-        System.out.println("resizing");
         temp = map;
         CURRENTCAPACITY = CURRENTCAPACITY * 2;
         map = new mLinkedList[CURRENTCAPACITY];
@@ -119,8 +170,28 @@ public class mHashMap<X, Y> {
     }
 
     public boolean containsKey(X key) {
-        if (get(key)== null ) return false;
-        else return true;
+        byte[] keyBytes = mHashMap.toByteArray((Serializable) key);
+
+        for (mLinkedList<mNodeH> temp : map) {
+            for (mNodeH<X, Y> n : temp) {
+                if (bytesEqual(keyBytes, mHashMap.toByteArray((Serializable) n.key))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void printAllKeys() {
+        System.out.println("Keys in the hashmap:");
+        for (int i = 0; i < CURRENTCAPACITY; i++) {
+            mLinkedList<mNodeH> bucket = map[i];
+            if (!bucket.isEmpty()) {
+                for (mNodeH<X, Y> node : bucket) {
+                    System.out.println(node.getKey().toString());
+                }
+            }
+        }
     }
 
     public boolean containsValue(Y value) {

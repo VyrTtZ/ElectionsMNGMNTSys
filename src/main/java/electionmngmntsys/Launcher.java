@@ -1,7 +1,10 @@
 package electionmngmntsys;
 
 import electionmngmntsys.mhashmap.mHashMap;
+import electionmngmntsys.mlinkedlist.mLinkedList;
+import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
+import electionmngmntsys.models.Politician;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,6 +49,19 @@ public class Launcher extends Application {
         stage.show();
     }
     public static void main(String[] args) {
+
+        mLinkedList<String> testList = new mLinkedList<>();
+
+        Politician p = new Politician("testPol", null, null, null, null);
+        Election e = new Election("testE", 0, null,null, 0);
+        Candidate c = new Candidate("test", null, null, null, null, e, 0);
+
+        mHashMap hashMp = new mHashMap();
+        hashMp.put(c, null);
+        hashMp.put(testList, null);
+        hashMp.put(p, null);
+        hashMp.put(e, null);
+
         launch();
 
 

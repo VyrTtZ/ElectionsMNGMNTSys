@@ -1,8 +1,9 @@
 package electionmngmntsys.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Politician {
+public class Politician implements Serializable {
     private String name;
     private LocalDate dateOfBirth; //Format dd:mm:yyyy
     private String party;
