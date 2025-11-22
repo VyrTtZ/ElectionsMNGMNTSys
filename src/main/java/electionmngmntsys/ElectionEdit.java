@@ -46,6 +46,7 @@ public class ElectionEdit {
         Election tmp=new Election(electionName.getText(), Utilities.electionTypeMap.get(electionType.getValue()).getValue(), electionLocation.getText(), electionDate.getValue(), (int)electionWinnerCount.getValue());
         if (!electionListPage.elections.containsKey(tmp)) {
             electionListPage.mainList.add(tmp);
+            electionListPage.elections.put(tmp, 1);
             launcher.switchScene("electionList");
         }
         else {

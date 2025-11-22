@@ -137,6 +137,7 @@ public class ElectionListPage {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.isPresent() && result.get() == ButtonType.OK) {
                         mainList.remove(currentList.get(index));
+                        elections.remove(currentList.get(index));
                     }
                     draw();
                 });
@@ -148,6 +149,7 @@ public class ElectionListPage {
                     electionEdit.electionWinnerCount.setValue(tmp.getNumOfWinners());
                     electionEdit.updateIndex=index;
                     mainList.remove(tmp);
+                    elections.remove(tmp);
                     launcher.switchScene("electionForm");
                 });
                 validContextMenu.getItems().add(delete);
