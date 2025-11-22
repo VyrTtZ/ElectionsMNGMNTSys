@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="electionmngmntsys.ElectionFilterEdit">
+    <header>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="87.0" prefWidth="640.0">
+         <children>
+            <Label alignment="CENTER" layoutX="162.0" layoutY="10.0" prefHeight="17.0" prefWidth="320.0" text="Election Filters">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="80.0" layoutY="48.0" prefHeight="22.0" prefWidth="480.0" text="Leave empty for no filtering of that type. Excludes selected items">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutY="91.0" prefHeight="5.0" prefWidth="640.0" />
+         </children></AnchorPane>
+    </header>
+    <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="640.0">
+         <children>
+            <Label layoutX="63.0" layoutY="24.0" prefHeight="25.0" prefWidth="42.0" text="Type:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="localType" layoutX="185.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" text="Local" />
+            <CheckBox fx:id="europeanType" layoutX="314.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" text="European" />
+            <CheckBox fx:id="presidentialType" layoutX="466.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" text="Presidential" />
+            <Separator layoutY="58.0" prefHeight="5.0" prefWidth="640.0" />
+            <Label layoutX="12.0" layoutY="94.0" prefHeight="25.0" prefWidth="164.0" text="Include Year (, for multiple):">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="includeYearField" layoutX="188.0" layoutY="93.0" prefHeight="25.0" prefWidth="437.0" />
+            <Separator layoutX="-4.0" layoutY="193.0" prefHeight="5.0" prefWidth="640.0" />
+            <Label layoutX="12.0" layoutY="140.0" prefHeight="25.0" prefWidth="168.0" text="Exclude Year (, for multiple):">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="excludeYearField" layoutX="188.0" layoutY="140.0" prefHeight="25.0" prefWidth="437.0" />
+         </children></AnchorPane>
+    </content>
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+</DialogPane>

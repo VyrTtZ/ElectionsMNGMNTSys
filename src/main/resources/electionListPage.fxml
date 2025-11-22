@@ -78,16 +78,11 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <HBox prefHeight="52.0" prefWidth="659.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <ChoiceBox fx:id="electionFilterType" prefHeight="66.0" prefWidth="359.0" />
-                                                            <TextField fx:id="electionFilterContent" prefHeight="443.0" prefWidth="306.0" promptText="Something">
-                                                               <font>
-                                                                  <Font size="23.0" />
-                                                               </font>
-                                                            </TextField>
-                                                         </children>
-                                                      </HBox>
+                                                      <Label fx:id="electionFilters" alignment="CENTER" prefHeight="48.8" prefWidth="659.2" text="Active filters (right click to edit):" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <font>
+                                                            <Font size="30.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

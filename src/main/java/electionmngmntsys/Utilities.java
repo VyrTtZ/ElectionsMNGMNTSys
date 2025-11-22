@@ -38,4 +38,34 @@ public class Utilities {
         }
         return newList;
     }
+
+    public static int getCommaSeparatedStringSize(String string)
+    {
+        int size=1;
+        for (int i=0; i<string.length(); i++)
+        {
+            if (string.charAt(i)==',')
+                size++;
+        }
+        return size;
+    }
+
+    public static String getValueFromCommaSeparatedString(int index, String string)
+    {
+        int num=0;
+        String ret="";
+        for (int i=0; i<string.length(); i++)
+        {
+            if (string.charAt(i)==',')
+            {
+                num++;
+                if (num>index)
+                    return ret.trim();
+                ret="";
+            }
+            else
+                ret+=string.charAt(i);
+        }
+        return ret.trim();
+    }
 }
