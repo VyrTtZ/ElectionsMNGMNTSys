@@ -9,12 +9,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Random;
 
 
 public class ElectionListPage {
@@ -24,7 +24,8 @@ public class ElectionListPage {
     public ChoiceBox <String> electionSort;
     public TextField electionSearchBar;
     public Canvas electionCanvas;
-    public Label electionFilters;
+    public Label electionFilters, electionListInfo;
+    public CheckBox electionSearchByLocation;
 
     public ContextMenu validContextMenu =new ContextMenu(), invalidContextMenu =new ContextMenu();
 
@@ -36,6 +37,7 @@ public class ElectionListPage {
     public ElectionEdit electionEdit;
     private String includeYear="", excludeYear="";
     private boolean localType=true, europeanType=true, presidentialType=true; //True -> include
+    private boolean usingQuickSort =true;
 
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
@@ -63,7 +65,7 @@ public class ElectionListPage {
             }
         });
 
-        electionFilters.setOnContextMenuRequested(event -> {
+        electionFilters.setOnMousePressed(event -> {
             try {
                 FXMLLoader filterLoader = new FXMLLoader(getClass().getResource("/electionFilterEdit.fxml"));
                 DialogPane dialogContent = filterLoader.load();
@@ -109,6 +111,12 @@ public class ElectionListPage {
         });
 
         electionSort.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            draw();
+        });
+        electionSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            draw();
+        });
+        electionSearchBar.setOnAction(event -> {
             draw();
         });
         draw();
@@ -167,7 +175,7 @@ public class ElectionListPage {
     @FXML
     public void draw() {
         int x=50, y=20;
-        filterAndSort();
+        searchFilterAndSort();
         gc.setFill(Color.AQUAMARINE);
         Image image=new Image(getClass().getResourceAsStream("/images/election.jpg"));
         gc.fillRect(0, 0, electionCanvas.getWidth(), electionCanvas.getHeight());
@@ -185,17 +193,60 @@ public class ElectionListPage {
         }
     }
 
-    private void filterAndSort()
+    private void setInfo()
     {
-        currentList=Utilities.copyList(mainList);
-        filter(currentList);
-        quickSort(currentList, 0, currentList.size()-1, electionSort.getValue());
+        String text;
+        if (usingQuickSort)
+            text="Using quick sort. Try typing bogo! Total elections count: ";
+        else
+            text="Using bogo sort. Try typing quick! Total elections count: ";
+        text+=mainList.size();
+        text+=". Current elections count: ";
+        text+=currentList.size();
+        text+=".";
+        electionListInfo.setText(text);
     }
 
-    private void filter(mLinkedList <Election> list)
+    private void searchFilterAndSort()
+    {
+        currentList=Utilities.copyList(mainList);
+        search();
+        filter();
+        if (usingQuickSort)
+            quickSort(currentList, 0, currentList.size()-1, electionSort.getValue());
+        else
+            bogoSort(currentList, electionSort.getValue());
+        setInfo();
+    }
+
+    private void search()
     {
         mLinkedList <Election> newList = new mLinkedList<>();
-        for (Election e: list)
+        if (electionSearchBar.getText().isEmpty())
+            return;
+        if (electionSearchBar.getText().equalsIgnoreCase("bogo") || electionSearchBar.getText().equalsIgnoreCase("quick"))
+        {
+            usingQuickSort =!usingQuickSort;
+        }
+        for (Election e: currentList) {
+            if (electionSearchByLocation.isSelected())
+            {
+                if (e.getLocation().contains(electionSearchBar.getText()))
+                    newList.add(e);
+            }
+            else
+            {
+                if (e.getName().contains(electionSearchBar.getText()))
+                    newList.add(e);
+            }
+        }
+        currentList=Utilities.copyList(newList);
+    }
+
+    private void filter()
+    {
+        mLinkedList <Election> newList = new mLinkedList<>();
+        for (Election e: currentList)
         {
             boolean flag=false;
             switch (e.getType())
@@ -270,6 +321,47 @@ public class ElectionListPage {
                 return -first.getLocation().compareTo(second.getLocation());
         }
         return -1;
+    }
+
+    private void bogoSort(mLinkedList <Election> list, String criteria)
+    {
+        int iteration=0;
+        mHashMap <mLinkedList <Election>, Integer> map=new mHashMap<>();
+        while (!isSorted(list, criteria))
+        {
+            do
+            {
+                shuffleList(list);
+            }
+            while (map.containsKey(list));
+            iteration++;
+            if (iteration%10000==0)
+                System.out.println("Iteration: "+iteration);
+            if (iteration>=1000000000)
+            {
+                System.out.println("Unsorted, iteration count passed 1 billion, terminating...");
+                return;
+            }
+        }
+        System.out.println("Sorted in "+iteration+" iterations.");
+    }
+
+    private void shuffleList(mLinkedList list)
+    {
+        Random rand = new Random();
+        for (int i= list.size()-1; i>=0; i--)
+        {
+            int j=rand.nextInt(i+1);
+            list.swapNodes(i, j);
+        }
+    }
+
+    private boolean isSorted(mLinkedList <Election> list, String criteria)
+    {
+        for (int i = 0; i < list.size()-1; i++)
+            if (compare(list.get(i), list.get(i+1), criteria) < 0)
+                return false;
+        return true;
     }
 
     private void quickSort(mLinkedList <Election> list, int start, int end, String criteria)
