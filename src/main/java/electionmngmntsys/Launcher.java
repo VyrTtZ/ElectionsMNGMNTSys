@@ -1,5 +1,6 @@
 package electionmngmntsys;
 
+import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.models.Election;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +46,12 @@ public class Launcher extends Application {
         stage.show();
     }
     public static void main(String[] args) {
+        mHashMap test = new mHashMap();
+        test.put("test", "test");
+        System.out.println(test.containsKey("tet"));
         launch();
+
+
     }
     public void switchScene(String dest)
     {

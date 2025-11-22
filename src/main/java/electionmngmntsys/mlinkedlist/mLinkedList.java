@@ -90,7 +90,6 @@ public class mLinkedList<T> implements Iterable<T>{
             if (curr.next == b) prevB = curr;
             curr = curr.next;
         }
-        if (prevA == null || prevB == null) return;
 
         prevA.next = b;
         prevB.next = a;
