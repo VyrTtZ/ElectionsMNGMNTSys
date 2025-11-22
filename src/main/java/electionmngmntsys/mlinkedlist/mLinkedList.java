@@ -1,9 +1,10 @@
 package electionmngmntsys.mlinkedlist;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 
-public class mLinkedList<T> implements Iterable<T>{
+public class mLinkedList<T> implements Iterable<T>, Serializable {
     private mNodeL<T> head;
 
     public mLinkedList(){
@@ -56,7 +57,7 @@ public class mLinkedList<T> implements Iterable<T>{
         return count;
     }
 
-    public mNodeL<T> get(int i){
+    public T get(int i){
         mNodeL<T> current = head;
         int j = 0;
 
@@ -64,8 +65,21 @@ public class mLinkedList<T> implements Iterable<T>{
             current = current.next;
             j++;
         }
+        return (current != null) ? current.data : null;
+    }
+
+    public mNodeL<T> getNode(int i) {
+        mNodeL<T> current = head;
+        int j = 0;
+
+        while (current != null && j < i) {
+            current = current.next;
+            j++;
+        }
+
         return current;
     }
+
     public int getIndex(T obj){
         mNodeL<T> current = head;
         int index = 0;
@@ -81,26 +95,38 @@ public class mLinkedList<T> implements Iterable<T>{
     }
 
     public void swapNodes(mNodeL a, mNodeL b) {
-        mNodeL prevA = null;
-        mNodeL prevB = null;
-        mNodeL curr = head;
+        if (a == b) return;
 
+        mNodeL prevA = null, prevB = null, curr = head;
         while (curr != null && curr.next != null) {
             if (curr.next == a) prevA = curr;
             if (curr.next == b) prevB = curr;
             curr = curr.next;
         }
+        if (head == a) prevA = null;
+        if (head == b) prevB = null;
 
-        prevA.next = b;
-        prevB.next = a;
+        if (a != head && prevA == null) return;
+        if (b != head && prevB == null) return;
+
+        if (prevA != null) prevA.next = b;
+        else head = b;
+
+        if (prevB != null) prevB.next = a;
+        else head = a;
 
         mNodeL temp = a.next;
         a.next = b.next;
         b.next = temp;
     }
 
-    public void swapNodes(int a, int b) {
-        swapNodes(this.get(a), this.get(b));
+    public void swapNodes(int i, int j) {
+        if (i == j) return;
+
+        mNodeL<T> a = getNode(i);
+        mNodeL<T> b = getNode(j);
+        if (a == null || b == null) return;
+        swapNodes(a, b);
     }
 
     @Override
