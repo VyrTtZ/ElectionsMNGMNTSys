@@ -1,6 +1,7 @@
 package electionmngmntsys;
 
 import electionmngmntsys.mhashmap.mHashMap;
+import electionmngmntsys.mlinkedlist.mLinkedList;
 
 public class Utilities {
     public static mHashMap <String, Integer> electionTypeMap =new mHashMap();
@@ -26,5 +27,15 @@ public class Utilities {
                 flag=true;
         }
         return flag;
+    }
+
+    public static mLinkedList copyList(mLinkedList list)
+    {
+        mLinkedList newList=new mLinkedList();
+        for (Object o : list)
+        {
+            newList.add(o);
+        }
+        return newList;
     }
 }

@@ -56,7 +56,7 @@ public class mLinkedList<T> implements Iterable<T>{
         return count;
     }
 
-    public T get(int i){
+    public mNodeL<T> get(int i){
         mNodeL<T> current = head;
         int j = 0;
 
@@ -64,7 +64,7 @@ public class mLinkedList<T> implements Iterable<T>{
             current = current.next;
             j++;
         }
-        return (current != null) ? current.data : null;
+        return current;
     }
     public int getIndex(T obj){
         mNodeL<T> current = head;
@@ -80,7 +80,7 @@ public class mLinkedList<T> implements Iterable<T>{
         return -1;
     }
 
-    public void swapNodes(mNodeL head, mNodeL a, mNodeL b) {
+    public void swapNodes(mNodeL a, mNodeL b) {
         mNodeL prevA = null;
         mNodeL prevB = null;
         mNodeL curr = head;
@@ -97,6 +97,10 @@ public class mLinkedList<T> implements Iterable<T>{
         mNodeL temp = a.next;
         a.next = b.next;
         b.next = temp;
+    }
+
+    public void swapNodes(int a, int b) {
+        swapNodes(this.get(a), this.get(b));
     }
 
     @Override
