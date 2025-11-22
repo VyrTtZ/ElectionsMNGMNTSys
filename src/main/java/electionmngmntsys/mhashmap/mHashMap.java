@@ -28,6 +28,7 @@ public class mHashMap<X, Y> {
         if (o == null) return 0;
 
         byte[] data = toByteArray((Serializable) o);
+        for(byte b : data) System.out.print(b);
         long h = 0x6D796D6D796D6D6DL ^ data.length;
 
         for (int i = 0; i < data.length; i += 8) {
