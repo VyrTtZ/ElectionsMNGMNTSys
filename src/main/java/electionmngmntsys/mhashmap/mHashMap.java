@@ -53,6 +53,7 @@ public class mHashMap<X, Y> {
 
 
     public byte[] toByteArray(Serializable obj) {//https://www.baeldung.com/object-to-byte-array
+        System.out.println(obj.getClass());
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
             oos.writeObject(obj);

@@ -1,9 +1,10 @@
 package electionmngmntsys.mlinkedlist;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 
-public class mLinkedList<T> implements Iterable<T>{
+public class mLinkedList<T> implements Iterable<T>, Serializable {
     private mNodeL<T> head;
 
     public mLinkedList(){
