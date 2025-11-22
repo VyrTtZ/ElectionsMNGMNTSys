@@ -1,16 +1,16 @@
 package electionmngmntsys.mhashmap;
 
 import electionmngmntsys.mlinkedlist.mLinkedList;
-
-import electionmngmntsys.mlinkedlist.*;
+import electionmngmntsys.mlinkedlist.mNodeL;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
 
 public class mHashMap<X, Y> {
-    private final int INITIALCAPACITY =11;
+    private final int INITIALCAPACITY = 11;
     private int CURRENTCAPACITY = INITIALCAPACITY;
     private mLinkedList<mNodeH>[] map;
     private mLinkedList<mNodeH>[] temp;
@@ -47,84 +47,92 @@ public class mHashMap<X, Y> {
         h *= 0xc4ceb9fe1a85ec53L;
         h ^= h >>> 33;
 
-        return (int)(h ^ (h >>> 32));
+        return (int) (h ^ (h >>> 32));
     }
 
 
     public byte[] toByteArray(Serializable obj) {//https://www.baeldung.com/object-to-byte-array
-        try(ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(bos)) {
             oos.writeObject(obj);
             return bos.toByteArray();
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return null;
         }
     }
-    public void put(X key, Y value){
+
+    public void put(X key, Y value) {
         putNode(new mNodeH<>(key, value));
     }
-    public void putNode(mNodeH<X, Y> node){
 
+    public void putNode(mNodeH<X, Y> node) {
+
+        if(node.key == null){
+            System.out.println("Cannot add key equal to null");
+            return;
+        }
         for (mNodeH<X, Y> n : map[Math.floorMod(hash(node.key), CURRENTCAPACITY)]) {
             if (node.key.equals(n.key)) {
                 n.value = node.value;
                 return;
             }
         }
-        if(!map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].isEmpty()) System.out.println("COllision");
+        if (!map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].isEmpty()) System.out.println("COllision");
 
         map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].add(node);
 
-        loadFactor = (double) size() /CURRENTCAPACITY;
-        if(loadFactor > .60) resize();
+        loadFactor = (double) size() / CURRENTCAPACITY;
+        if (loadFactor > .60) resize();
 
     }
 
-    public mNodeH<X, Y> get(X key){
-        for (mNodeH<X,Y> n : map[Math.floorMod(hash(key), CURRENTCAPACITY)]) {
+    public mNodeH<X, Y> get(X key) {
+        for (mNodeH<X, Y> n : map[Math.floorMod(hash(key), CURRENTCAPACITY)]) {
             if (key.equals(n.key)) return n;
         }
         return null;
     }
 
-    public int size(){
+    public int size() {
         int retVal = 0;
-        for(int i = 0; i < map.length; i++){
-            if(!map[i].isEmpty()) retVal++;
+        for (int i = 0; i < map.length; i++) {
+            if (!map[i].isEmpty()) retVal++;
         }
         return retVal;
     }
 
-    private void resize(){
+    private void resize() {
         System.out.println("resizing");
         temp = map;
-        CURRENTCAPACITY = CURRENTCAPACITY*2;
+        CURRENTCAPACITY = CURRENTCAPACITY * 2;
         map = new mLinkedList[CURRENTCAPACITY];
         for (int i = 0; i < CURRENTCAPACITY; i++) map[i] = new mLinkedList<>();
-        for(int i = 0; i < temp.length; i++){
-            if(temp[i] != null){
-                for(mNodeH n : temp[i]){
-                    put((X)n.getKey(), (Y)n.getValue());
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                for (mNodeH n : temp[i]) {
+                    put((X) n.getKey(), (Y) n.getValue());
                 }
             }
         }
 
     }
-    public boolean containsKey(X key){
-        if(get(key).equals(null)) return false;
+
+    public boolean containsKey(X key) {
+        if (get(key)== null ) return false;
         else return true;
     }
-    public boolean containsValue(Y value){
-        for(int i = 0; i < CURRENTCAPACITY; i++){
-            for(mNodeH n : map[i]){
-                if(n.getValue().equals(value)) return true;
+
+    public boolean containsValue(Y value) {
+        for (int i = 0; i < CURRENTCAPACITY; i++) {
+            for (mNodeH n : map[i]) {
+                if (n.getValue().equals(value)) return true;
             }
         }
         return false;
     }
-    public void remove(X key){
+
+    public void remove(X key) {
         int index = Math.floorMod(hash(key), CURRENTCAPACITY);
         if (map[index] != null) {
             map[index].remove(get(key));
@@ -133,6 +141,12 @@ public class mHashMap<X, Y> {
 
     public int getCURRENTCAPACITY() {
         return CURRENTCAPACITY;
+    }
+
+    public void swapValues(mNodeH swapping, mNodeH toSwapWith) {
+        Y temp = (Y) swapping.value;
+        swapping.value = toSwapWith.value;
+        toSwapWith.value = temp;
     }
 }
 

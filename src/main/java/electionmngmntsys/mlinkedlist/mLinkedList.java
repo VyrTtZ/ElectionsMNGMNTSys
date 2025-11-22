@@ -80,6 +80,26 @@ public class mLinkedList<T> implements Iterable<T>{
         return -1;
     }
 
+    public void swapNodes(mNodeL head, mNodeL a, mNodeL b) {
+        mNodeL prevA = null;
+        mNodeL prevB = null;
+        mNodeL curr = head;
+
+        while (curr != null && curr.next != null) {
+            if (curr.next == a) prevA = curr;
+            if (curr.next == b) prevB = curr;
+            curr = curr.next;
+        }
+        if (prevA == null || prevB == null) return;
+
+        prevA.next = b;
+        prevB.next = a;
+
+        mNodeL temp = a.next;
+        a.next = b.next;
+        b.next = temp;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
