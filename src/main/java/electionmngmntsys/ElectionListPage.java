@@ -94,12 +94,12 @@ public class ElectionListPage {
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.isPresent() && result.get() == ButtonType.OK) {
-                        mainList.remove(mainList.get(index).data);
+                        mainList.remove(mainList.get(index));
                     }
                     draw();
                 });
                 update.setOnAction(e -> {
-                    Election tmp=mainList.get(index).data;
+                    Election tmp=mainList.get(index);
                     electionEdit.electionName.setText(tmp.getName());
                     electionEdit.electionLocation.setText(tmp.getLocation());
                     electionEdit.electionType.setValue(Utilities.electionTypeReverseMap.get(tmp.getType()).getValue());
@@ -175,19 +175,19 @@ public class ElectionListPage {
         if (start>=end)
             return;
         if (start==end-1) {
-            if (compare(list.get(start).data, list.get(end).data, criteria) == 1)
+            if (compare(list.get(start), list.get(end), criteria) == 1)
                 list.swapNodes(start, end);
             return;
         }
         int i=start, j=end-1;
-        Election pivot=list.get(end).data;
+        Election pivot=list.get(end);
         while (i<=j)
         {
-            if (compare(list.get(i).data, pivot, criteria) >=0)
+            if (compare(list.get(i), pivot, criteria) >=0)
             {
                 while (i<=j)
                 {
-                    if (compare(list.get(j).data, pivot, criteria) <0)
+                    if (compare(list.get(j), pivot, criteria) <0)
                         break;
                     j--;
                 }

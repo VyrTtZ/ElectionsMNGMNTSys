@@ -56,7 +56,6 @@
             <Font size="40.0" />
          </font></Button>
       <Slider fx:id="electionWinnerCount" blockIncrement="1.0" layoutX="1105.0" layoutY="630.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="50.0" prefWidth="525.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
-      <Label alignment="CENTER" layoutX="355.0" layoutY="274.0" prefHeight="26.0" prefWidth="29.0" text="1" />
       <TextField fx:id="electionLocation" layoutX="290.0" layoutY="630.0" prefHeight="50.0" prefWidth="525.0" promptText="Waterford" />
       <Label fx:id="electionSliderReport" alignment="CENTER" layoutX="1669.0" layoutY="630.0" prefHeight="50.0" prefWidth="52.0" text="1">
          <font>

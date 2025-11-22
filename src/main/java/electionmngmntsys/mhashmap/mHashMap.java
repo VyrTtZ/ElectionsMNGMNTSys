@@ -28,7 +28,6 @@ public class mHashMap<X, Y> {
         if (o == null) return 0;
 
         byte[] data = toByteArray((Serializable) o);
-        for(byte b : data) System.out.print(b);
         long h = 0x6D796D6D796D6D6DL ^ data.length;
 
         for (int i = 0; i < data.length; i += 8) {
@@ -53,7 +52,6 @@ public class mHashMap<X, Y> {
 
 
     public byte[] toByteArray(Serializable obj) {//https://www.baeldung.com/object-to-byte-array
-        System.out.println(obj.getClass());
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
             oos.writeObject(obj);
@@ -80,7 +78,7 @@ public class mHashMap<X, Y> {
                 return;
             }
         }
-        if (!map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].isEmpty()) System.out.println("COllision");
+        if (!map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].isEmpty()) System.out.println("Collision");
 
         map[Math.floorMod(hash(node.key), CURRENTCAPACITY)].add(node);
 

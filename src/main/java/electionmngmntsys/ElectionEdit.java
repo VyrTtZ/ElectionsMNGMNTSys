@@ -44,17 +44,13 @@ public class ElectionEdit {
     @FXML
     public void submit() {
         Election tmp=new Election(electionName.getText(), Utilities.electionTypeMap.get(electionType.getValue()).getValue(), electionLocation.getText(), electionDate.getValue(), (int)electionWinnerCount.getValue());
-/*
-        electionListPage.mainList.add(tmp);
-        if (updateIndex!=-1)
-        {
-            electionListPage.mainList.swapNodes(electionListPage.mainList.get(electionListPage.mainList.size()-1), electionListPage.mainList.get(updateIndex));
-            electionListPage.mainList.remove(electionListPage.mainList.get(electionListPage.mainList.size()-1).data);
-        }
-        launcher.switchScene("electionList");
-*/
         if (!electionListPage.elections.containsKey(tmp)) {
             electionListPage.mainList.add(tmp);
+            if (updateIndex!=-1)
+            {
+                electionListPage.mainList.swapNodes(electionListPage.mainList.size()-1, updateIndex);
+                electionListPage.mainList.remove(electionListPage.mainList.get(electionListPage.mainList.size()-1));
+            }
             launcher.switchScene("electionList");
         }
         else {

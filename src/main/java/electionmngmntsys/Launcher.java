@@ -46,12 +46,6 @@ public class Launcher extends Application {
         stage.show();
     }
     public static void main(String[] args) {
-        mHashMap test = new mHashMap();
-        test.put("test", "test");
-        System.out.println(test.containsKey("tet"));
-        Election tmp = new Election("testing", 0, null, null, 0);
-        test.put(tmp.getName(), tmp);
-        System.out.println("election test: " + test.containsKey("testing")  );
         launch();
 
 
