@@ -3,6 +3,7 @@ package electionmngmntsys;
 import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
 import electionmngmntsys.models.Election;
+import electionmngmntsys.models.Politician;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
@@ -19,25 +20,36 @@ import java.util.Random;
 
 public class ElectionListPage {
 
+    ///ELECTION STUFF
     //Front End
-    public Button electionTab, politicianTab;
-    public ChoiceBox <String> electionSort;
-    public TextField electionSearchBar;
-    public Canvas electionCanvas;
-    public Label electionFilters, electionListInfo;
-    public CheckBox electionSearchByLocation;
+    public ChoiceBox <String> sortCriteria;
+    public TextField searchBar;
+    public Canvas canvas;
+    public Label filters, listInfo;
+    public CheckBox changeSortingType;
 
     public ContextMenu validContextMenu =new ContextMenu(), invalidContextMenu =new ContextMenu();
 
-    //Back End
-    public mLinkedList <Election> mainList=new mLinkedList<>(), currentList=new mLinkedList<>();
+    //Election Back End
+    public mLinkedList <Election> mainElectionList =new mLinkedList<>(), currentElectionList =new mLinkedList<>();
     public mHashMap<Election, Integer> elections=new mHashMap<>();
-    public GraphicsContext gc;
+    public GraphicsContext electionGc;
     public Launcher launcher;
     public ElectionEdit electionEdit;
-    private String includeYear="", excludeYear="";
+    private String electionIncludeYear ="", electionExcludeYear ="";
     private boolean localType=true, europeanType=true, presidentialType=true; //True -> include
-    private boolean usingQuickSort =true;
+    private boolean electionUsingQuickSort =true, electionSerious =true;
+
+    //Politician Back End
+    public mLinkedList <Politician> mainPoliticianList=new mLinkedList<>(), currentPoliticianList =new mLinkedList<>();
+    public mHashMap<Politician, Integer> politicians=new mHashMap<>();
+    public PoliticianEdit politicianEdit;
+    private String politicianIncludeYear ="", politicianExcludeYear ="", politicianIncludeParty="", politicianExcludeParty="";
+    private boolean politicianUsingQuickSort=true, politicianSerious=true;
+
+    //General
+    public Button electionTab, politicianTab;
+    public boolean election=true;
 
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
@@ -47,16 +59,17 @@ public class ElectionListPage {
         this.electionEdit = electionEdit;
     }
 
+    public void setPoliticianEdit(PoliticianEdit politicianEdit) {
+        this.politicianEdit = politicianEdit;
+    }
+
     @FXML
     public void initialize() {
-        electionSort.getItems().addAll("Name Ascending", "Type Ascending", "Year Ascending", "Location Ascending", "Name Descending", "Type Descending", "Year Descending", "Location Descending");
-        electionSort.setValue("Name Ascending");
-
         Utilities.initMap();
-        initContextMenus();
-        gc=electionCanvas.getGraphicsContext2D();
+        electionGc= canvas.getGraphicsContext2D();
 
-        electionCanvas.setOnMousePressed(event -> {
+        reInit();
+        canvas.setOnMousePressed(event -> {
             if (validContextMenu.isShowing()) {
                 validContextMenu.hide();
             }
@@ -65,17 +78,86 @@ public class ElectionListPage {
             }
         });
 
-        electionFilters.setOnMousePressed(event -> {
-            try {
-                FXMLLoader filterLoader = new FXMLLoader(getClass().getResource("/electionFilterEdit.fxml"));
-                DialogPane dialogContent = filterLoader.load();
-                ElectionFilterEdit controller = filterLoader.getController();
+        sortCriteria.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            draw();
+        });
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            draw();
+        });
+        draw();
+    }
 
-                controller.setIncludeYearField(includeYear);
-                controller.setExcludeYearField(excludeYear);
-                controller.setLocalType(!localType);
-                controller.setEuropeanType(!europeanType);
-                controller.setPresidentialType(!presidentialType);
+    @FXML
+    public void initSortingChoiceBox()
+    {
+        sortCriteria.getItems().clear();
+        if (election)
+        {
+            sortCriteria.getItems().addAll("Name Ascending", "Type Ascending", "Year Ascending", "Location Ascending", "Name Descending", "Type Descending", "Year Descending", "Location Descending");
+            sortCriteria.setValue("Name Ascending");
+        }
+        else
+        {
+            sortCriteria.getItems().addAll("Name Ascending", "Party Ascending", "Date of Birth Ascending", "Home County Ascending", "Name Descending", "Party Descending", "Date of Birth Descending", "Home County Descending");
+            sortCriteria.setValue("Name Ascending");
+        }
+    }
+
+    @FXML
+    public void switchType()
+    {
+        election=!election;
+        reInit();
+        draw();
+    }
+
+    private void reInit()
+    {
+        if (election) {
+            electionTab.setDisable(true);
+            politicianTab.setDisable(false);
+            changeSortingType.setText("Search by Location");
+        }
+        else
+        {
+            changeSortingType.setText("Search by Home");
+            electionTab.setDisable(false);
+            politicianTab.setDisable(true);
+        }
+        initSortingChoiceBox();
+        initContextMenus();
+        filters.setOnMousePressed(event -> {
+            try {
+                FXMLLoader filterLoader;
+                DialogPane dialogContent;
+                Object controller;
+                if (election) {
+                    ElectionFilterEdit tmpController;
+                    filterLoader = new FXMLLoader(getClass().getResource("/electionFilterEdit.fxml"));
+                    dialogContent = filterLoader.load();
+                    tmpController = filterLoader.getController();
+
+                    tmpController.setIncludeYearField(electionIncludeYear);
+                    tmpController.setExcludeYearField(electionExcludeYear);
+                    tmpController.setLocalType(!localType);
+                    tmpController.setEuropeanType(!europeanType);
+                    tmpController.setPresidentialType(!presidentialType);
+                    controller=tmpController;
+                }
+                else
+                {
+                    PoliticianFilterEdit tmpController;
+                    filterLoader = new FXMLLoader(getClass().getResource("/politicianFilterEdit.fxml"));
+                    dialogContent = filterLoader.load();
+                    tmpController = filterLoader.getController();
+
+                    tmpController.setIncludeYearField(politicianIncludeYear);
+                    tmpController.setExcludeYearField(politicianExcludeYear);
+                    tmpController.setIncludePartyField(politicianIncludeParty);
+                    tmpController.setExcludePartyField(politicianExcludeParty);
+                    controller=tmpController;
+
+                }
                 Dialog <ButtonType> dialog = new Dialog<>();
                 dialog.initOwner(Launcher.stage);
                 dialog.initModality(Modality.APPLICATION_MODAL);
@@ -84,24 +166,48 @@ public class ElectionListPage {
 
                 Optional<ButtonType> result = dialog.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                    includeYear=controller.getIncludeYearField().trim();
-                    excludeYear=controller.getExcludeYearField().trim();
-                    localType=!controller.getLocalType();
-                    europeanType=!controller.getEuropeanType();
-                    presidentialType=!controller.getPresidentialType();
-                    String tmp="Active filters (right click to edit):";
-                    if (!localType || !europeanType || !presidentialType) {
-                        tmp+=" T";
-                        if (!includeYear.isEmpty() || !excludeYear.isEmpty()) {
-                            tmp+=", Y;";
+                    if (election) {
+                        ElectionFilterEdit tmpController=(ElectionFilterEdit)controller;
+                        electionIncludeYear = tmpController.getIncludeYearField().trim();
+                        electionExcludeYear = tmpController.getExcludeYearField().trim();
+                        localType = !tmpController.getLocalType();
+                        europeanType = !tmpController.getEuropeanType();
+                        presidentialType = !tmpController.getPresidentialType();
+                    }
+                    else
+                    {
+                        PoliticianFilterEdit tmpController=(PoliticianFilterEdit)controller;
+                        politicianIncludeYear=tmpController.getIncludeYearField().trim();
+                        politicianExcludeYear=tmpController.getExcludeYearField().trim();
+                        politicianIncludeParty=tmpController.getIncludePartyField().trim();
+                        politicianExcludeParty=tmpController.getExcludePartyField().trim();
+                    }
+                    String tmp = "Active filters (right click to edit):";
+                    if (election) {
+                        if (!localType || !europeanType || !presidentialType) {
+                            tmp += " T";
+                            if (!electionIncludeYear.isEmpty() || !electionExcludeYear.isEmpty())
+                                tmp += ", Y;";
+                            else
+                                tmp += ";";
                         }
-                        else
-                            tmp+=";";
+                        else if (!electionIncludeYear.isEmpty() || !electionExcludeYear.isEmpty())
+                            tmp += " Y;";
                     }
-                    else if (!includeYear.isEmpty() || !excludeYear.isEmpty()) {
-                        tmp+=" Y;";
+                    else
+                    {
+                        if (!politicianIncludeYear.isEmpty() || !politicianExcludeYear.isEmpty())
+                        {
+                            tmp+=" Y";
+                            if (!politicianIncludeParty.isEmpty() || !politicianExcludeParty.isEmpty())
+                                tmp+=", P;";
+                            else
+                                tmp+=";";
+                        }
+                        else if (!politicianIncludeParty.isEmpty() || !politicianExcludeParty.isEmpty())
+                            tmp+=" P;";
                     }
-                    electionFilters.setText(tmp);
+                    filters.setText(tmp);
                     draw();
                 }
             }
@@ -109,17 +215,6 @@ public class ElectionListPage {
                 ex.printStackTrace();
             }
         });
-
-        electionSort.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            draw();
-        });
-        electionSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-            draw();
-        });
-        electionSearchBar.setOnAction(event -> {
-            draw();
-        });
-        draw();
     }
 
     @FXML
@@ -128,178 +223,359 @@ public class ElectionListPage {
         validContextMenu.getItems().clear();
         MenuItem add=new MenuItem("Add"), delete=new MenuItem("Delete"), update=new MenuItem("Update");
         add.setOnAction(event -> {
-            launcher.switchScene("electionForm");
+            if (election)
+                launcher.switchScene("electionForm");
+            else
+                launcher.switchScene("politicianForm");
         });
         validContextMenu.getItems().add(add);
-        electionCanvas.setOnContextMenuRequested(event -> {
+        canvas.setOnContextMenuRequested(event -> {
             int index=getIndexOfMouse((int) event.getScreenX(), (int) event.getScreenY()-104); //top buttons and stuff
-            if (index!=-1 && index<=currentList.size()-1) {
+            if (index!=-1 && ((election && index<= currentElectionList.size()-1) || (!election && index<=currentPoliticianList.size()-1)))  {
                 delete.setOnAction(e -> {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.initOwner(Launcher.stage);
                     alert.initModality(Modality.APPLICATION_MODAL);
                     alert.setTitle("Confirmation");
                     alert.setHeaderText(null);
-                    alert.setContentText("Are you sure you want to delete this election?");
+                    if (election)
+                        alert.setContentText("Are you sure you want to delete this election?");
+                    else
+                        alert.setContentText("Are you sure you want to delete this politician?");
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.isPresent() && result.get() == ButtonType.OK) {
-                        mainList.remove(currentList.get(index));
-                        elections.remove(currentList.get(index));
+                        if (election) {
+                            mainElectionList.remove(currentElectionList.get(index));
+                            elections.remove(currentElectionList.get(index));
+                        }
+                        else
+                        {
+                            mainPoliticianList.remove(currentPoliticianList.get(index));
+                            politicians.remove(currentPoliticianList.get(index));
+                        }
                     }
                     draw();
                 });
                 update.setOnAction(e -> {
-                    Election tmp=currentList.get(index);
-                    electionEdit.electionName.setText(tmp.getName());
-                    electionEdit.electionLocation.setText(tmp.getLocation());
-                    electionEdit.electionType.setValue(Utilities.electionTypeReverseMap.get(tmp.getType()).getValue());
-                    electionEdit.electionWinnerCount.setValue(tmp.getNumOfWinners());
-                    electionEdit.updateIndex=index;
-                    mainList.remove(tmp);
-                    elections.remove(tmp);
-                    launcher.switchScene("electionForm");
+                    if (election) {
+                        Election tmp = currentElectionList.get(index);
+                        electionEdit.electionName.setText(tmp.getName());
+                        electionEdit.electionLocation.setText(tmp.getLocation());
+                        electionEdit.electionType.setValue(Utilities.electionTypeReverseMap.get(tmp.getType()).getValue());
+                        electionEdit.electionWinnerCount.setValue(tmp.getNumOfWinners());
+                        electionEdit.updateIndex = index;
+                        mainElectionList.remove(tmp);
+                        elections.remove(tmp);
+                        launcher.switchScene("electionForm");
+                    }
+                    else
+                    {
+                        Politician tmp = currentPoliticianList.get(index);
+                        politicianEdit.politicianName.setText(tmp.getName());
+                        politicianEdit.politicianHome.setText(tmp.getHomeCountry());
+                        politicianEdit.politicianParty.setText(tmp.getParty());
+                        politicianEdit.politicianURL.setText(tmp.getImageURL());
+                        politicianEdit.updateIndex = index;
+                        mainPoliticianList.remove(tmp);
+                        politicians.remove(tmp);
+                        launcher.switchScene("politicianForm");
+                    }
                 });
                 validContextMenu.getItems().add(delete);
                 validContextMenu.getItems().add(update);
-                validContextMenu.show(electionCanvas, event.getScreenX(), event.getScreenY());
+                validContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
             }
             else
-                invalidContextMenu.show(electionCanvas, event.getScreenX(), event.getScreenY());
+                invalidContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
         });
 
         invalidContextMenu.getItems().clear();
         invalidContextMenu.getItems().add(add);
+
+        invalidContextMenu.setStyle("-fx-font-size: 20px;");
+        validContextMenu.setStyle("-fx-font-size: 20px;");
     }
 
     @FXML
     public void draw() {
         int x=50, y=20;
         searchFilterAndSort();
-        gc.setFill(Color.AQUAMARINE);
-        Image image=new Image(getClass().getResourceAsStream("/images/election.jpg"));
-        gc.fillRect(0, 0, electionCanvas.getWidth(), electionCanvas.getHeight());
-        for (Election e: currentList) {
-            gc.setFill(Color.WHITE);
-            gc.fillRect(x, y, electionCanvas.getWidth()-100, 200);
-            gc.drawImage(image, x+20, y+20, 160, 160);
-            gc.setFill(Color.BLACK);
-            gc.fillText("Election "+e.getName(), x+200, y+20);
-            gc.fillText("Election Type: "+Utilities.electionTypeReverseMap.get(e.getType()).getValue(), x+200, y+52);
-            gc.fillText("Election Location: "+e.getLocation(), x+200, y+82);
-            gc.fillText("Date: "+e.getYearDate(), x+200, y+112);
-            gc.fillText("Notable info: Nothing here yet lmao", x+200, y+142);
-            y+=220;
+        String imagePath;
+        if (election) {
+            electionGc.setFill(Color.AQUAMARINE);
+            if (electionSerious)
+                imagePath = "/images/election.jpg";
+            else
+                imagePath = "/images/election.png";
+        }
+        else
+        {
+            electionGc.setFill(Color.LIGHTGOLDENRODYELLOW);
+            if (politicianSerious)
+                imagePath = "/images/politician.jpg";
+            else
+                imagePath = "/images/politician.gif";
+        }
+        Image image=new Image(getClass().getResourceAsStream(imagePath));
+        electionGc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        if (election) {
+            for (Election e : currentElectionList) {
+                electionGc.setFill(Color.WHITE);
+                electionGc.fillRect(x, y, canvas.getWidth() - 100, 200);
+                electionGc.drawImage(image, x + 20, y + 20, 160, 160);
+                electionGc.setFill(Color.BLACK);
+                electionGc.fillText("Election " + e.getName(), x + 200, y + 20);
+                electionGc.fillText("Election Type: " + Utilities.electionTypeReverseMap.get(e.getType()).getValue(), x + 200, y + 52);
+                electionGc.fillText("Election Location: " + e.getLocation(), x + 200, y + 82);
+                electionGc.fillText("Date: " + e.getYearDate(), x + 200, y + 112);
+                electionGc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
+                y += 220;
+            }
+        }
+        else
+        {
+            for (Politician p : currentPoliticianList) {
+                electionGc.setFill(Color.WHITE);
+                electionGc.fillRect(x, y, canvas.getWidth() - 100, 200);
+                electionGc.drawImage(image, x + 20, y + 20, 160, 160);
+                electionGc.setFill(Color.BLACK);
+                electionGc.fillText("Name: " + p.getName(), x + 200, y + 20);
+                electionGc.fillText("Political Party: " + p.getParty(), x + 200, y + 52);
+                electionGc.fillText("Home County: " + p.getHomeCountry(), x + 200, y + 82);
+                electionGc.fillText("Date of Birth: " + p.getDateOfBirth(), x + 200, y + 112);
+                electionGc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
+                y += 220;
+            }
         }
     }
 
-    private void setInfo()
-    {
+    private void setInfo() {
         String text;
-        if (usingQuickSort)
-            text="Using quick sort. Try typing bogo! Total elections count: ";
+        if (election) {
+            if (electionUsingQuickSort)
+                text = "Using quick sort. Try typing bogo or lmao! Total elections count: ";
+            else
+                text = "Using bogo sort. Try typing quick or lockin! Total elections count: ";
+            text += mainElectionList.size();
+            text += ". Current elections count: ";
+            text += currentElectionList.size();
+            text += ".";
+            listInfo.setText(text);
+        }
         else
-            text="Using bogo sort. Try typing quick! Total elections count: ";
-        text+=mainList.size();
-        text+=". Current elections count: ";
-        text+=currentList.size();
-        text+=".";
-        electionListInfo.setText(text);
+        {
+            if (politicianUsingQuickSort)
+                text = "Using quick sort. Try typing bogo or lmao! Total politicians count: ";
+            else
+                text = "Using bogo sort. Try typing quick or lockin! Total politicians count: ";
+            text += mainPoliticianList.size();
+            text += ". Current politicians count: ";
+            text += currentPoliticianList.size();
+            text += ".";
+            listInfo.setText(text);
+        }
     }
 
     private void searchFilterAndSort()
     {
-        currentList=Utilities.copyList(mainList);
-        search();
-        filter();
-        if (usingQuickSort)
-            quickSort(currentList, 0, currentList.size()-1, electionSort.getValue());
+        if (election) {
+            currentElectionList = Utilities.copyList(mainElectionList);
+            search();
+            filter();
+            if (electionUsingQuickSort)
+                quickSort(currentElectionList, 0, currentElectionList.size() - 1, sortCriteria.getValue());
+            else
+                bogoSort(currentElectionList, sortCriteria.getValue());
+        }
         else
-            bogoSort(currentList, electionSort.getValue());
+        {
+            currentPoliticianList=Utilities.copyList(mainPoliticianList);
+            search();
+            filter();
+            if (politicianUsingQuickSort)
+                quickSort(currentPoliticianList, 0, currentPoliticianList.size() - 1, sortCriteria.getValue());
+            else
+                bogoSort(currentPoliticianList, sortCriteria.getValue());
+        }
         setInfo();
     }
 
     private void search()
     {
-        mLinkedList <Election> newList = new mLinkedList<>();
-        if (electionSearchBar.getText().isEmpty())
+        mLinkedList newList = new mLinkedList<>();
+        if (searchBar.getText().isEmpty())
             return;
-        if (electionSearchBar.getText().equalsIgnoreCase("bogo") || electionSearchBar.getText().equalsIgnoreCase("quick"))
-        {
-            usingQuickSort =!usingQuickSort;
-        }
-        for (Election e: currentList) {
-            if (electionSearchByLocation.isSelected())
-            {
-                if (e.getLocation().contains(electionSearchBar.getText()))
-                    newList.add(e);
-            }
+        if (searchBar.getText().equalsIgnoreCase("bogo") || searchBar.getText().equalsIgnoreCase("quick")) {
+            if (election)
+                electionUsingQuickSort = !electionUsingQuickSort;
             else
-            {
-                if (e.getName().contains(electionSearchBar.getText()))
-                    newList.add(e);
-            }
+                politicianUsingQuickSort = !politicianUsingQuickSort;
         }
-        currentList=Utilities.copyList(newList);
+        if (searchBar.getText().equalsIgnoreCase("lmao") || searchBar.getText().equalsIgnoreCase("lockin")) {
+            if (election)
+                electionSerious = !electionSerious;
+            else
+                politicianSerious = !politicianSerious;
+        }
+        if (election) {
+            for (Election e : currentElectionList) {
+                if (changeSortingType.isSelected())
+                    if (e.getLocation().contains(searchBar.getText()))
+                        newList.add(e);
+                else
+                    if (e.getName().contains(searchBar.getText()))
+                        newList.add(e);
+            }
+            currentElectionList=Utilities.copyList(newList);
+        }
+        else
+        {
+            for (Politician p : currentPoliticianList) {
+                if (changeSortingType.isSelected())
+                    if (p.getHomeCountry().contains(searchBar.getText()))
+                        newList.add(p);
+                else
+                    if (p.getName().contains(searchBar.getText()))
+                        newList.add(p);
+            }
+            currentPoliticianList=Utilities.copyList(newList);
+        }
     }
 
     private void filter()
     {
-        mLinkedList <Election> newList = new mLinkedList<>();
-        for (Election e: currentList)
-        {
-            boolean flag=false;
-            switch (e.getType())
-            {
-                case 1:
-                    if (!localType)
-                        flag=true;
-                    break;
-                case 2:
-                    if (!europeanType)
-                        flag=true;
-                    break;
-                case 3:
-                    if (!presidentialType)
-                        flag=true;
-                    break;
-            }
-            if (!includeYear.isEmpty()) {
-                boolean flag2=false;
-                for (int i = 0; i < Utilities.getCommaSeparatedStringSize(includeYear); i++) {
-                    String tmp=Utilities.getValueFromCommaSeparatedString(i, includeYear);
-                    if (Utilities.isValidInteger(tmp))
-                    {
-                        if (e.getYearDate().getYear()==Integer.parseInt(tmp))
-                        {
-                            flag2=true;
-                            break;
+        if (election) {
+            mLinkedList<Election> newList = new mLinkedList<>();
+            for (Election e : currentElectionList) {
+                boolean flag = false;
+                switch (e.getType()) {
+                    case 1:
+                        if (!localType)
+                            flag = true;
+                        break;
+                    case 2:
+                        if (!europeanType)
+                            flag = true;
+                        break;
+                    case 3:
+                        if (!presidentialType)
+                            flag = true;
+                        break;
+                }
+                if (!electionIncludeYear.isEmpty()) {
+                    boolean flag2 = false;
+                    for (int i = 0; i < Utilities.getCommaSeparatedStringSize(electionIncludeYear); i++) {
+                        String tmp = Utilities.getValueFromCommaSeparatedString(i, electionIncludeYear);
+                        if (Utilities.isValidInteger(tmp)) {
+                            if (e.getYearDate().getYear() == Integer.parseInt(tmp)) {
+                                flag2 = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!flag2)
+                        flag = true;
+                }
+                if (!electionExcludeYear.isEmpty()) {
+                    for (int i = 0; i < Utilities.getCommaSeparatedStringSize(electionExcludeYear); i++) {
+                        String tmp = Utilities.getValueFromCommaSeparatedString(i, electionExcludeYear);
+                        if (Utilities.isValidInteger(tmp)) {
+                            if (e.getYearDate().getYear() == Integer.parseInt(tmp)) {
+                                flag = true;
+                                break;
+                            }
                         }
                     }
                 }
-                if (!flag2)
-                    flag=true;
+                if (!flag)
+                    newList.add(e);
             }
-            if (!excludeYear.isEmpty()) {
-                for (int i = 0; i < Utilities.getCommaSeparatedStringSize(excludeYear); i++) {
-                    String tmp=Utilities.getValueFromCommaSeparatedString(i, excludeYear);
-                    if (Utilities.isValidInteger(tmp))
-                    {
-                        if (e.getYearDate().getYear()==Integer.parseInt(tmp))
-                        {
-                            flag=true;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (!flag)
-                newList.add(e);
+            currentElectionList = Utilities.copyList(newList);
         }
-        currentList=Utilities.copyList(newList);
+        else
+        {
+            mLinkedList<Politician> newList = new mLinkedList<>();
+            for (Politician p : currentPoliticianList) {
+                boolean flag = false;
+                if (!politicianIncludeYear.isEmpty()) {
+                    boolean flag2 = false;
+                    for (int i = 0; i < Utilities.getCommaSeparatedStringSize(politicianIncludeYear); i++) {
+                        String tmp = Utilities.getValueFromCommaSeparatedString(i, politicianIncludeYear);
+                        if (Utilities.isValidInteger(tmp)) {
+                            if (p.getDateOfBirth().getYear() == Integer.parseInt(tmp)) {
+                                flag2 = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!flag2)
+                        flag = true;
+                }
+                if (!politicianExcludeYear.isEmpty()) {
+                    for (int i = 0; i < Utilities.getCommaSeparatedStringSize(politicianExcludeYear); i++) {
+                        String tmp = Utilities.getValueFromCommaSeparatedString(i, politicianExcludeYear);
+                        if (Utilities.isValidInteger(tmp)) {
+                            if (p.getDateOfBirth().getYear() == Integer.parseInt(tmp)) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (!politicianIncludeParty.isEmpty()) {
+                    boolean flag2 = false;
+                    for (int i = 0; i < Utilities.getCommaSeparatedStringSize(politicianIncludeParty); i++) {
+                        String tmp = Utilities.getValueFromCommaSeparatedString(i, politicianIncludeParty);
+                        if (p.getParty().equalsIgnoreCase(tmp)) {
+                            flag2 = true;
+                            break;
+                        }
+                    }
+                    if (!flag2)
+                        flag = true;
+                }
+                if (!politicianExcludeParty.isEmpty()) {
+                    for (int i = 0; i < Utilities.getCommaSeparatedStringSize(politicianExcludeParty); i++) {
+                        String tmp = Utilities.getValueFromCommaSeparatedString(i, politicianExcludeParty);
+                        if (p.getParty().equalsIgnoreCase(tmp)) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+                if (!flag)
+                    newList.add(p);
+            }
+            currentPoliticianList = Utilities.copyList(newList);
+        }
     }
 
-    private int compare(Election first, Election second, String criteria)
+    private int comparePoliticians(Politician first, Politician second, String criteria)
+    {
+        switch (criteria)
+        {
+            case "Name Ascending":
+                return first.getName().compareToIgnoreCase(second.getName());
+            case "Party Ascending":
+                return first.getParty().compareToIgnoreCase(second.getParty());
+            case "Date of Birth Ascending":
+                return first.getDateOfBirth().compareTo(second.getDateOfBirth());
+            case "Home County Ascending":
+                return first.getHomeCountry().compareToIgnoreCase(second.getHomeCountry());
+            case "Name Descending":
+                return -first.getName().compareToIgnoreCase(second.getName());
+            case "Party Descending":
+                return -first.getParty().compareToIgnoreCase(second.getParty());
+            case "Date of Birth Descending":
+                return -first.getDateOfBirth().compareTo(second.getDateOfBirth());
+            case "Home County Descending":
+                return -first.getHomeCountry().compareToIgnoreCase(second.getHomeCountry());
+        }
+        return -1;
+    }
+
+    private int compareElections(Election first, Election second, String criteria)
     {
         switch (criteria)
         {
@@ -323,10 +599,10 @@ public class ElectionListPage {
         return -1;
     }
 
-    private void bogoSort(mLinkedList <Election> list, String criteria)
+    private void bogoSort(mLinkedList list, String criteria)
     {
         int iteration=0;
-        mHashMap <mLinkedList <Election>, Integer> map=new mHashMap<>();
+        mHashMap <mLinkedList, Integer> map=new mHashMap<>();
         while (!isSorted(list, criteria))
         {
             do
@@ -356,39 +632,69 @@ public class ElectionListPage {
         }
     }
 
-    private boolean isSorted(mLinkedList <Election> list, String criteria)
+    private boolean isSorted(mLinkedList list, String criteria)
     {
-        for (int i = 0; i < list.size()-1; i++)
-            if (compare(list.get(i), list.get(i+1), criteria) < 0)
-                return false;
+        for (int i = 0; i < list.size()-1; i++) {
+            if (election)
+                if (compareElections((Election) list.get(i), (Election) list.get(i + 1), criteria) < 0)
+                    return false;
+            else
+                if (comparePoliticians((Politician) list.get(i), (Politician) list.get(i + 1), criteria) < 0)
+                    return false;
+        }
         return true;
     }
 
-    private void quickSort(mLinkedList <Election> list, int start, int end, String criteria)
+    private void quickSort(mLinkedList list, int start, int end, String criteria)
     {
         if (start>=end)
             return;
         if (start==end-1) {
-            if (compare(list.get(start), list.get(end), criteria) == 1)
-                list.swapNodes(start, end);
+            if (election) {
+                if (compareElections((Election) list.get(start), (Election) list.get(end), criteria) == 1)
+                    list.swapNodes(start, end);
+            }
+            else
+            {
+                if (comparePoliticians((Politician) list.get(start), (Politician) list.get(end), criteria) == 1)
+                    list.swapNodes(start, end);
+            }
             return;
         }
         int i=start, j=end-1;
-        Election pivot=list.get(end);
+        Object pivot=list.get(end);
         while (i<=j)
         {
-            if (compare(list.get(i), pivot, criteria) >=0)
-            {
-                while (i<=j)
+            if (election) {
+                if (compareElections((Election) list.get(i), (Election) pivot, criteria) >=0)
                 {
-                    if (compare(list.get(j), pivot, criteria) <0)
+                    while (i<=j)
+                    {
+                        if (compareElections((Election) list.get(j), (Election) pivot, criteria) <0)
+                            break;
+                        j--;
+                    }
+                    if (j>i)
+                        list.swapNodes(i, j);
+                    else
                         break;
-                    j--;
                 }
-                if (j>i)
-                    list.swapNodes(i, j);
-                else
-                    break;
+            }
+            else
+            {
+                if (comparePoliticians((Politician) list.get(i), (Politician) pivot, criteria) >=0)
+                {
+                    while (i<=j)
+                    {
+                        if (comparePoliticians((Politician) list.get(j), (Politician) pivot, criteria) <0)
+                            break;
+                        j--;
+                    }
+                    if (j>i)
+                        list.swapNodes(i, j);
+                    else
+                        break;
+                }
             }
             i++;
         }
@@ -400,7 +706,7 @@ public class ElectionListPage {
     public int getIndexOfMouse(int x, int y)
     {
         int index=y%220;
-        if (x<50 || x>electionCanvas.getWidth()-50)
+        if (x<50 || x> canvas.getWidth()-50)
             return -1;
         if (index==0)
             return y/220-1;
