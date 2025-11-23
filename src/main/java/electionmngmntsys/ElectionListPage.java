@@ -273,7 +273,7 @@ public class ElectionListPage {
                     {
                         Politician tmp = currentPoliticianList.get(index);
                         politicianEdit.politicianName.setText(tmp.getName());
-                        politicianEdit.politicianHome.setText(tmp.getHomeCountry());
+                        politicianEdit.politicianHome.setText(tmp.getHomeCounty());
                         politicianEdit.politicianParty.setText(tmp.getParty());
                         politicianEdit.politicianURL.setText(tmp.getImageURL());
                         politicianEdit.updateIndex = index;
@@ -342,7 +342,7 @@ public class ElectionListPage {
                 electionGc.setFill(Color.BLACK);
                 electionGc.fillText("Name: " + p.getName(), x + 200, y + 20);
                 electionGc.fillText("Political Party: " + p.getParty(), x + 200, y + 52);
-                electionGc.fillText("Home County: " + p.getHomeCountry(), x + 200, y + 82);
+                electionGc.fillText("Home County: " + p.getHomeCounty(), x + 200, y + 82);
                 electionGc.fillText("Date of Birth: " + p.getDateOfBirth(), x + 200, y + 112);
                 electionGc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
                 y += 220;
@@ -433,7 +433,7 @@ public class ElectionListPage {
         {
             for (Politician p : currentPoliticianList) {
                 if (changeSortingType.isSelected())
-                    if (p.getHomeCountry().contains(searchBar.getText()))
+                    if (p.getHomeCounty().contains(searchBar.getText()))
                         newList.add(p);
                 else
                     if (p.getName().contains(searchBar.getText()))
@@ -562,7 +562,7 @@ public class ElectionListPage {
             case "Date of Birth Ascending":
                 return first.getDateOfBirth().compareTo(second.getDateOfBirth());
             case "Home County Ascending":
-                return first.getHomeCountry().compareToIgnoreCase(second.getHomeCountry());
+                return first.getHomeCounty().compareToIgnoreCase(second.getHomeCounty());
             case "Name Descending":
                 return -first.getName().compareToIgnoreCase(second.getName());
             case "Party Descending":
@@ -570,7 +570,7 @@ public class ElectionListPage {
             case "Date of Birth Descending":
                 return -first.getDateOfBirth().compareTo(second.getDateOfBirth());
             case "Home County Descending":
-                return -first.getHomeCountry().compareToIgnoreCase(second.getHomeCountry());
+                return -first.getHomeCounty().compareToIgnoreCase(second.getHomeCounty());
         }
         return -1;
     }

@@ -8,8 +8,8 @@ public class Candidate extends Politician implements Serializable{
     private Election election;
     private int votes;
 
-    public Candidate(String name, LocalDate dateOfBirth, String party, String homeCountry, String imageURL , Election election, int votes) {
-        super(name, dateOfBirth, party, homeCountry, imageURL);
+    public Candidate(String name, LocalDate dateOfBirth, String party, String homeCounty, String imageURL , Election election, int votes) {
+        super(name, dateOfBirth, party, homeCounty, imageURL);
         this.election = election;
         this.votes = votes;
     }

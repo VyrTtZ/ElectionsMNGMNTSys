@@ -1,13 +1,11 @@
 package electionmngmntsys.mhashmap;
 
 import electionmngmntsys.mlinkedlist.mLinkedList;
-import electionmngmntsys.mlinkedlist.mNodeL;
 import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
 
 import java.io.*;
-import java.util.Iterator;
 
 public class mHashMap<X, Y> {
     private final int INITIALCAPACITY = 11;
@@ -66,7 +64,7 @@ public class mHashMap<X, Y> {
                 dos.writeUTF(c.getName() != null ? c.getName() : "");
                 dos.writeUTF(c.getDateOfBirth() != null ? c.getDateOfBirth().toString() : "");
                 dos.writeUTF(c.getParty() != null ? c.getParty() : "");
-                dos.writeUTF(c.getHomeCountry() != null ? c.getHomeCountry() : "");
+                dos.writeUTF(c.getHomeCounty() != null ? c.getHomeCounty() : "");
                 dos.writeUTF(c.getImageURL() != null ? c.getImageURL() : "");
                 dos.writeUTF(c.getElection() != null && c.getElection().getName() != null
                         ? c.getElection().getName() : "");
@@ -76,7 +74,7 @@ public class mHashMap<X, Y> {
                 dos.writeUTF(p.getName() != null ? p.getName() : "");
                 dos.writeUTF(p.getDateOfBirth() != null ? p.getDateOfBirth().toString() : "");
                 dos.writeUTF(p.getParty() != null ? p.getParty() : "");
-                dos.writeUTF(p.getHomeCountry() != null ? p.getHomeCountry() : "");
+                dos.writeUTF(p.getHomeCounty() != null ? p.getHomeCounty() : "");
                 dos.writeUTF(p.getImageURL() != null ? p.getImageURL() : "");
             }
             else if (obj instanceof mLinkedList<?> list) {

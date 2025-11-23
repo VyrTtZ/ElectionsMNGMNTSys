@@ -7,14 +7,14 @@ public class Politician implements Serializable {
     private String name;
     private LocalDate dateOfBirth; //Format dd:mm:yyyy
     private String party;
-    private String homeCountry;
+    private String homeCounty;
     private String imageURL;
 
-    public Politician(String name, LocalDate dateOfBirth, String party, String homeCountry, String imageURL) {
+    public Politician(String name, LocalDate dateOfBirth, String party, String homeCounty, String imageURL) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.party = party;
-        this.homeCountry = homeCountry;
+        this.homeCounty = homeCounty;
         this.imageURL = imageURL;
     }
 
@@ -42,12 +42,12 @@ public class Politician implements Serializable {
         this.party = party;
     }
 
-    public String getHomeCountry() {
-        return homeCountry;
+    public String getHomeCounty() {
+        return homeCounty;
     }
 
-    public void setHomeCountry(String homeCountry) {
-        this.homeCountry = homeCountry;
+    public void setHomeCounty(String homeCounty) {
+        this.homeCounty = homeCounty;
     }
 
     public String getImageURL() {
