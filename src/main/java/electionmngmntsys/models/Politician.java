@@ -1,5 +1,7 @@
 package electionmngmntsys.models;
 
+import electionmngmntsys.mlinkedlist.mLinkedList;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -9,6 +11,8 @@ public class Politician implements Serializable {
     private String party;
     private String homeCounty;
     private String imageURL;
+    private mLinkedList<mLinkedList<Integer>> votesList = new mLinkedList<>(); //for votes and elections (id)
+    private mLinkedList<mLinkedList<String>> associations = new mLinkedList<>(); //for party during an election (id)
 
     public Politician(String name, LocalDate dateOfBirth, String party, String homeCounty, String imageURL) {
         this.name = name;
@@ -56,5 +60,21 @@ public class Politician implements Serializable {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public mLinkedList<mLinkedList<Integer>> getVotesList() {
+        return votesList;
+    }
+
+    public void setVotesList(mLinkedList<mLinkedList<Integer>> votes) {
+        this.votesList = votes;
+    }
+
+    public mLinkedList<mLinkedList<String>> getAssociations() {
+        return associations;
+    }
+
+    public void setAssociations(mLinkedList<mLinkedList<String>> associations) {
+        this.associations = associations;
     }
 }

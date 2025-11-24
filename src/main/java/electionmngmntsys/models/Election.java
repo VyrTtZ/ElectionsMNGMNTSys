@@ -9,7 +9,11 @@ public class Election implements Serializable {
     private String location, name;
     private LocalDate yearDate;
     private int numOfWinners;
-    private mLinkedList<Candidate> candidates = new mLinkedList<Candidate>();
+    private mLinkedList<Candidate> candidates = new mLinkedList<>();
+    private mLinkedList<Politician> politicians = new mLinkedList<>();
+    private int id = 0;
+
+
 
     public Election(String name, int type, String location, LocalDate yearDate, int numOfWinners) {
         this.name = name;
@@ -18,6 +22,8 @@ public class Election implements Serializable {
         this.yearDate = yearDate;
         this.numOfWinners = numOfWinners;
         this.candidates=new mLinkedList<>();
+        this.politicians = new mLinkedList<>();
+        setId();
     }
 
     public String getName() {
@@ -65,5 +71,24 @@ public class Election implements Serializable {
 
     public void setCandidates(mLinkedList<Candidate> candidates) {
         this.candidates = candidates;
+    }
+
+    public mLinkedList<Politician> getPoliticians() {
+        return politicians;
+    }
+
+    public void setPoliticians(mLinkedList<Politician> politicians) {
+        this.politicians = politicians;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId() {
+        id++;
+        this.id =id;
+
     }
 }
