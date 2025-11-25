@@ -8,11 +8,11 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class mHashMapTest {
-    private MyHashMap<String, Integer> map;
+
 
     @BeforeEach
     void setUp() {
-        map = new MyHashMap<>();
+
     }
 
 
