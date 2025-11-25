@@ -6,7 +6,9 @@ module main {
 
 
     opens electionmngmntsys to javafx.fxml;
-    exports electionmngmntsys;
+    exports electionmngmntsys.mlinkedlist;
+    exports electionmngmntsys.mhashmap;
     exports electionmngmntsys.controllers;
+    exports electionmngmntsys.models;
     opens electionmngmntsys.controllers to javafx.fxml;
 }
