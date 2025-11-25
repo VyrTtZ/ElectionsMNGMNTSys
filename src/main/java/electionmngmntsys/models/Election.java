@@ -13,7 +13,8 @@ public class Election implements Serializable {
     private int numOfWinners;
     private mLinkedList<Candidate> candidates = new mLinkedList<>();
     private mLinkedList<Politician> politicians = new mLinkedList<>();
-    private static int id = 0;
+    private int id = 0;
+    private static int nextId = 1;
     private mHashMap<Politician, Integer> duplicateCheck = new mHashMap<>();
 
 
@@ -26,7 +27,7 @@ public class Election implements Serializable {
         this.numOfWinners = numOfWinners;
         this.candidates=new mLinkedList<>();
         this.politicians = new mLinkedList<>();
-        setId();
+
     }
 
     public String getName() {
@@ -89,11 +90,13 @@ public class Election implements Serializable {
         return id;
     }
 
-    public void setId() {
-        id++;
-        this.id =id;
-
+    public void setId(int id) {
+        this.id = nextId++;
     }
+
+   public void setId(){
+        this.id = id;
+   }
 
     public mHashMap<Politician, Integer> getDuplicateCheck() {
         return duplicateCheck;

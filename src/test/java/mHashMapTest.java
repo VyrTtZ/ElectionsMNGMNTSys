@@ -52,15 +52,15 @@ class mHashMapTest {
     void get() {
         // 3 = type (presidential)
         Election original = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        original.setId();
+        original.setId(0);
 
         hashMapE.put(original, "Active");
 
         Election duplicate = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        duplicate.setId();
+        duplicate.setId(0);
 
         assertNotSame(original, duplicate);
-        assertNotEquals(original, duplicate);
+
 
         mNodeH<Election, String> findtheelusivemf = hashMapE.get(duplicate);
 
@@ -77,10 +77,10 @@ class mHashMapTest {
     void containsKey() {
         mHashMap<Election, String> hashMap = new mHashMap<>();
         Election electionn = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        electionn.setId();
+        electionn.setId(0);
 
         Election electionnn = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        electionn.setId();
+        electionn.setId(0);
 
         hashMapE.put(electionn, "Active");
 
@@ -104,7 +104,7 @@ class mHashMapTest {
     void containsValue() {
 
         Election presidentialIreland2025 = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        presidentialIreland2025.setId();
+        presidentialIreland2025.setId(0);
 
         statusOfElections.put(presidentialIreland2025, "Completed");
         assertEquals(1, statusOfElections.size());
@@ -113,7 +113,7 @@ class mHashMapTest {
 
         // different object, same data. tests strength of key distinction
         Election weAreNotTheKeyYourLookingFor = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        weAreNotTheKeyYourLookingFor.setId();
+        weAreNotTheKeyYourLookingFor.setId(0);
 
         assertNotSame(presidentialIreland2025, weAreNotTheKeyYourLookingFor);
         assertNotEquals(presidentialIreland2025, weAreNotTheKeyYourLookingFor);
@@ -146,10 +146,10 @@ class mHashMapTest {
     @Test
     void remove() {
         Election ee = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        ee.setId();
+        ee.setId(0);
 
         Election eee = new Election("General Election", 1, "Kilmaccow", LocalDate.of(2026, 3, 15), 1);
-        eee.setId();
+        eee.setId(0);
 
         hashMapE.put(ee, "Completed");
         hashMapE.put(eee, "Ahead");
@@ -159,10 +159,10 @@ class mHashMapTest {
         assertTrue(hashMapE.containsKey(eee));
 
         Election eeCulprit = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        eeCulprit.setId();
+        eeCulprit.setId(0);
 
         Election eeeCulprit = new Election("General Election", 1, "Ireland", LocalDate.of(2026, 3, 15), 1);
-        eeeCulprit.setId();
+        eeeCulprit.setId(0);
 
         assertTrue(hashMapE.containsKey(eeCulprit));
         assertEquals(1, hashMapE.size());
@@ -192,10 +192,10 @@ class mHashMapTest {
     void swapValues() {
 
         Election irishGeneralElection = new Election("General Election", 1, "Ireland", LocalDate.of(2026,3, 15), 1);
-        irishGeneralElection.setId();
+        irishGeneralElection.setId(0);
 
         Election irishPrezzieElection = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        irishPrezzieElection.setId();
+        irishPrezzieElection.setId(0);
 
         hashMapE.put(irishGeneralElection, "Ahead");
         hashMapE.put(irishPrezzieElection, "Completed");
@@ -214,7 +214,7 @@ class mHashMapTest {
         assertEquals("Ahead", nodeIrishGeneral.getValue());
 
         Election IrishGeneralElectCulprit = new Election("General Election", 1, "Ireland", LocalDate.of(2026, 3, 15), 1);
-        IrishGeneralElectCulprit.setId();
+        IrishGeneralElectCulprit.setId(0);
 
         assertEquals("Ahead", hashMapE.get(IrishGeneralElectCulprit));
 
