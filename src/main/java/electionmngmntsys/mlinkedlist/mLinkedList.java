@@ -128,7 +128,7 @@ public class mLinkedList<T> implements Iterable<T>, Serializable {
         if (prevB != null) prevB.next = a; //JUST AS ABOVE, VICE VERSA
         else head = a;
 
-        mNodeL temp = a.next;//SWAPES THE NODES NEXT VALUES
+        mNodeL temp = a.next;//SWAPS THE NODES NEXT VALUES
         a.next = b.next;
         b.next = temp;
     }
