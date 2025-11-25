@@ -1,6 +1,7 @@
 package electionmngmntsys.models;
 
 import electionmngmntsys.Utilities;
+import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class Election implements Serializable {
     private mLinkedList<Candidate> candidates = new mLinkedList<>();
     private mLinkedList<Politician> politicians = new mLinkedList<>();
     private static int id = 0;
+    private mHashMap<Politician, Integer> duplicateCheck = new mHashMap<>();
 
 
 
@@ -91,6 +93,14 @@ public class Election implements Serializable {
         id++;
         this.id =id;
 
+    }
+
+    public mHashMap<Politician, Integer> getDuplicateCheck() {
+        return duplicateCheck;
+    }
+
+    public void setDuplicateCheck(mHashMap<Politician, Integer> duplicateCheck) {
+        this.duplicateCheck = duplicateCheck;
     }
 
     public String toString()
