@@ -12,7 +12,7 @@ public class Politician implements Serializable {
     private String homeCounty;
     private String imageURL;
     private mLinkedList<mLinkedList<Integer>> votesList = new mLinkedList<>(); //for votes and elections (id)
-    private mLinkedList<mLinkedList<String>> associations = new mLinkedList<>(); //for party during an election (id)
+    private mLinkedList<String> associations = new mLinkedList<>(); //for party during an election (id)
 
     public Politician(String name, LocalDate dateOfBirth, String party, String homeCounty, String imageURL) {
         this.name = name;
@@ -70,11 +70,11 @@ public class Politician implements Serializable {
         this.votesList = votes;
     }
 
-    public mLinkedList<mLinkedList<String>> getAssociations() {
+    public mLinkedList<String> getAssociations() {
         return associations;
     }
 
-    public void setAssociations(mLinkedList<mLinkedList<String>> associations) {
+    public void setAssociations(mLinkedList<String> associations) {
         this.associations = associations;
     }
 }

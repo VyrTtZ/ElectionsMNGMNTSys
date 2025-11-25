@@ -14,6 +14,12 @@ public class Candidate extends Politician implements Serializable{
         this.votes = votes;
     }
 
+    public Candidate(Politician politician, Election election, int votes) {
+        super(politician.getName(), politician.getDateOfBirth(), politician.getParty(), politician.getHomeCounty(), politician.getImageURL());
+        this.setElection(election);
+        this.votes = votes;
+    }
+
     public Election getElection() {
         return election;
     }
@@ -32,9 +38,8 @@ public class Candidate extends Politician implements Serializable{
 
     @Override
     public String toString() {
-        return "Candidate{" +
-                "election=" + election +
-                ", votes=" + votes +
-                '}';
+        return "Candidate "+ getName() +" representing "+getParty()+ ", from "+getHomeCounty()+", born on "+getDateOfBirth()+
+                "; GOT " + votes +
+                " votes";
     }
 }

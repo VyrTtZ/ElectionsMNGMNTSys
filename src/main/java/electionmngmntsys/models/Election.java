@@ -1,5 +1,6 @@
 package electionmngmntsys.models;
 
+import electionmngmntsys.Utilities;
 import electionmngmntsys.mlinkedlist.mLinkedList;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ public class Election implements Serializable {
     private int numOfWinners;
     private mLinkedList<Candidate> candidates = new mLinkedList<>();
     private mLinkedList<Politician> politicians = new mLinkedList<>();
-    private int id = 0;
+    private static int id = 0;
 
 
 
@@ -90,5 +91,10 @@ public class Election implements Serializable {
         id++;
         this.id =id;
 
+    }
+
+    public String toString()
+    {
+        return Utilities.electionTypeReverseMap.get(type).getValue()+" election "+name+", held in "+location+", on "+yearDate+", "+numOfWinners+" winners";
     }
 }

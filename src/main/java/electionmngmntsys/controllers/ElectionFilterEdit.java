@@ -1,4 +1,4 @@
-package electionmngmntsys;
+package electionmngmntsys.controllers;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;

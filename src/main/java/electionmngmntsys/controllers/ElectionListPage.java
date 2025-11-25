@@ -1,7 +1,10 @@
-package electionmngmntsys;
+package electionmngmntsys.controllers;
 
+import electionmngmntsys.Launcher;
+import electionmngmntsys.Utilities;
 import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
+import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
 import javafx.fxml.FXML;
@@ -28,13 +31,12 @@ public class ElectionListPage {
     public Label filters, listInfo;
     public CheckBox changeSortingType;
 
-    public ContextMenu validContextMenu =new ContextMenu(), invalidContextMenu =new ContextMenu();
+    public ContextMenu validContextMenu =new ContextMenu(), invalidContextMenu =new ContextMenu(), addContextMenu =new ContextMenu();
 
     //Election Back End
     public mLinkedList <Election> mainElectionList =new mLinkedList<>(), currentElectionList =new mLinkedList<>();
     public mHashMap<Election, Integer> elections=new mHashMap<>();
-    public GraphicsContext electionGc;
-    public Launcher launcher;
+    public Election addingToElection;
     public ElectionEdit electionEdit;
     private String electionIncludeYear ="", electionExcludeYear ="";
     private boolean localType=true, europeanType=true, presidentialType=true; //True -> include
@@ -43,13 +45,17 @@ public class ElectionListPage {
     //Politician Back End
     public mLinkedList <Politician> mainPoliticianList=new mLinkedList<>(), currentPoliticianList =new mLinkedList<>();
     public mHashMap<Politician, Integer> politicians=new mHashMap<>();
+    public Politician addingToPolitician;
     public PoliticianEdit politicianEdit;
     private String politicianIncludeYear ="", politicianExcludeYear ="", politicianIncludeParty="", politicianExcludeParty="";
     private boolean politicianUsingQuickSort=true, politicianSerious=true;
 
     //General
+    public GraphicsContext gc;
+    public Launcher launcher;
     public Button electionTab, politicianTab;
-    public boolean election=true;
+    public boolean election=true, adding=false;
+    public Individual individual;
 
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
@@ -63,10 +69,15 @@ public class ElectionListPage {
         this.politicianEdit = politicianEdit;
     }
 
+    public void setIndividual(Individual individual)
+    {
+        this.individual=individual;
+    }
+
     @FXML
     public void initialize() {
         Utilities.initMap();
-        electionGc= canvas.getGraphicsContext2D();
+        gc = canvas.getGraphicsContext2D();
 
         reInit();
         canvas.setOnMousePressed(event -> {
@@ -77,7 +88,6 @@ public class ElectionListPage {
                 invalidContextMenu.hide();
             }
         });
-
         sortCriteria.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             draw();
         });
@@ -220,18 +230,54 @@ public class ElectionListPage {
     @FXML
     public void initContextMenus()
     {
+        addContextMenu.getItems().clear();
         validContextMenu.getItems().clear();
-        MenuItem add=new MenuItem("Add"), delete=new MenuItem("Delete"), update=new MenuItem("Update");
+        MenuItem add=new MenuItem("Add"), add1=new MenuItem("Add"), delete=new MenuItem("Delete"), update=new MenuItem("Update"), visit=new MenuItem("Visit"), back=new MenuItem("Back"), addTo=new MenuItem("Add");;
         add.setOnAction(event -> {
             if (election)
                 launcher.switchScene("electionForm");
             else
                 launcher.switchScene("politicianForm");
         });
+        add1.setOnAction(event -> {
+            if (election)
+                launcher.switchScene("electionForm");
+            else
+                launcher.switchScene("politicianForm");
+        });
+        back.setOnAction(e -> {
+            if (election)
+            {
+                individual.selectedPolitician=addingToPolitician;
+                individual.selectedElection=null;
+            }
+            else
+            {
+                individual.selectedPolitician=null;
+                individual.selectedElection=addingToElection;
+            }
+            individual.init();
+            launcher.switchScene("individual");
+        });
         validContextMenu.getItems().add(add);
+        addContextMenu.getItems().add(back);
         canvas.setOnContextMenuRequested(event -> {
             int index=getIndexOfMouse((int) event.getScreenX(), (int) event.getScreenY()-104); //top buttons and stuff
             if (index!=-1 && ((election && index<= currentElectionList.size()-1) || (!election && index<=currentPoliticianList.size()-1)))  {
+                addTo.setOnAction(e -> {
+                    if (!election) {
+                        addingToElection.getPoliticians().add(currentPoliticianList.get(index));
+                        addingToElection.getCandidates().add(new Candidate(currentPoliticianList.get(index), addingToElection, 0)); //TODO COPY
+                    }
+                    else
+                    {
+                        mLinkedList <Integer> voteList=new mLinkedList();
+                        voteList.add(0); //votes
+                        voteList.add(currentElectionList.get(index).getId());
+                        addingToPolitician.getVotesList().add(voteList);
+                        addingToPolitician.getAssociations().add(addingToPolitician.getParty()); //TODO hash map verify
+                    }
+                });
                 delete.setOnAction(e -> {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.initOwner(Launcher.stage);
@@ -282,16 +328,40 @@ public class ElectionListPage {
                         launcher.switchScene("politicianForm");
                     }
                 });
+                visit.setOnAction(e -> {
+                    if (election)
+                    {
+                        individual.selectedElection=currentElectionList.get(index); //TODO COPY THAT
+                        individual.selectedPolitician=null;
+                        individual.election=true;
+                    }
+                    else
+                    {
+                        individual.selectedPolitician=currentPoliticianList.get(index); //TODO COPY THAT
+                        individual.selectedElection=null;
+                        individual.election=false;
+                    }
+                    individual.init();
+                    launcher.switchScene("individual");
+                });
+                validContextMenu.getItems().add(visit);
                 validContextMenu.getItems().add(delete);
                 validContextMenu.getItems().add(update);
-                validContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
+
+                addContextMenu.getItems().add(addTo);
+                if (!adding)
+                    validContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
+                else
+                    addContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
             }
-            else
+            else if (!adding)
                 invalidContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
+            else
+                addContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
         });
 
         invalidContextMenu.getItems().clear();
-        invalidContextMenu.getItems().add(add);
+        invalidContextMenu.getItems().add(add1);
 
         invalidContextMenu.setStyle("-fx-font-size: 20px;");
         validContextMenu.setStyle("-fx-font-size: 20px;");
@@ -303,7 +373,7 @@ public class ElectionListPage {
         searchFilterAndSort();
         String imagePath;
         if (election) {
-            electionGc.setFill(Color.AQUAMARINE);
+            gc.setFill(Color.AQUAMARINE);
             if (electionSerious)
                 imagePath = "/images/election.jpg";
             else
@@ -311,40 +381,40 @@ public class ElectionListPage {
         }
         else
         {
-            electionGc.setFill(Color.LIGHTGOLDENRODYELLOW);
+            gc.setFill(Color.LIGHTGOLDENRODYELLOW);
             if (politicianSerious)
                 imagePath = "/images/politician.jpg";
             else
                 imagePath = "/images/politician.gif";
         }
         Image image=new Image(getClass().getResourceAsStream(imagePath));
-        electionGc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         if (election) {
             for (Election e : currentElectionList) {
-                electionGc.setFill(Color.WHITE);
-                electionGc.fillRect(x, y, canvas.getWidth() - 100, 200);
-                electionGc.drawImage(image, x + 20, y + 20, 160, 160);
-                electionGc.setFill(Color.BLACK);
-                electionGc.fillText("Election " + e.getName(), x + 200, y + 20);
-                electionGc.fillText("Election Type: " + Utilities.electionTypeReverseMap.get(e.getType()).getValue(), x + 200, y + 52);
-                electionGc.fillText("Election Location: " + e.getLocation(), x + 200, y + 82);
-                electionGc.fillText("Date: " + e.getYearDate(), x + 200, y + 112);
-                electionGc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
+                gc.setFill(Color.WHITE);
+                gc.fillRect(x, y, canvas.getWidth() - 100, 200);
+                gc.drawImage(image, x + 20, y + 20, 160, 160);
+                gc.setFill(Color.BLACK);
+                gc.fillText("Election " + e.getName(), x + 200, y + 20);
+                gc.fillText("Election Type: " + Utilities.electionTypeReverseMap.get(e.getType()).getValue(), x + 200, y + 52);
+                gc.fillText("Election Location: " + e.getLocation(), x + 200, y + 82);
+                gc.fillText("Date: " + e.getYearDate(), x + 200, y + 112);
+                gc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
                 y += 220;
             }
         }
         else
         {
             for (Politician p : currentPoliticianList) {
-                electionGc.setFill(Color.WHITE);
-                electionGc.fillRect(x, y, canvas.getWidth() - 100, 200);
-                electionGc.drawImage(image, x + 20, y + 20, 160, 160);
-                electionGc.setFill(Color.BLACK);
-                electionGc.fillText("Name: " + p.getName(), x + 200, y + 20);
-                electionGc.fillText("Political Party: " + p.getParty(), x + 200, y + 52);
-                electionGc.fillText("Home County: " + p.getHomeCounty(), x + 200, y + 82);
-                electionGc.fillText("Date of Birth: " + p.getDateOfBirth(), x + 200, y + 112);
-                electionGc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
+                gc.setFill(Color.WHITE);
+                gc.fillRect(x, y, canvas.getWidth() - 100, 200);
+                gc.drawImage(image, x + 20, y + 20, 160, 160);
+                gc.setFill(Color.BLACK);
+                gc.fillText("Name: " + p.getName(), x + 200, y + 20);
+                gc.fillText("Political Party: " + p.getParty(), x + 200, y + 52);
+                gc.fillText("Home County: " + p.getHomeCounty(), x + 200, y + 82);
+                gc.fillText("Date of Birth: " + p.getDateOfBirth(), x + 200, y + 112);
+                gc.fillText("Notable info: Nothing here yet lmao", x + 200, y + 142);
                 y += 220;
             }
         }
@@ -352,29 +422,34 @@ public class ElectionListPage {
 
     private void setInfo() {
         String text;
-        if (election) {
-            if (electionUsingQuickSort)
-                text = "Using quick sort. Try typing bogo or lmao! Total elections count: ";
-            else
-                text = "Using bogo sort. Try typing quick or lockin! Total elections count: ";
-            text += mainElectionList.size();
-            text += ". Current elections count: ";
-            text += currentElectionList.size();
+        if (!adding) {
+            if (election) {
+                if (electionUsingQuickSort)
+                    text = "Using quick sort. Try typing bogo or lmao! Total elections count: ";
+                else
+                    text = "Using bogo sort. Try typing quick or lockin! Total elections count: ";
+                text += mainElectionList.size();
+                text += ". Current elections count: ";
+                text += currentElectionList.size();
+            } else {
+                if (politicianUsingQuickSort)
+                    text = "Using quick sort. Try typing bogo or lmao! Total politicians count: ";
+                else
+                    text = "Using bogo sort. Try typing quick or lockin! Total politicians count: ";
+                text += mainPoliticianList.size();
+                text += ". Current politicians count: ";
+                text += currentPoliticianList.size();
+            }
             text += ".";
-            listInfo.setText(text);
         }
         else
         {
-            if (politicianUsingQuickSort)
-                text = "Using quick sort. Try typing bogo or lmao! Total politicians count: ";
+            if (!election)
+                text="Adding to the election "+addingToElection.getName()+".";
             else
-                text = "Using bogo sort. Try typing quick or lockin! Total politicians count: ";
-            text += mainPoliticianList.size();
-            text += ". Current politicians count: ";
-            text += currentPoliticianList.size();
-            text += ".";
-            listInfo.setText(text);
+                text="Adding to the politician "+addingToPolitician.getName()+".";
         }
+        listInfo.setText(text);
     }
 
     private void searchFilterAndSort()
