@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="pushed updated deps in pom for xstream">
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="fixed linked list in politician + tests for contains value">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764100872319</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed linked list in politician + tests for contains value">
+      <option name="closed" value="true" />
+      <created>1764103121316</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764103121316</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -178,6 +185,7 @@
     <MESSAGE value="changed exports in module for test dir" />
     <MESSAGE value="fixed module with javafx" />
     <MESSAGE value="pushed updated deps in pom for xstream" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushed updated deps in pom for xstream" />
+    <MESSAGE value="fixed linked list in politician + tests for contains value" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed linked list in politician + tests for contains value" />
   </component>
 </project>
