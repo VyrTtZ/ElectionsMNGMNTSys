@@ -39,6 +39,7 @@ class mHashMapTest {
             hashMap.put("Catherine Connolly" + i, i * 10);
         }
         assertTrue(hashMap.sizeOfHashMap() >= 20);
+        // lol wrote that twice from brain fog
       //  assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
         assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
     }
