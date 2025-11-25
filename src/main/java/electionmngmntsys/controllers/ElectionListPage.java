@@ -1,9 +1,12 @@
 package electionmngmntsys.controllers;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import electionmngmntsys.Launcher;
 import electionmngmntsys.Utilities;
 import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
+import electionmngmntsys.mlinkedlist.mNodeL;
 import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
@@ -16,7 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Optional;
 import java.util.Random;
 
@@ -794,4 +797,29 @@ public class ElectionListPage {
         }
         return -1;
     }
+
+    public void save() throws Exception {
+        XStream xstream=new XStream(new DomDriver());
+        ObjectOutputStream out=xstream.createObjectOutputStream(new FileWriter("pom.xml"));
+        out.writeObject(mainElectionList);
+        out.close();
+    }
+
+    public void load() throws Exception {
+        Class<?>[] classes = new Class[] { mNodeL.class, mLinkedList.class, ElectionEdit.class, PoliticianEdit.class, PoliticianFilterEdit.class, Individual.class, ElectionFilterEdit.class};
+
+        //setting up the xstream object with default security and the above classes
+        XStream xstream = new XStream(new DomDriver());
+        XStream.setupDefaultSecurity(xstream);
+        xstream.allowTypes(classes);
+
+        //doing the actual serialisation to an XML file
+        ObjectInputStream in = xstream.createObjectInputStream(new FileReader("baoList.xml"));
+        mainElectionList = (mLinkedList<Election>) in.readObject();
+        in.close();
+    }
+
+
+
+
 }
