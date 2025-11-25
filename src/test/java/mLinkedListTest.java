@@ -1,4 +1,6 @@
-package electionmngmntsys.mlinkedlist;
+
+
+import electionmngmntsys.mlinkedlist.mLinkedList;
 import electionmngmntsys.mlinkedlist.mNodeL;
 
 import org.junit.jupiter.api.BeforeEach;
