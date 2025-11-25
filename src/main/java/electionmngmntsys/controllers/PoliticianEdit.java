@@ -1,6 +1,6 @@
-package electionmngmntsys;
+package electionmngmntsys.controllers;
 
-import electionmngmntsys.models.Election;
+import electionmngmntsys.Launcher;
 import electionmngmntsys.models.Politician;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

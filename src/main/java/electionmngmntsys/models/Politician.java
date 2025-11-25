@@ -1,9 +1,11 @@
 package electionmngmntsys.models;
 
+import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class Politician implements Serializable {
     private String name;
@@ -12,7 +14,8 @@ public class Politician implements Serializable {
     private String homeCounty;
     private String imageURL;
     private mLinkedList<mLinkedList<Integer>> votesList = new mLinkedList<>(); //for votes and elections (id)
-    private mLinkedList<mLinkedList<String>> associations = new mLinkedList<>(); //for party during an election (id)
+    private mLinkedList<String> associations = new mLinkedList<>(); //for party during an election (id)
+    private mHashMap<Election, Integer> duplicateCheck = new mHashMap<>();
 
     public Politician(String name, LocalDate dateOfBirth, String party, String homeCounty, String imageURL) {
         this.name = name;
@@ -70,11 +73,19 @@ public class Politician implements Serializable {
         this.votesList = votes;
     }
 
-    public mLinkedList<mLinkedList<String>> getAssociations() {
+    public mLinkedList<String> getAssociations() {
         return associations;
     }
 
-    public void setAssociations(mLinkedList<mLinkedList<String>> associations) {
+    public void setAssociations(mLinkedList<String> associations) {
         this.associations = associations;
+    }
+
+    public mHashMap<Election, Integer> getDuplicateCheck() {
+        return duplicateCheck;
+    }
+
+    public void setDuplicateCheck(mHashMap<Election, Integer> duplicateCheck) {
+        this.duplicateCheck = duplicateCheck;
     }
 }
