@@ -782,7 +782,7 @@ public class ElectionListPage {
 
     public void save() throws Exception {
         XStream xstream=new XStream(new DomDriver());
-        ObjectOutputStream out=xstream.createObjectOutputStream(new FileWriter("pom.xml"));
+        ObjectOutputStream out=xstream.createObjectOutputStream(new FileWriter("Elections.xml"));
         out.writeObject(mainElectionList);
         out.close();
     }
@@ -796,7 +796,7 @@ public class ElectionListPage {
         xstream.allowTypes(classes);
 
         //doing the actual serialisation to an XML file
-        ObjectInputStream in = xstream.createObjectInputStream(new FileReader("baoList.xml"));
+        ObjectInputStream in = xstream.createObjectInputStream(new FileReader("Elections.xml"));
         mainElectionList = (mLinkedList<Election>) in.readObject();
         in.close();
     }

@@ -16,6 +16,7 @@ public class mHashMap<X, Y> {
     private final long SEED1 = 0x5A3C7F1B8E6D2A1FL;
     private final long SEED2 = 0x1F8E6D2A5A3C7F9BL;
     private double loadFactor = 0;
+    private int size = 0;
 
 //---------------------------------------------------------------------------------------------------------CONSTRUCTOR
     public mHashMap() {
@@ -127,10 +128,17 @@ public class mHashMap<X, Y> {
                 return;
             }
         }
-        map[index].add(node); //ADDS NODE TO THE LINKED LIST
+        map[index].add(node);//ADDS NODE TO THE LINKED LIST
+        size++;
 
         loadFactor = (double) size() / CURRENTCAPACITY;
         if (loadFactor > 0.60) resize(); //IF THE LOAD FACTOR IS ABOVE .6 THE MAP RESIZES
+    }
+    //------------------------------------------------------------------------------------------------------------------
+
+    public Y getValue(X key) {
+        mNodeH<X, Y> node = get(key);
+        return node != null ? node.getValue() : null;
     }
 //----------------------------------------------------------------------------------------------------------------------
     public mNodeH<X, Y> get(X key) {
@@ -146,6 +154,10 @@ public class mHashMap<X, Y> {
             if (!map[i].isEmpty()) retVal++;
         }
         return retVal;
+    }
+
+    public int sizeOfHashMap() {
+        return size;
     }
 //----------------------------------------------------------------------------------------------------------------------
     private void resize() {//RESIZES THE MAP

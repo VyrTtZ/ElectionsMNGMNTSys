@@ -11,59 +11,65 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class mHashMapTest {
+    private mHashMap<String, Integer> hashMapS;
+    private mHashMap<Election, String> hashMapE;
+    private mHashMap <Election, String> statusOfElections;
 
 
     @BeforeEach
     void setUp() {
+        hashMapS= new mHashMap<>();
+        hashMapE = new mHashMap<>();
+        statusOfElections = new mHashMap<>();
+
 
     }
 
 
     @Test
     void putNode() {
-        mHashMap<String, Integer> hashMap = new mHashMap<>();
+        hashMapS.put("Catherine Connolly", 1);
+        assertEquals(Integer.valueOf(1), hashMapS.getValue("Catherine Connolly"));
 
-        hashMap.put("Catherine Connolly", 1);
-        assertEquals(Integer.valueOf(1), hashMap.get("Catherine Connolly").getValue());
-
-        hashMap.put("Catherine Connolly", 2);
-        assertEquals(Integer.valueOf(2), hashMap.get("Catherine Connolly"));
+        hashMapS.put("Catherine Connolly", 2);
+        assertEquals(Integer.valueOf(2), hashMapS.getValue("Catherine Connolly"));
 
         // nothing happens essentially
-        hashMap.put(null, 3);
-        assertEquals(null, hashMap.get("Catherine Connolly"));
+        hashMapS.put(null, 999);
+        assertEquals(Integer.valueOf(2), hashMapS.getValue("Catherine Connolly"));
 
         // resizes the map
         for (int i = 0; i < 20; i++) {
-            hashMap.put("Catherine Connolly" + i, i);
+            hashMapS.put("Catherine Connolly" + i, i * 10);
         }
-        assertTrue(hashMap.size() >= 20);
-        assertEquals(Integer.valueOf(5), hashMap.get("Catherine Connolly"));
+        assertTrue(hashMapS.sizeOfHashMap() >= 20);
+        // lol wrote that twice from brain fog
+      //  assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
+        assertEquals(Integer.valueOf(2), hashMapS.getValue("Catherine Connolly"));
     }
 
     @Test
     void get() {
-        mHashMap<Election, String> hashMap = new mHashMap<>();
         // 3 = type (presidential)
         Election original = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        original.setId();
+        original.setId(0);
 
-        hashMap.put(original, "Active");
+        hashMapE.put(original, "Active");
 
         Election duplicate = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        duplicate.setId();
+        duplicate.setId(0);
 
         assertNotSame(original, duplicate);
-        assertNotEquals(original, duplicate);
 
-        mNodeH<Election, String> findtheelusivemf = hashMap.get(duplicate);
+
+        mNodeH<Election, String> findtheelusivemf = hashMapE.get(duplicate);
 
         assertNotNull(findtheelusivemf);
         //
         assertEquals("Active", findtheelusivemf.getValue());
-        assertEquals("Active", hashMap.get(duplicate));
+        assertEquals("Active", hashMapE.get(duplicate));
 
-        assertNull(hashMap.get(null));
+        assertNull(hashMapE.get(null));
     }
 
 
@@ -71,36 +77,34 @@ class mHashMapTest {
     void containsKey() {
         mHashMap<Election, String> hashMap = new mHashMap<>();
         Election electionn = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        electionn.setId();
+        electionn.setId(0);
 
         Election electionnn = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        electionn.setId();
+        electionn.setId(0);
 
-        hashMap.put(electionn, "Active");
+        hashMapE.put(electionn, "Active");
 
         assertNotSame(electionn, electionnn);
 
-        assertTrue(hashMap.containsKey(electionn));
-        assertTrue(hashMap.containsKey(electionnn));
+        assertTrue(hashMapE.containsKey(electionn));
+        assertTrue(hashMapE.containsKey(electionnn));
 
         Election thewrongkey = new Election("Local / General Election", 1, "Ireland", LocalDate.of(2025, 1, 1), 174);
-        assertFalse(hashMap.containsKey(thewrongkey));
-
-        assertFalse(hashMap.containsKey(null));
+        assertFalse(hashMapE.containsKey(thewrongkey));
+        assertFalse(hashMapE.containsKey(null));
 
         for (int i = 0; i < 20; i++) {
-            hashMap.put(new Election("Election " + i, 1, "Ireland", LocalDate.of(2025, 1, 1), 174), "Active");
+            hashMapE.put(new Election("Election " + i, 1, "Ireland", LocalDate.of(2025, 1, 1), 174), "Active");
         }
         assertTrue(hashMap.containsKey(thewrongkey));
     }
 
+
     @Test
     void containsValue() {
-        //
-        mHashMap<Election, String> statusOfElections = new mHashMap<>();
 
         Election presidentialIreland2025 = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        presidentialIreland2025.setId();
+        presidentialIreland2025.setId(0);
 
         statusOfElections.put(presidentialIreland2025, "Completed");
         assertEquals(1, statusOfElections.size());
@@ -109,7 +113,7 @@ class mHashMapTest {
 
         // different object, same data. tests strength of key distinction
         Election weAreNotTheKeyYourLookingFor = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        weAreNotTheKeyYourLookingFor.setId();
+        weAreNotTheKeyYourLookingFor.setId(0);
 
         assertNotSame(presidentialIreland2025, weAreNotTheKeyYourLookingFor);
         assertNotEquals(presidentialIreland2025, weAreNotTheKeyYourLookingFor);
@@ -141,84 +145,81 @@ class mHashMapTest {
 
     @Test
     void remove() {
-        mHashMap<Election, String> hashMap = new mHashMap<>();
-
         Election ee = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        ee.setId();
+        ee.setId(0);
 
         Election eee = new Election("General Election", 1, "Kilmaccow", LocalDate.of(2026, 3, 15), 1);
-        eee.setId();
+        eee.setId(0);
 
-        hashMap.put(ee, "Completed");
-        hashMap.put(eee, "Ahead");
+        hashMapE.put(ee, "Completed");
+        hashMapE.put(eee, "Ahead");
 
-        assertEquals(2, hashMap.size());
-        assertTrue(hashMap.containsKey(ee));
-        assertTrue(hashMap.containsKey(eee));
+        assertEquals(2, hashMapE.size());
+        assertTrue(hashMapE.containsKey(ee));
+        assertTrue(hashMapE.containsKey(eee));
 
         Election eeCulprit = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        eeCulprit.setId();
+        eeCulprit.setId(0);
 
         Election eeeCulprit = new Election("General Election", 1, "Ireland", LocalDate.of(2026, 3, 15), 1);
-        eeeCulprit.setId();
+        eeeCulprit.setId(0);
 
-        assertTrue(hashMap.containsKey(eeCulprit));
-        assertEquals(1, hashMap.size());
+        assertTrue(hashMapE.containsKey(eeCulprit));
+        assertEquals(1, hashMapE.size());
 
-        assertFalse(hashMap.containsKey(ee));
-        assertFalse(hashMap.containsKey(eeCulprit));
-        assertNull(hashMap.get(eeCulprit));
+        assertFalse(hashMapE.containsKey(ee));
+        assertFalse(hashMapE.containsKey(eeCulprit));
+        assertNull(hashMapE.get(eeCulprit));
 
         ////boo////
 
        // assertTrue(hashMap.remove(eee));
-        assertEquals(0, hashMap.size());
-        assertTrue(hashMap.size() == 0);
+        assertEquals(0, hashMapE.size());
+        assertTrue(hashMapE.size() == 0);
 
         for(int i = 0; i < 20; i++) {
             Election resizer = new Election("Presidential " + i, 3, "Ireland", LocalDate.now(), 1);
-            hashMap.put(resizer, "Presidential");
+            hashMapE.put(resizer, "Presidential");
         }
-        assertEquals(20, hashMap.size());
+        assertEquals(20, hashMapE.size());
 
         Election resizerCulprit = new Election("Presidential", 3, "Ireland", LocalDate.now(), 1);
         //assertTrue(hashMap.remove(resizerCulprit));
-        assertEquals(19, hashMap.size());
+        assertEquals(19, hashMapE.size());
     }
 
     @Test
     void swapValues() {
-        mHashMap<Election, String> hashMap = new mHashMap<>();
 
         Election irishGeneralElection = new Election("General Election", 1, "Ireland", LocalDate.of(2026,3, 15), 1);
-        irishGeneralElection.setId();
+        irishGeneralElection.setId(0);
 
         Election irishPrezzieElection = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
-        irishPrezzieElection.setId();
+        irishPrezzieElection.setId(0);
 
-        hashMap.put(irishGeneralElection, "Ahead");
-        hashMap.put(irishPrezzieElection, "Completed");
+        hashMapE.put(irishGeneralElection, "Ahead");
+        hashMapE.put(irishPrezzieElection, "Completed");
 
-        mNodeH<Election, String> nodeIrishGeneral = hashMap.get(irishGeneralElection);
-        mNodeH<Election, String> nodeIrishPrezzie = hashMap.get(irishPrezzieElection);
+        mNodeH<Election, String> nodeIrishGeneral = hashMapE.get(irishGeneralElection);
+        mNodeH<Election, String> nodeIrishPrezzie = hashMapE.get(irishPrezzieElection);
 
         assertNotNull(nodeIrishGeneral);
         assertNotNull(nodeIrishPrezzie);
         assertEquals("Ahead", nodeIrishGeneral.getValue());
         assertEquals("Completed", nodeIrishPrezzie.getValue());
 
-        hashMap.swapValues(nodeIrishGeneral, nodeIrishPrezzie);
+        hashMapE.swapValues(nodeIrishGeneral, nodeIrishPrezzie);
 
         assertEquals("Completed", nodeIrishPrezzie.getValue());
         assertEquals("Ahead", nodeIrishGeneral.getValue());
 
         Election IrishGeneralElectCulprit = new Election("General Election", 1, "Ireland", LocalDate.of(2026, 3, 15), 1);
-        IrishGeneralElectCulprit.setId();
+        IrishGeneralElectCulprit.setId(0);
 
-        assertEquals("Ahead", hashMap.get(IrishGeneralElectCulprit));
+        assertEquals("Ahead", hashMapE.get(IrishGeneralElectCulprit));
 
-        hashMap.swapValues(nodeIrishGeneral, nodeIrishPrezzie);
-        assertEquals("Ahead", hashMap.get(irishGeneralElection));
-        assertEquals("Completed", hashMap.get(irishPrezzieElection));
+        hashMapE.swapValues(nodeIrishGeneral, nodeIrishPrezzie);
+        assertEquals("Ahead", hashMapE.get(irishGeneralElection));
+        assertEquals("Completed", hashMapE.get(irishPrezzieElection));
     }
 }
