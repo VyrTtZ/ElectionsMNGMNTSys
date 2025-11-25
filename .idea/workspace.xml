@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="added a linkedList for election in politician and reverted the change from elections to integer" />
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="pushed updated deps in pom for xstream">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,32 +23,32 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 4
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
   <component name="ProjectId" id="35z2vDNTyXoTjTMi22VVfkxNhjg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ElectionMNGMNTSys.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.mHashMapTest.containsValue.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.mHashMapTest.putNode.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.test in ElectionMNGMNTSys.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Launcher.executor": "Run",
+    "JUnit.All in ElectionMNGMNTSys.executor": "Run",
+    "JUnit.mHashMapTest.containsValue.executor": "Run",
+    "JUnit.mHashMapTest.putNode.executor": "Run",
+    "JUnit.test in ElectionMNGMNTSys.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RunManager" selected="Application.Launcher">
+}]]></component>
+  <component name="RunManager" selected="JUnit.All in ElectionMNGMNTSys">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="electionmngmntsys.Launcher" />
       <module name="ElectionMNGMNTSys" />
@@ -110,10 +113,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.All in ElectionMNGMNTSys" />
         <item itemvalue="JUnit.mHashMapTest.containsValue" />
         <item itemvalue="JUnit.test in ElectionMNGMNTSys" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.mHashMapTest.putNode" />
       </list>
     </recent_temporary>
@@ -167,15 +170,7 @@
       <option name="project" value="LOCAL" />
       <updated>1764100872319</updated>
     </task>
-    <task id="LOCAL-00006" summary="fixed linked list in politician + tests for contains value">
-      <option name="closed" value="true" />
-      <created>1764103121316</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1764103121316</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -183,8 +178,6 @@
     <MESSAGE value="changed exports in module for test dir" />
     <MESSAGE value="fixed module with javafx" />
     <MESSAGE value="pushed updated deps in pom for xstream" />
-    <MESSAGE value="fixed linked list in politician + tests for contains value" />
-    <MESSAGE value="added a linkedList for election in politician and reverted the change from elections to integer" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a linkedList for election in politician and reverted the change from elections to integer" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushed updated deps in pom for xstream" />
   </component>
 </project>

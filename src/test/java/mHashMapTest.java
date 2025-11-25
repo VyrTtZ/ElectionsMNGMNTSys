@@ -16,6 +16,7 @@ class mHashMapTest {
     @BeforeEach
     void setUp() {
 
+
     }
 
 
@@ -24,21 +25,23 @@ class mHashMapTest {
         mHashMap<String, Integer> hashMap = new mHashMap<>();
 
         hashMap.put("Catherine Connolly", 1);
-        assertEquals(Integer.valueOf(1), hashMap.get("Catherine Connolly").getValue());
+        assertEquals(Integer.valueOf(1), hashMap.getValue("Catherine Connolly"));
 
         hashMap.put("Catherine Connolly", 2);
-        assertEquals(Integer.valueOf(2), hashMap.get("Catherine Connolly"));
+        assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
 
         // nothing happens essentially
-        hashMap.put(null, 3);
-        assertEquals(null, hashMap.get("Catherine Connolly"));
+        hashMap.put(null, 999);
+        assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
 
         // resizes the map
         for (int i = 0; i < 20; i++) {
-            hashMap.put("Catherine Connolly" + i, i);
+            hashMap.put("Catherine Connolly" + i, i * 10);
         }
-        assertTrue(hashMap.size() >= 20);
-        assertEquals(Integer.valueOf(5), hashMap.get("Catherine Connolly"));
+        assertTrue(hashMap.sizeOfHashMap() >= 20);
+        // lol wrote that twice from brain fog
+      //  assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
+        assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
     }
 
     @Test
