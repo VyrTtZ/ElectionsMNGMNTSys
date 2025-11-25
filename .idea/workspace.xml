@@ -4,6 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="pushed updated deps in pom for xstream">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,43 +23,89 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="35z2vDNTyXoTjTMi22VVfkxNhjg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Launcher.executor": "Run",
+    "JUnit.All in ElectionMNGMNTSys.executor": "Run",
+    "JUnit.mHashMapTest.containsValue.executor": "Run",
     "JUnit.mHashMapTest.putNode.executor": "Run",
+    "JUnit.test in ElectionMNGMNTSys.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager" selected="JUnit.All in ElectionMNGMNTSys">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="electionmngmntsys.Launcher" />
+      <module name="ElectionMNGMNTSys" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="electionmngmntsys.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in ElectionMNGMNTSys" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ElectionMNGMNTSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mHashMapTest.containsValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
+      <option name="METHOD_NAME" value="containsValue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="mHashMapTest.putNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
+      <option name="METHOD_NAME" value="putNode" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test in ElectionMNGMNTSys" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
+      <module name="ElectionsMNGMNTSys" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ElectionsMNGMNTSys" />
       <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -63,6 +113,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in ElectionMNGMNTSys" />
+        <item itemvalue="JUnit.mHashMapTest.containsValue" />
+        <item itemvalue="JUnit.test in ElectionMNGMNTSys" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.mHashMapTest.putNode" />
       </list>
     </recent_temporary>
@@ -70,36 +124,60 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="" />
+      <created>1764098808933</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+      <updated>1764098808933</updated>
     </task>
+    <task id="LOCAL-00001" summary="fixed tests file path">
       <option name="closed" value="true" />
+      <created>1764099069673</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
+      <updated>1764099069673</updated>
     </task>
+    <task id="LOCAL-00002" summary="changed exports in module for test dir">
       <option name="closed" value="true" />
+      <created>1764099314688</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
+      <updated>1764099314688</updated>
     </task>
+    <task id="LOCAL-00003" summary="fixed module with javafx">
       <option name="closed" value="true" />
+      <created>1764099874918</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
+      <updated>1764099874918</updated>
     </task>
+    <task id="LOCAL-00004" summary="pushed updated deps in pom for xstream">
       <option name="closed" value="true" />
+      <created>1764100814990</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
+      <updated>1764100814990</updated>
     </task>
+    <task id="LOCAL-00005" summary="pushed updated deps in pom for xstream">
       <option name="closed" value="true" />
+      <created>1764100872319</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
+      <updated>1764100872319</updated>
     </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed tests file path" />
+    <MESSAGE value="changed exports in module for test dir" />
+    <MESSAGE value="fixed module with javafx" />
+    <MESSAGE value="pushed updated deps in pom for xstream" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushed updated deps in pom for xstream" />
   </component>
 </project>
