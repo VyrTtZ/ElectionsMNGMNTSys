@@ -10,5 +10,6 @@ module main {
     exports electionmngmntsys.mhashmap;
     exports electionmngmntsys.controllers;
     exports electionmngmntsys.models;
+    exports electionmngmntsys;
     opens electionmngmntsys.controllers to javafx.fxml;
 }

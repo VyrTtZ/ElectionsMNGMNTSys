@@ -24,7 +24,7 @@ class mHashMapTest {
         mHashMap<String, Integer> hashMap = new mHashMap<>();
 
         hashMap.put("Catherine Connolly", 1);
-        assertEquals(Integer.valueOf(1), hashMap.get("Catherine Connolly"));
+        assertEquals(Integer.valueOf(1), hashMap.get("Catherine Connolly").getValue());
 
         hashMap.put("Catherine Connolly", 2);
         assertEquals(Integer.valueOf(2), hashMap.get("Catherine Connolly"));
