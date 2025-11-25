@@ -210,8 +210,8 @@ class mHashMapTest {
 
         hashMapE.swapValues(nodeIrishGeneral, nodeIrishPrezzie);
 
-        assertNull("Completed", nodeIrishPrezzie.getValue());
-        assertEquals("Ahead", nodeIrishGeneral.getValue());
+        assertEquals("Ahead", nodeIrishPrezzie.getValue());
+        assertEquals("Completed", nodeIrishGeneral.getValue());
 
         assertEquals("Completed", hashMapE.getValue(nodeIrishGeneral.getKey()));
         assertEquals("Ahead",     hashMapE.getValue(nodeIrishPrezzie.getKey()));

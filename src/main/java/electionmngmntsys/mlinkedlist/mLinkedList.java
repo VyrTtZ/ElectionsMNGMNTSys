@@ -27,7 +27,7 @@ public class mLinkedList<T> implements Iterable<T>, Serializable {
 
     //----------------------------------------------------------------------------------------------------------------------
     public void add(T value) { //HELPER TO THE ADD NODE SO THERE IS NO NEED TO DECLARE A WHOLE NODE
-        addNode(new mNodeL<>(value, null, null));
+        addNode(new mNodeL<>(value, null));
     }
 
     //----------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,8 @@ public class mLinkedList<T> implements Iterable<T>, Serializable {
     }
 
     //----------------------------------------------------------------------------------------------------------------------
-    public mNodeL<T> getNode(int i) { //RETUNS THE NODE, NOT JUST THE ITEM WITHIN
+    public mNodeL<T> getNode(int i) {//RETUNS THE NODE, NOT JUST THE ITEM WITHIN
+        if(i < 0) return null;
         mNodeL<T> current = head;
         int j = 0;
 
@@ -108,7 +109,17 @@ public class mLinkedList<T> implements Iterable<T>, Serializable {
 
     //----------------------------------------------------------------------------------------------------------------------
     public void swapNodes(mNodeL a, mNodeL b) { //SWAPS 2 NODES
-        if (a == b) return;
+        if (a == b)
+            return;
+
+        if(a == null) {
+            remove((T) b);
+            return;
+        }
+        else if(b == null){
+            remove ((T) a);
+            return;
+        }
 
         mNodeL prevA = null;
         mNodeL prevB = null;
