@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="fixed module with javafx" />
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="pushed updated deps in pom for xstream">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +36,7 @@
   "keyToString": {
     "Application.Launcher.executor": "Run",
     "JUnit.All in ElectionMNGMNTSys.executor": "Run",
+    "JUnit.mHashMapTest.containsValue.executor": "Run",
     "JUnit.mHashMapTest.putNode.executor": "Run",
     "JUnit.test in ElectionMNGMNTSys.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -44,7 +48,7 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.test in ElectionMNGMNTSys">
+  <component name="RunManager" selected="JUnit.All in ElectionMNGMNTSys">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="electionmngmntsys.Launcher" />
       <module name="ElectionMNGMNTSys" />
@@ -62,6 +66,16 @@
       <module name="ElectionMNGMNTSys" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mHashMapTest.containsValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ElectionMNGMNTSys" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
+      <option name="METHOD_NAME" value="containsValue" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,9 +113,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in ElectionMNGMNTSys" />
+        <item itemvalue="JUnit.mHashMapTest.containsValue" />
         <item itemvalue="JUnit.test in ElectionMNGMNTSys" />
         <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.All in ElectionMNGMNTSys" />
         <item itemvalue="JUnit.mHashMapTest.putNode" />
       </list>
     </recent_temporary>
@@ -139,13 +154,30 @@
       <option name="project" value="LOCAL" />
       <updated>1764099874918</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="pushed updated deps in pom for xstream">
+      <option name="closed" value="true" />
+      <created>1764100814990</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1764100814990</updated>
+    </task>
+    <task id="LOCAL-00005" summary="pushed updated deps in pom for xstream">
+      <option name="closed" value="true" />
+      <created>1764100872319</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764100872319</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed tests file path" />
     <MESSAGE value="changed exports in module for test dir" />
     <MESSAGE value="fixed module with javafx" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed module with javafx" />
+    <MESSAGE value="pushed updated deps in pom for xstream" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushed updated deps in pom for xstream" />
   </component>
 </project>
