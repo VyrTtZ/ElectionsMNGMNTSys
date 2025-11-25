@@ -63,7 +63,11 @@ public class Individual {
     public void initialize()
     {
         sortType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            init();
+            if (election)
+                quickSort(currentCandidates, currentPoliticians, 0, currentCandidates.size()-1, sortType.getSelectionModel().getSelectedItem());
+            else
+                quickSort(currentElections, null, 0, currentElections.size()-1, sortType.getSelectionModel().getSelectedItem());
+            initListView();
         });
     }
 
@@ -73,6 +77,8 @@ public class Individual {
         {
             changeVote.setDisable(false);
             voteField.setDisable(false);
+            politicianTab.setDisable(true);
+            electionTab.setDisable(false);
             setNameLabel(selectedElection.getName());
             setTypeParty("Type: "+Utilities.electionTypeReverseMap.get(selectedElection.getType()).getValue());
             setLocationHome("Location: "+selectedElection.getLocation());
@@ -86,12 +92,14 @@ public class Individual {
         {
             changeVote.setDisable(true);
             voteField.setDisable(true);
+            politicianTab.setDisable(false);
+            electionTab.setDisable(true);
             setNameLabel(selectedPolitician.getName());
             setTypeParty("Party: "+selectedPolitician.getParty());
             setLocationHome("Home: "+selectedPolitician.getHomeCounty());
             setDateOfBirth("DOB: "+selectedPolitician.getDateOfBirth().toString());
             setCountURL("Image: "+selectedPolitician.getImageURL());
-//            currentElections=selectedPolitician.getElections();
+            currentElections=selectedPolitician.getElections();
             quickSort(currentElections, null, 0, currentElections.size()-1, sortType.getSelectionModel().getSelectedItem());
         }
         assignRanking();
@@ -138,10 +146,14 @@ public class Individual {
             });
             add.setOnAction(e -> {
                 electionListPage.adding=true;
-                if (election)
-                    electionListPage.addingToElection=selectedElection;
-                else
-                    electionListPage.addingToPolitician=selectedPolitician;
+                if (election) {
+                    electionListPage.addingToElection = selectedElection;
+                    electionListPage.election=false;
+                }
+                else {
+                    electionListPage.addingToPolitician = selectedPolitician;
+                    electionListPage.election=true;
+                }
                 launcher.switchScene("electionList");
             });
             remove.setOnAction(e -> {
@@ -153,18 +165,29 @@ public class Individual {
                 }
                 else
                 {
-                    currentElections.remove(currentElections.get());
+                    currentElections.remove(currentElections.get(currentElections.getIndex((Election) listView.getSelectionModel().getSelectedItem())));
                 }
             });
             visit.setOnAction(e -> {
+                currentPoliticians=null;
+                currentCandidates=null;
+                currentElections=null;
+                selectedElection=null;
+                selectedPolitician=null;
                 if (election)
                 {
-
+                    selectedPolitician=currentPoliticians.get(currentCandidates.getIndex((Candidate) listView.getSelectionModel().getSelectedItem()));
+                    init();
+                }
+                else
+                {
+                    selectedElection= (Election) listView.getSelectionModel().getSelectedItem();
+                    init();
                 }
             });
             contextMenu1.getItems().addAll(adding, visit);
             contextMenu2.getItems().add(add);
-            contextMenu1.show(listView, event.getScreenX(), event.getScreenY());
+            contextMenu1.show(listView, event.getScreenX(), event.getScreenY()); //TODO
         });
     }
 
@@ -173,8 +196,8 @@ public class Individual {
         listView.getItems().clear();
         if (election)
         {
-            listView.setCellFactory(lv -> new ListCell<Candidate>() {
-                protected void updateItem(Candidate candidate, boolean empty) {
+            listView.setCellFactory(lv -> new ListCell<Object>() {
+                protected void updateItem(Object candidate, boolean empty) {
                     super.updateItem(candidate, empty);
                     if (empty || candidate == null) {
                         setText(null);
@@ -184,7 +207,9 @@ public class Individual {
                     {
                         setText(candidate.toString());
 
-                        if (candidate.getRanking()<=selectedElection.getNumOfWinners())
+                        if (selectedElection==null)
+                            return;
+                        if (((Candidate)candidate).getRanking()<=selectedElection.getNumOfWinners())
                         {
                             setStyle("-fx-background-color: gold; -fx-font-size: 20px; -fx-alignment: center;");
                         }
@@ -200,8 +225,8 @@ public class Individual {
         }
         else
         {
-            listView.setCellFactory(lv -> new ListCell<Election>() {
-                protected void updateItem(Election election, boolean empty) {
+            listView.setCellFactory(lv -> new ListCell<Object>() {
+                protected void updateItem(Object election, boolean empty) {
                     super.updateItem(election, empty);
                     if (empty || election == null) {
                         setText(null);
@@ -211,7 +236,12 @@ public class Individual {
                     {
                         setText(election.toString());
 
-                        if (true)
+                        if (selectedPolitician==null)
+                            return;
+                        int index=selectedPolitician.getElections().getIndex((Election) election);
+                        int i=selectedPolitician.getElections().get(index).getPoliticians().getIndex(selectedPolitician);
+
+                        if (selectedPolitician.getElections().get(index).getCandidates().get(i).getRanking()<=((Election)election).getNumOfWinners())
                         {
                             setStyle("-fx-background-color: gold; -fx-font-size: 20px; -fx-alignment: center;");
                         }
@@ -244,10 +274,6 @@ public class Individual {
                     listInfo.setText("Invalid value!");
                 }
             }
-            else
-            {
-                //TODO
-            }
         }
         else
             listInfo.setText("Select something!");
@@ -255,7 +281,7 @@ public class Individual {
 
     public void switchType()
     {
-        //TODO
+        goBack();
     }
 
     public void goBack()
@@ -265,12 +291,14 @@ public class Individual {
         currentElections=null;
         selectedElection=null;
         selectedPolitician=null;
+        electionListPage.election=election;
+        electionListPage.adding=false;
         launcher.switchScene("electionList");
     }
 
     public void editSelected()
     {
-
+        //TODO
     }
 
     public void assignRanking()

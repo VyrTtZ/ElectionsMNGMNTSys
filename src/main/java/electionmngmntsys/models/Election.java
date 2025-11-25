@@ -6,6 +6,8 @@ import electionmngmntsys.mlinkedlist.mLinkedList;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
+
 public class Election implements Serializable {
     private int type; //Local = 1; Euro = 2; Presidential = 3;
     private String location, name;
@@ -109,5 +111,13 @@ public class Election implements Serializable {
     public String toString()
     {
         return Utilities.electionTypeReverseMap.get(type).getValue()+" election "+name+", held in "+location+", on "+yearDate+", "+numOfWinners+" winners";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Election election = (Election) o;
+        return type == election.type && numOfWinners == election.numOfWinners && Objects.equals(location, election.location) && Objects.equals(name, election.name) && Objects.equals(yearDate, election.yearDate);
     }
 }

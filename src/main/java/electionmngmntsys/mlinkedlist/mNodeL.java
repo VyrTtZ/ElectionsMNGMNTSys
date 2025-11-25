@@ -1,5 +1,7 @@
 package electionmngmntsys.mlinkedlist;
 
+import java.util.Objects;
+
 public class mNodeL <T>{
     public T data;
     public mNodeL<T> next;
@@ -23,4 +25,11 @@ public class mNodeL <T>{
         return prev;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        mNodeL<?> mNodeL = (mNodeL<?>) o;
+        return data.equals(mNodeL.data);
+    }
 }

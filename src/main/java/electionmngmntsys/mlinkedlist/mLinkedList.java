@@ -96,7 +96,7 @@ public class mLinkedList<T> implements Iterable<T>, Serializable {
         mNodeL<T> current = head;
         int index = 0;
         while (current != null) {
-            if (current == obj) return index;
+            if (current.getContent().equals(obj)) return index;
             else {
                 current = current.next;
                 index++;

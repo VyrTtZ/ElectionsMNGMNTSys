@@ -1,6 +1,7 @@
 package electionmngmntsys.controllers;
 
 import electionmngmntsys.Launcher;
+import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -35,6 +36,11 @@ public class PoliticianEdit {
             electionListPage.mainPoliticianList.add(tmp);
             electionListPage.politicians.put(tmp, 1);
             launcher.switchScene("electionList");
+            if (updateIndex!=-1) {
+                Politician rmv = electionListPage.mainPoliticianList.get(updateIndex);
+                electionListPage.mainPoliticianList.remove(rmv);
+                electionListPage.politicians.remove(rmv);
+            }
         }
         else {
             politicianFormMainLabel.setText("Politician already exists!");

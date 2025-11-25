@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="pushed updated deps in pom for xstream">
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="Still continuing individual accessing.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/Individual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/PoliticianEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/PoliticianEdit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Candidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Candidate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Politician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Politician.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,38 +36,37 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="35z2vDNTyXoTjTMi22VVfkxNhjg" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Launcher.executor": "Run",
-    "JUnit.All in ElectionMNGMNTSys.executor": "Run",
-    "JUnit.mHashMapTest.containsValue.executor": "Run",
-    "JUnit.mHashMapTest.get.executor": "Run",
-    "JUnit.mHashMapTest.putNode.executor": "Run",
-    "JUnit.test in ElectionMNGMNTSys.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in ElectionMNGMNTSys.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.mHashMapTest.containsValue.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.mHashMapTest.putNode.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.test in ElectionMNGMNTSys.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.mHashMapTest.swapValues">
-    <configuration name="mHashMapTest.containsKey" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+}</component>
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="electionmngmntsys.Launcher" />
       <module name="ElectionMNGMNTSys" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
-      <option name="METHOD_NAME" value="containsKey" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="electionmngmntsys.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -76,32 +81,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mHashMapTest.get" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="mHashMapTest.putNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
-      <option name="METHOD_NAME" value="get" />
+      <option name="METHOD_NAME" value="putNode" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mHashMapTest.remove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="test in ElectionMNGMNTSys" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
-      <option name="METHOD_NAME" value="remove" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="mHashMapTest.swapValues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ElectionMNGMNTSys" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
-      <option name="METHOD_NAME" value="swapValues" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -121,11 +114,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.mHashMapTest.swapValues" />
-        <item itemvalue="JUnit.mHashMapTest.remove" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.mHashMapTest.containsValue" />
-        <item itemvalue="JUnit.mHashMapTest.containsKey" />
-        <item itemvalue="JUnit.mHashMapTest.get" />
+        <item itemvalue="JUnit.test in ElectionMNGMNTSys" />
+        <item itemvalue="JUnit.mHashMapTest.putNode" />
       </list>
     </recent_temporary>
   </component>
@@ -178,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764100872319</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Still continuing individual accessing.">
+      <option name="closed" value="true" />
+      <created>1764103649699</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764103649699</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -186,24 +186,8 @@
     <MESSAGE value="changed exports in module for test dir" />
     <MESSAGE value="fixed module with javafx" />
     <MESSAGE value="pushed updated deps in pom for xstream" />
-    <MESSAGE value="updated so that only one new hashmap is created for efficiency" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated so that only one new hashmap is created for efficiency" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java</url>
-          <line>12</line>
-          <properties field="numOfWinners" class="electionmngmntsys.models.Election" />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Starting on the drill-down." />
+    <MESSAGE value="Still continuing individual accessing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Still continuing individual accessing." />
   </component>
 </project>

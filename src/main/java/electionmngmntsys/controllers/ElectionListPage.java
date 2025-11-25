@@ -137,6 +137,10 @@ public class ElectionListPage {
             electionTab.setDisable(false);
             politicianTab.setDisable(true);
         }
+        if (adding) {
+            electionTab.setDisable(true);
+            politicianTab.setDisable(true);
+        }
         initSortingChoiceBox();
         initContextMenus();
         filters.setOnMousePressed(event -> {
@@ -271,15 +275,19 @@ public class ElectionListPage {
                 addTo.setOnAction(e -> {
                     if (!election) {
                         addingToElection.getPoliticians().add(currentPoliticianList.get(index));
-                        addingToElection.getCandidates().add(new Candidate(currentPoliticianList.get(index), addingToElection, 0)); //TODO COPY
+                        addingToElection.getCandidates().add(new Candidate(currentPoliticianList.get(index), addingToElection, 0));
+                        Politician curPol=currentPoliticianList.get(index);
+                        int i=mainPoliticianList.getIndex(curPol);
+                        mainPoliticianList.get(i).getElections().add(addingToElection);
                     }
                     else
                     {
-                        mLinkedList <Integer> voteList=new mLinkedList();
-                        voteList.add(0); //votes
-                        voteList.add(currentElectionList.get(index).getId());
-                        addingToPolitician.getVotesList().add(voteList);
+                        addingToPolitician.getVotesList().add(0);
                         addingToPolitician.getAssociations().add(addingToPolitician.getParty()); //TODO hash map verify
+                        addingToPolitician.getElections().add(currentElectionList.get(index));
+                        int i=mainElectionList.getIndex(currentElectionList.get(index));
+                        mainElectionList.get(i).getPoliticians().add(addingToPolitician);
+                        mainElectionList.get(i).getCandidates().add(new Candidate(addingToPolitician, addingToElection, 0));
                     }
                 });
                 delete.setOnAction(e -> {
@@ -315,8 +323,6 @@ public class ElectionListPage {
                         electionEdit.electionType.setValue(Utilities.electionTypeReverseMap.get(tmp.getType()).getValue());
                         electionEdit.electionWinnerCount.setValue(tmp.getNumOfWinners());
                         electionEdit.updateIndex = index;
-                        mainElectionList.remove(tmp);
-                        elections.remove(tmp);
                         launcher.switchScene("electionForm");
                     }
                     else

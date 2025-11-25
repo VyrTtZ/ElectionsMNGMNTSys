@@ -6,6 +6,7 @@ import electionmngmntsys.mlinkedlist.mLinkedList;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Politician implements Serializable {
     private String name;
@@ -13,8 +14,8 @@ public class Politician implements Serializable {
     private String party;
     private String homeCounty;
     private String imageURL;
-    private mLinkedList<mLinkedList<Integer>> votesList = new mLinkedList<>(); //for votes and elections (id)
-    private mLinkedList<Election> electionList = new mLinkedList<>();
+    private mLinkedList<Integer> votesList = new mLinkedList<>(); //for votes
+    private mLinkedList<Election> elections = new mLinkedList<>();
     private mLinkedList<String> associations = new mLinkedList<>(); //for party during an election (id)
     private mHashMap<Election, Integer> duplicateCheck = new mHashMap<>();
 
@@ -66,11 +67,11 @@ public class Politician implements Serializable {
         this.imageURL = imageURL;
     }
 
-    public mLinkedList<mLinkedList<Integer>> getVotesList() {
+    public mLinkedList<Integer> getVotesList() {
         return votesList;
     }
 
-    public void setVotesList(mLinkedList<mLinkedList<Integer>> votes) {
+    public void setVotesList(mLinkedList<Integer> votes) {
         this.votesList = votes;
     }
 
@@ -82,6 +83,13 @@ public class Politician implements Serializable {
         this.associations = associations;
     }
 
+    public mLinkedList<Election> getElections() {
+        return elections;
+    }
+    public void setElections(mLinkedList<Election> elections) {
+        this.elections = elections;
+    }
+
     public mHashMap<Election, Integer> getDuplicateCheck() {
         return duplicateCheck;
     }
@@ -90,11 +98,11 @@ public class Politician implements Serializable {
         this.duplicateCheck = duplicateCheck;
     }
 
-    public mLinkedList<Election> getElectionList() {
-        return electionList;
-    }
-
-    public void setElectionList(mLinkedList<Election> electionList) {
-        this.electionList = electionList;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Politician that = (Politician) o;
+        return Objects.equals(name, that.name) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(party, that.party) && Objects.equals(homeCounty, that.homeCounty) && Objects.equals(imageURL, that.imageURL);
     }
 }

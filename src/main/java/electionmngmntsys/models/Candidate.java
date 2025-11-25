@@ -2,6 +2,7 @@ package electionmngmntsys.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 public class Candidate extends Politician implements Serializable{
@@ -49,5 +50,14 @@ public class Candidate extends Politician implements Serializable{
         return "Candidate "+ getName() +" representing "+getParty()+ ", from "+getHomeCounty()+", born on "+getDateOfBirth()+
                 "; GOT " + votes +
                 " votes";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Candidate candidate = (Candidate) o;
+        return votes == candidate.votes && ranking == candidate.ranking && Objects.equals(election, candidate.election);
     }
 }

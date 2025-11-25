@@ -47,6 +47,11 @@ public class ElectionEdit {
         if (!electionListPage.elections.containsKey(tmp)) {
             electionListPage.mainElectionList.add(tmp);
             electionListPage.elections.put(tmp, 1);
+            if (updateIndex!=-1) {
+                Election rmv = electionListPage.mainElectionList.get(updateIndex);
+                electionListPage.mainElectionList.remove(rmv);
+                electionListPage.elections.remove(rmv);
+            }
             launcher.switchScene("electionList");
         }
         else {
