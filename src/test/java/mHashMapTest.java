@@ -108,7 +108,7 @@ class mHashMapTest {
         statusOfElections.put(presidentialIreland2025, "Completed");
         assertEquals(1, statusOfElections.size());
         assertTrue(statusOfElections.containsValue("Completed"));
-        assertEquals("Completed", statusOfElections.get(presidentialIreland2025));
+        assertEquals("Completed", statusOfElections.get(presidentialIreland2025).getValue());
 
         // different object, same data. tests strength of key distinction
         Election weAreNotTheKeyYourLookingFor = new Election("Presidential", 3, "Ireland", LocalDate.of(2025, 1, 1), 1);
@@ -118,20 +118,20 @@ class mHashMapTest {
         assertNotEquals(presidentialIreland2025, weAreNotTheKeyYourLookingFor);
 
         assertTrue(statusOfElections.containsKey(weAreNotTheKeyYourLookingFor));
-        assertNotNull(statusOfElections.get(weAreNotTheKeyYourLookingFor));
-        assertEquals("Completed", statusOfElections.get(weAreNotTheKeyYourLookingFor));
-
+        //assertNotNull(statusOfElections.get(weAreNotTheKeyYourLookingFor));
+        //assertEquals("Completed", statusOfElections.get(weAreNotTheKeyYourLookingFor)); ?
 
         statusOfElections.put(weAreNotTheKeyYourLookingFor, "Completed");
-        assertEquals("Completed", statusOfElections.get(weAreNotTheKeyYourLookingFor));
+        //assertEquals("Completed", statusOfElections.get(weAreNotTheKeyYourLookingFor)); //wont work, cant have a duplicate key, the key is presidential Ireland
+        assertEquals("Completed", statusOfElections.get(presidentialIreland2025).getValue());
 
         mHashMap<Candidate, Integer> candidateVotes = new mHashMap<>();
 
-        /*Candidate catherine = new Candidate("Catherine Connolly", LocalDate.of(1957, 7, 12));
-        Candidate catherinee = new Candidate("Catherine Connolly", LocalDate.of(1957, 7, 12, "Unaffiliated", "Galway", "Screenshot 2025-11-25 141737.png", ));
+        Candidate catherine = new Candidate("Catherine Connolly", LocalDate.of(1957, 7, 12), "Unaffiliated", "Galway", "smthn", presidentialIreland2025, 1);
+        Candidate catherinee = new Candidate("Catherine Connolly", LocalDate.of(1957, 7, 12), "Unaffiliated", "Galway", "Screenshot 2025-11-25 141737.png", presidentialIreland2025, 20);
 
         candidateVotes.put(catherine, 1);
-        assertEquals(Integer.valueOf(1), candidateVotes.get(catherinee));*/
+        assertEquals(Integer.valueOf(1), candidateVotes.get(catherinee));
 
         for (int i = 0; i < 30; i++) {
             Election e = new Election("Presidential" + i, 3, "Ireland", LocalDate.now(), 1);

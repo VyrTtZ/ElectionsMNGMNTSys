@@ -13,7 +13,7 @@ public class Politician implements Serializable {
     private String party;
     private String homeCounty;
     private String imageURL;
-    private mLinkedList<mLinkedList<Integer>> votesList = new mLinkedList<>(); //for votes and elections (id)
+    private mLinkedList<mLinkedList<Election>> votesList = new mLinkedList<>(); //for votes and elections (id)
     private mLinkedList<String> associations = new mLinkedList<>(); //for party during an election (id)
     private mHashMap<Election, Integer> duplicateCheck = new mHashMap<>();
 
@@ -65,11 +65,11 @@ public class Politician implements Serializable {
         this.imageURL = imageURL;
     }
 
-    public mLinkedList<mLinkedList<Integer>> getVotesList() {
+    public mLinkedList<mLinkedList<Election>> getVotesList() {
         return votesList;
     }
 
-    public void setVotesList(mLinkedList<mLinkedList<Integer>> votes) {
+    public void setVotesList(mLinkedList<mLinkedList<Election>> votes) {
         this.votesList = votes;
     }
 
