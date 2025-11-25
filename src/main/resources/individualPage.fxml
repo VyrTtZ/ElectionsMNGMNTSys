@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -60,12 +61,12 @@
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Button layoutX="135.0" layoutY="34.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="Back">
+                  <Button layoutX="135.0" layoutY="34.0" mnemonicParsing="false" onAction="#goBack" prefHeight="44.0" prefWidth="100.0" text="Back">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button layoutX="1675.0" layoutY="34.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="Edit">
+                  <Button layoutX="1675.0" layoutY="34.0" mnemonicParsing="false" onAction="#editSelected" prefHeight="44.0" prefWidth="100.0" text="Edit">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -96,6 +97,12 @@
                      </font>
                   </Label>
                   <ChoiceBox fx:id="sortType" layoutX="1083.0" layoutY="253.0" prefHeight="54.0" prefWidth="186.0" />
+                  <TextField fx:id="voteField" layoutX="1083.0" layoutY="174.0" prefHeight="54.0" prefWidth="186.0" />
+                  <Button fx:id="changeVote" layoutX="712.0" layoutY="170.0" mnemonicParsing="false" onAction="#changeVotes" prefHeight="54.0" prefWidth="157.0" text="Change Votes">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </center>

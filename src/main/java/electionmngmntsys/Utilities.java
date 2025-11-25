@@ -2,6 +2,7 @@ package electionmngmntsys;
 
 import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
+import electionmngmntsys.models.Election;
 
 public class Utilities {
     public static mHashMap <String, Integer> electionTypeMap =new mHashMap();
@@ -67,5 +68,29 @@ public class Utilities {
                 ret+=string.charAt(i);
         }
         return ret.trim();
+    }
+
+    public static int compareElections(Election first, Election second, String criteria)
+    {
+        switch (criteria)
+        {
+            case "Name Ascending":
+                return first.getName().compareToIgnoreCase(second.getName());
+            case "Type Ascending":
+                return Utilities.electionTypeReverseMap.get(first.getType()).getValue().compareToIgnoreCase(Utilities.electionTypeReverseMap.get(second.getType()).getValue());
+            case "Year Ascending":
+                return first.getYearDate().compareTo(second.getYearDate());
+            case "Location Ascending":
+                return first.getLocation().compareToIgnoreCase(second.getLocation());
+            case "Name Descending":
+                return -first.getName().compareToIgnoreCase(second.getName());
+            case "Type Descending":
+                return -Utilities.electionTypeReverseMap.get(first.getType()).getValue().compareTo(Utilities.electionTypeReverseMap.get(second.getType()).getValue());
+            case "Year Descending":
+                return -first.getYearDate().compareTo(second.getYearDate());
+            case "Location Descending":
+                return -first.getLocation().compareTo(second.getLocation());
+        }
+        return -1;
     }
 }

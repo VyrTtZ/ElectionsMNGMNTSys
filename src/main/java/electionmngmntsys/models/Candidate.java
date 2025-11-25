@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Candidate extends Politician implements Serializable{
     private Election election;
-    private int votes;
+    private int votes, ranking;
 
     public Candidate(String name, LocalDate dateOfBirth, String party, String homeCounty, String imageURL , Election election, int votes) {
         super(name, dateOfBirth, party, homeCounty, imageURL);
@@ -34,6 +34,14 @@ public class Candidate extends Politician implements Serializable{
 
     public void setVotes(int votes) {
         this.votes = votes;
+    }
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
     }
 
     @Override

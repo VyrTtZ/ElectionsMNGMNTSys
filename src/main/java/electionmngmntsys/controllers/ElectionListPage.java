@@ -235,7 +235,7 @@ public class ElectionListPage {
     {
         addContextMenu.getItems().clear();
         validContextMenu.getItems().clear();
-        MenuItem add=new MenuItem("Add"), add1=new MenuItem("Add"), delete=new MenuItem("Delete"), update=new MenuItem("Update"), visit=new MenuItem("Visit"), back=new MenuItem("Back"), addTo=new MenuItem("Add");;
+        MenuItem add=new MenuItem("Add"), add1=new MenuItem("Add"), delete=new MenuItem("Delete"), update=new MenuItem("Update"), visit=new MenuItem("Visit"), back=new MenuItem("Back");
         add.setOnAction(event -> {
             if (election)
                 launcher.switchScene("electionForm");
@@ -248,7 +248,7 @@ public class ElectionListPage {
             else
                 launcher.switchScene("politicianForm");
         });
-        back.setOnAction(e -> {
+        back.setOnAction(event -> {
             if (election)
             {
                 individual.selectedPolitician=addingToPolitician;
@@ -263,9 +263,10 @@ public class ElectionListPage {
             launcher.switchScene("individual");
         });
         validContextMenu.getItems().add(add);
-        addContextMenu.getItems().add(back);
         canvas.setOnContextMenuRequested(event -> {
             int index=getIndexOfMouse((int) event.getScreenX(), (int) event.getScreenY()-104); //top buttons and stuff
+            MenuItem addTo=new MenuItem("Add");
+
             if (index!=-1 && ((election && index<= currentElectionList.size()-1) || (!election && index<=currentPoliticianList.size()-1)))  {
                 addTo.setOnAction(e -> {
                     if (!election) {
@@ -351,6 +352,8 @@ public class ElectionListPage {
                 validContextMenu.getItems().add(delete);
                 validContextMenu.getItems().add(update);
 
+                addContextMenu.getItems().clear();
+                addContextMenu.getItems().add(back);
                 addContextMenu.getItems().add(addTo);
                 if (!adding)
                     validContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
@@ -359,8 +362,11 @@ public class ElectionListPage {
             }
             else if (!adding)
                 invalidContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
-            else
+            else {
+                addContextMenu.getItems().clear();
+                addContextMenu.getItems().add(back);
                 addContextMenu.show(canvas, event.getScreenX(), event.getScreenY());
+            }
         });
 
         invalidContextMenu.getItems().clear();
@@ -653,30 +659,6 @@ public class ElectionListPage {
         return -1;
     }
 
-    private int compareElections(Election first, Election second, String criteria)
-    {
-        switch (criteria)
-        {
-            case "Name Ascending":
-                return first.getName().compareToIgnoreCase(second.getName());
-            case "Type Ascending":
-                return Utilities.electionTypeReverseMap.get(first.getType()).getValue().compareToIgnoreCase(Utilities.electionTypeReverseMap.get(second.getType()).getValue());
-            case "Year Ascending":
-                return first.getYearDate().compareTo(second.getYearDate());
-            case "Location Ascending":
-                return first.getLocation().compareToIgnoreCase(second.getLocation());
-            case "Name Descending":
-                return -first.getName().compareToIgnoreCase(second.getName());
-            case "Type Descending":
-                return -Utilities.electionTypeReverseMap.get(first.getType()).getValue().compareTo(Utilities.electionTypeReverseMap.get(second.getType()).getValue());
-            case "Year Descending":
-                return -first.getYearDate().compareTo(second.getYearDate());
-            case "Location Descending":
-                return -first.getLocation().compareTo(second.getLocation());
-        }
-        return -1;
-    }
-
     private void bogoSort(mLinkedList list, String criteria)
     {
         int iteration=0;
@@ -714,7 +696,7 @@ public class ElectionListPage {
     {
         for (int i = 0; i < list.size()-1; i++) {
             if (election)
-                if (compareElections((Election) list.get(i), (Election) list.get(i + 1), criteria) < 0)
+                if (Utilities.compareElections((Election) list.get(i), (Election) list.get(i + 1), criteria) < 0)
                     return false;
             else
                 if (comparePoliticians((Politician) list.get(i), (Politician) list.get(i + 1), criteria) < 0)
@@ -729,7 +711,7 @@ public class ElectionListPage {
             return;
         if (start==end-1) {
             if (election) {
-                if (compareElections((Election) list.get(start), (Election) list.get(end), criteria) == 1)
+                if (Utilities.compareElections((Election) list.get(start), (Election) list.get(end), criteria) == 1)
                     list.swapNodes(start, end);
             }
             else
@@ -744,11 +726,11 @@ public class ElectionListPage {
         while (i<=j)
         {
             if (election) {
-                if (compareElections((Election) list.get(i), (Election) pivot, criteria) >=0)
+                if (Utilities.compareElections((Election) list.get(i), (Election) pivot, criteria) >=0)
                 {
                     while (i<=j)
                     {
-                        if (compareElections((Election) list.get(j), (Election) pivot, criteria) <0)
+                        if (Utilities.compareElections((Election) list.get(j), (Election) pivot, criteria) <0)
                             break;
                         j--;
                     }
