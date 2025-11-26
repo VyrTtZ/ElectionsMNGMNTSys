@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="pushed updated deps in pom for xstream">
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="fixed test errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mhashmap/mHashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mhashmap/mHashMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mHashMapTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/mLinkedListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mLinkedListTest.java" afterDir="false" />
     </list>
@@ -49,8 +49,10 @@
     "JUnit.mHashMapTest.remove.executor": "Run",
     "JUnit.mHashMapTest.swapValues.executor": "Run",
     "JUnit.mLinkedListTest.addNode.executor": "Run",
+    "JUnit.mLinkedListTest.executor": "Run",
     "JUnit.mLinkedListTest.remove.executor": "Run",
     "JUnit.mLinkedListTest.swapNodes.executor": "Run",
+    "JUnit.mLinkedListTest.testSwapNodes.executor": "Run",
     "JUnit.test in ElectionMNGMNTSys.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -62,7 +64,7 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.mLinkedListTest.swapNodes">
+  <component name="RunManager" selected="JUnit.test in ElectionMNGMNTSys">
     <configuration name="mHashMapTest.remove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
       <option name="PACKAGE_NAME" value="" />
@@ -73,22 +75,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mHashMapTest.swapValues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ElectionMNGMNTSys" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="mHashMapTest" />
-      <option name="METHOD_NAME" value="swapValues" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="mLinkedListTest.addNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="mLinkedListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="mLinkedListTest" />
-      <option name="METHOD_NAME" value="addNode" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -103,12 +94,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="mLinkedListTest.swapNodes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="mLinkedListTest.testSwapNodes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ElectionMNGMNTSys" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="mLinkedListTest" />
-      <option name="METHOD_NAME" value="swapNodes" />
+      <option name="METHOD_NAME" value="testSwapNodes" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test in ElectionMNGMNTSys" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ElectionMNGMNTSys" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,11 +127,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.mLinkedListTest.swapNodes" />
-        <item itemvalue="JUnit.mLinkedListTest.addNode" />
-        <item itemvalue="JUnit.mLinkedListTest.remove" />
-        <item itemvalue="JUnit.mHashMapTest.swapValues" />
+        <item itemvalue="JUnit.test in ElectionMNGMNTSys" />
         <item itemvalue="JUnit.mHashMapTest.remove" />
+        <item itemvalue="JUnit.mLinkedListTest.remove" />
+        <item itemvalue="JUnit.mLinkedListTest" />
+        <item itemvalue="JUnit.mLinkedListTest.testSwapNodes" />
       </list>
     </recent_temporary>
   </component>
@@ -193,7 +192,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764112188933</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixed test errors">
+      <option name="closed" value="true" />
+      <created>1764114074674</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764114074674</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -202,7 +209,8 @@
     <MESSAGE value="fixed module with javafx" />
     <MESSAGE value="updated so that only one new hashmap is created for efficiency" />
     <MESSAGE value="pushed updated deps in pom for xstream" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushed updated deps in pom for xstream" />
+    <MESSAGE value="fixed test errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed test errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -217,6 +225,15 @@
           <line>14</line>
           <properties field="numOfWinners" class="electionmngmntsys.models.Election" />
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/mLinkedListTest.java</url>
+          <line>55</line>
+          <properties class="mLinkedListTest" method="remove">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

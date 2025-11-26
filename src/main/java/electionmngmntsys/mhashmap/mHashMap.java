@@ -151,14 +151,13 @@ public class mHashMap<X, Y> {
     public int size() { //RETURNS THE SIZE OF THE MAP (HOW FULL IT IS)
         int retVal = 0;
         for (int i = 0; i < map.length; i++) {
-            if (!map[i].isEmpty()) retVal++;
+            if (!map[i].isEmpty())
+                retVal+=map[i].size();
         }
         return retVal;
     }
 
-    public int sizeOfHashMap() {
-        return size;
-    }
+
 //----------------------------------------------------------------------------------------------------------------------
     private void resize() {//RESIZES THE MAP
         temp = map;//SAVES THE MAP

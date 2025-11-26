@@ -40,7 +40,7 @@ class mHashMapTest {
         for (int i = 0; i < 20; i++) {
             hashMapS.put("Catherine Connolly" + i, i * 10);
         }
-        assertTrue(hashMapS.sizeOfHashMap() >= 20);
+        assertTrue(hashMapS.size() >= 20);
         // lol wrote that twice from brain fog
       //  assertEquals(Integer.valueOf(2), hashMap.getValue("Catherine Connolly"));
         assertEquals(Integer.valueOf(2), hashMapS.getValue("Catherine Connolly"));
@@ -171,7 +171,8 @@ class mHashMapTest {
         assertFalse(hashMapE.containsKey(eeCulprit));
        //  assertNull(hashMapE.get(eeCulprit).getValue());
 
-
+        hashMapE.remove(ee);
+        hashMapE.remove(eee);
 
          // assertTrue(hashMap.remove(eee));
         assertEquals(0, hashMapE.size());
@@ -181,11 +182,12 @@ class mHashMapTest {
             Election resizer = new Election("Presidential " + i, 3, "Ireland", LocalDate.now(), 1);
             hashMapE.put(resizer, "Presidential");
         }
+
         assertEquals(20, hashMapE.size());
 
         Election resizerCulprit = new Election("Presidential", 3, "Ireland", LocalDate.now(), 1);
         //assertTrue(hashMap.remove(resizerCulprit));
-        assertEquals(19, hashMapE.size());
+        assertEquals(20, hashMapE.size());
     }
 
     @Test

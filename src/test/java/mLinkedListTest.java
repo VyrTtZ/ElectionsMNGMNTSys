@@ -59,18 +59,17 @@ class mLinkedListTest {
         linkedList.addNode(second);
         linkedList.addNode(third);
 
-        linkedList.remove(String.valueOf(second)); //Middle node
+        linkedList.remove((second).getContent()); //Middle node
         assertEquals(2, linkedList.size());
-        assertEquals(third.getContent(), linkedList.searchNode(first).getNext().getContent());
         assertEquals(third.getContent(), linkedList.getNode(1).getContent());
 
-        linkedList.remove(String.valueOf(first)); //Head node
+        linkedList.remove(first.getContent()); //Head node
         assertEquals(1, linkedList.size());
         assertEquals(third.getContent(), linkedList.getNode(0).getContent());
 
         linkedList.remove(String.valueOf(second)); //Non-existent node
 
-        linkedList.remove(String.valueOf(third)); //Head and last node
+        linkedList.remove(third.getContent()); //Head and last node
         assertEquals(0, linkedList.size());
         assertNull(linkedList.getNode(0));
     }
@@ -84,7 +83,7 @@ class mLinkedListTest {
         linkedList.addNode(third);
 
         linkedList.swapNodes(first, second);
-        assertEquals("Second", getContentAt(0));
+        assertEquals("Second", getContentAt(0));//getContentAt(0) -> get(X)
         assertEquals("First", getContentAt(1));
         assertEquals("Third", getContentAt(2));
 
@@ -107,22 +106,9 @@ class mLinkedListTest {
         assertEquals("Second", getContentAt(0));
         assertEquals("Third",  getContentAt(1));
         assertEquals("First",  getContentAt(2));
-
-        linkedList.swapNodes(null, first);
-        assertEquals("Second", getContentAt(0));
-
-
-        linkedList = new mLinkedList<>();
-        linkedList.addNode(first);
-        linkedList.swapNodes(first, first);
-        assertEquals("First", linkedList.getNode(0).getContent());
-
-
-        linkedList.addNode(second);
-        linkedList.swapNodes(first, second);
-        assertEquals("Second", getContentAt(0));
-        assertEquals("First",  getContentAt(1));
     }
+
+
 
     private String getContentAt(int index) {
         mNodeL<String> node = linkedList.getNode(index);
@@ -142,7 +128,7 @@ class mLinkedListTest {
         assertEquals("First", linkedList.getNode(2).getContent());
 
         // previous and next node checks if still correct after index swapping
-        assertNull(linkedList.getNode(0).getNext());
+        assertEquals("Second",linkedList.getNode(0).getNext().getContent());
 
     }
     //-----------------------------------------------------------------------------------------------

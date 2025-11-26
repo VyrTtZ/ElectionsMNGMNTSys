@@ -175,16 +175,4 @@ public class mLinkedList<T> implements Iterable<T>, Serializable {
         //----------------------------------------------------------------------------------------------------------------------
 
     }
-
-    public mNodeL<Object> searchNode(mNodeL<T> third) {
-        mNodeL<T> current = head;
-
-        while (current != null) {
-            if (Objects.equals(current.getContent(), third)) {  // safe null-check
-                return (mNodeL<Object>) current;
-            }
-            current = current.next;
-        }
-        return null;
     }
-}
