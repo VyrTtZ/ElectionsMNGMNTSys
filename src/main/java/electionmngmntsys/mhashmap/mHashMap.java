@@ -9,8 +9,8 @@ import java.io.*;
 
 //----------------------------------------------------------------------------------------------------------------------
 public class mHashMap<X, Y> {
-    private final int INITIALCAPACITY = 11;
-    private int CURRENTCAPACITY = INITIALCAPACITY;
+    private static final int INITIALCAPACITY = 11;
+    private int currentCapacity = INITIALCAPACITY;
     private mLinkedList<mNodeH>[] map;
     private mLinkedList<mNodeH>[] temp;
     private final long SEED1 = 0x5A3C7F1B8E6D2A1FL;
@@ -20,8 +20,8 @@ public class mHashMap<X, Y> {
 
 //---------------------------------------------------------------------------------------------------------CONSTRUCTOR
     public mHashMap() {
-        map = new mLinkedList[CURRENTCAPACITY]; //Array of LinkedLists (Buckets)
-        for (int i = 0; i < CURRENTCAPACITY; i++) map[i] = new mLinkedList<>(); //Stating linked list for each index
+        map = new mLinkedList[currentCapacity]; //Array of LinkedLists (Buckets)
+        for (int i = 0; i < currentCapacity; i++) map[i] = new mLinkedList<>(); //Stating linked list for each index
     }
 //------------------------------------------------------------------------------------------------------------HASH FUNCTION
     public int hash(Object o) { //some garbage copy of wyhash, we get like approx 24% collisions on 100 String, String entries
@@ -118,7 +118,7 @@ public class mHashMap<X, Y> {
 
         byte[] nodeBytes = toByteArray((Serializable) node.key); //TURNS THE KEY INTO BYTE ARRAY
 
-        int index = Math.floorMod(hash(node.key), CURRENTCAPACITY); //FINDS THE INDEX IN THE MAP FOR THE KEY
+        int index = Math.floorMod(hash(node.key), currentCapacity); //FINDS THE INDEX IN THE MAP FOR THE KEY
 
         for (mNodeH<X, Y> n : map[index]) {
             byte[] existingBytes = toByteArray((Serializable) n.key); //ITERATES OVER THE WHOLE MAP AND TURNS EACH KEY INTO BYTE ARRAY
@@ -131,7 +131,7 @@ public class mHashMap<X, Y> {
         map[index].add(node);//ADDS NODE TO THE LINKED LIST
         size++;
 
-        loadFactor = (double) size() / CURRENTCAPACITY;
+        loadFactor = (double) size() / currentCapacity;
         if (loadFactor > 0.60) resize(); //IF THE LOAD FACTOR IS ABOVE .6 THE MAP RESIZES
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ public class mHashMap<X, Y> {
     }
 //----------------------------------------------------------------------------------------------------------------------
     public mNodeH<X, Y> get(X key) {
-        for (mNodeH<X, Y> n : map[Math.floorMod(hash(key), CURRENTCAPACITY)]) {//LOOKS FOR A KEY WITHIN THE LINKEDLIST PLACED IN THE ARRAY
+        for (mNodeH<X, Y> n : map[Math.floorMod(hash(key), currentCapacity)]) {//LOOKS FOR A KEY WITHIN THE LINKEDLIST PLACED IN THE ARRAY
             if (key.equals(n.key)) return n;
         }
         return null;
@@ -161,9 +161,9 @@ public class mHashMap<X, Y> {
 //----------------------------------------------------------------------------------------------------------------------
     private void resize() {//RESIZES THE MAP
         temp = map;//SAVES THE MAP
-        CURRENTCAPACITY = CURRENTCAPACITY * 2; //INCREASE IN CAPACITY
-        map = new mLinkedList[CURRENTCAPACITY];
-        for (int i = 0; i < CURRENTCAPACITY; i++) map[i] = new mLinkedList<>();//ADDS LINKED LISTS IN THE MAP
+        currentCapacity = currentCapacity * 2; //INCREASE IN CAPACITY
+        map = new mLinkedList[currentCapacity];
+        for (int i = 0; i < currentCapacity; i++) map[i] = new mLinkedList<>();//ADDS LINKED LISTS IN THE MAP
         for (int i = 0; i < temp.length; i++) {//REHASHES THE OBJECTS IN TEMP TO FIT THE NEW MAP
             if (temp[i] != null) {
                 for (mNodeH n : temp[i]) {
@@ -188,7 +188,7 @@ public class mHashMap<X, Y> {
     }
 //----------------------------------------------------------------------------------------------------------------------
     public boolean containsValue(Y value) {//CHECKS FOR A VALUE
-        for (int i = 0; i < CURRENTCAPACITY; i++) {
+        for (int i = 0; i < currentCapacity; i++) {
             for (mNodeH n : map[i]) {
                 if (n.getValue() == (value)) return true;
             }
@@ -197,7 +197,7 @@ public class mHashMap<X, Y> {
     }
 //----------------------------------------------------------------------------------------------------------------------
     public void remove(X key) {
-        int index = Math.floorMod(hash(key), CURRENTCAPACITY); //FINDS THE INDEX BY KEY
+        int index = Math.floorMod(hash(key), currentCapacity); //FINDS THE INDEX BY KEY
         if (map[index] != null) {
             map[index].remove(get(key));//REMOVES THE NODE IN THE LINKEDLIST
         }

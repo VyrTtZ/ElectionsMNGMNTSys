@@ -5,7 +5,9 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import electionmngmntsys.Launcher;
 import electionmngmntsys.Utilities;
 import electionmngmntsys.mhashmap.mHashMap;
+import electionmngmntsys.mhashmap.mNodeH;
 import electionmngmntsys.mlinkedlist.mLinkedList;
+import electionmngmntsys.mlinkedlist.mNodeL;
 import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
@@ -846,7 +848,7 @@ public class ListPage {
     }
 
     public void load() throws Exception {
-        Class<?>[] classes = new Class[] { ListPage.class, mLinkedList.class, Election.class, Politician.class, Candidate.class};
+        Class<?>[] classes = new Class[] { ListPage.class, mLinkedList.class, Election.class, Politician.class, Candidate.class, mHashMap.class, mNodeH.class, mNodeL.class};
 
         //setting up the xstream object with default security and the above classes
         XStream xstream = new XStream(new DomDriver());

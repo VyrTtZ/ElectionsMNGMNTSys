@@ -5,14 +5,363 @@
         <type>1</type>
         <location>1</location>
         <name>1</name>
-        <yearDate>2025-11-19</yearDate>
+        <yearDate>2025-11-11</yearDate>
         <numOfWinners>1</numOfWinners>
-        <candidates/>
-        <politicians/>
+        <candidates>
+          <head>
+            <data class="electionmngmntsys.models.Candidate">
+              <name>12</name>
+              <dateOfBirth>2025-11-13</dateOfBirth>
+              <party>1</party>
+              <homeCounty>1</homeCounty>
+              <imageURL>1</imageURL>
+              <votesList/>
+              <elections/>
+              <associations/>
+              <duplicateCheck>
+                <currentCapacity>11</currentCapacity>
+                <map>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                </map>
+                <SEED1>6502211718346517023</SEED1>
+                <SEED2>2273874890538647451</SEED2>
+                <loadFactor>0.0</loadFactor>
+                <size>0</size>
+              </duplicateCheck>
+              <election reference="../../../.."/>
+              <votes>10</votes>
+              <ranking>1</ranking>
+            </data>
+            <next>
+              <data class="electionmngmntsys.models.Candidate">
+                <name>1</name>
+                <dateOfBirth>2025-11-13</dateOfBirth>
+                <party>1</party>
+                <homeCounty>1</homeCounty>
+                <imageURL>1</imageURL>
+                <votesList/>
+                <elections/>
+                <associations/>
+                <duplicateCheck>
+                  <currentCapacity>11</currentCapacity>
+                  <map>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  </map>
+                  <SEED1>6502211718346517023</SEED1>
+                  <SEED2>2273874890538647451</SEED2>
+                  <loadFactor>0.0</loadFactor>
+                  <size>0</size>
+                </duplicateCheck>
+                <election reference="../../../../.."/>
+                <votes>0</votes>
+                <ranking>2</ranking>
+              </data>
+            </next>
+          </head>
+        </candidates>
+        <politicians>
+          <head>
+            <data class="electionmngmntsys.models.Politician">
+              <name>12</name>
+              <dateOfBirth>2025-11-13</dateOfBirth>
+              <party>1</party>
+              <homeCounty>1</homeCounty>
+              <imageURL>1</imageURL>
+              <votesList/>
+              <elections>
+                <head>
+                  <data class="electionmngmntsys.models.Election" reference="../../../../../.."/>
+                </head>
+              </elections>
+              <associations/>
+              <duplicateCheck>
+                <currentCapacity>11</currentCapacity>
+                <map>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                </map>
+                <SEED1>6502211718346517023</SEED1>
+                <SEED2>2273874890538647451</SEED2>
+                <loadFactor>0.0</loadFactor>
+                <size>0</size>
+              </duplicateCheck>
+            </data>
+            <next>
+              <data class="electionmngmntsys.models.Politician">
+                <name>1</name>
+                <dateOfBirth>2025-11-13</dateOfBirth>
+                <party>1</party>
+                <homeCounty>1</homeCounty>
+                <imageURL>1</imageURL>
+                <votesList/>
+                <elections>
+                  <head>
+                    <data class="electionmngmntsys.models.Election" reference="../../../../../../.."/>
+                  </head>
+                </elections>
+                <associations/>
+                <duplicateCheck>
+                  <currentCapacity>11</currentCapacity>
+                  <map>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                    <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  </map>
+                  <SEED1>6502211718346517023</SEED1>
+                  <SEED2>2273874890538647451</SEED2>
+                  <loadFactor>0.0</loadFactor>
+                  <size>0</size>
+                </duplicateCheck>
+              </data>
+            </next>
+          </head>
+        </politicians>
         <id>0</id>
         <duplicateCheck>
-          <INITIALCAPACITY>11</INITIALCAPACITY>
-          <CURRENTCAPACITY>11</CURRENTCAPACITY>
+          <currentCapacity>11</currentCapacity>
+          <map>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList>
+              <head>
+                <data class="electionmngmntsys.mhashmap.mNodeH">
+                  <key class="electionmngmntsys.models.Politician" reference="../../../../../../politicians/head/data"/>
+                  <value class="int">1</value>
+                </data>
+              </head>
+            </electionmngmntsys.mlinkedlist.mLinkedList>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList>
+              <head>
+                <data class="electionmngmntsys.mhashmap.mNodeH">
+                  <key class="electionmngmntsys.models.Politician" reference="../../../../../../politicians/head/next/data"/>
+                  <value class="int">1</value>
+                </data>
+              </head>
+            </electionmngmntsys.mlinkedlist.mLinkedList>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+            <electionmngmntsys.mlinkedlist.mLinkedList/>
+          </map>
+          <SEED1>6502211718346517023</SEED1>
+          <SEED2>2273874890538647451</SEED2>
+          <loadFactor>0.18181818181818182</loadFactor>
+          <size>2</size>
+        </duplicateCheck>
+      </data>
+    </head>
+  </electionmngmntsys.mlinkedlist.mLinkedList>
+  <electionmngmntsys.mlinkedlist.mLinkedList>
+    <head>
+      <data class="electionmngmntsys.models.Politician">
+        <name>1</name>
+        <dateOfBirth>2025-11-13</dateOfBirth>
+        <party>1</party>
+        <homeCounty>1</homeCounty>
+        <imageURL>1</imageURL>
+        <votesList/>
+        <elections>
+          <head>
+            <data class="electionmngmntsys.models.Election">
+              <type>1</type>
+              <location>1</location>
+              <name>1</name>
+              <yearDate>2025-11-11</yearDate>
+              <numOfWinners>1</numOfWinners>
+              <candidates>
+                <head>
+                  <data class="electionmngmntsys.models.Candidate">
+                    <name>12</name>
+                    <dateOfBirth>2025-11-13</dateOfBirth>
+                    <party>1</party>
+                    <homeCounty>1</homeCounty>
+                    <imageURL>1</imageURL>
+                    <votesList/>
+                    <elections/>
+                    <associations/>
+                    <duplicateCheck>
+                      <currentCapacity>11</currentCapacity>
+                      <map>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                      </map>
+                      <SEED1>6502211718346517023</SEED1>
+                      <SEED2>2273874890538647451</SEED2>
+                      <loadFactor>0.0</loadFactor>
+                      <size>0</size>
+                    </duplicateCheck>
+                    <election reference="../../../.."/>
+                    <votes>10</votes>
+                    <ranking>1</ranking>
+                  </data>
+                  <next>
+                    <data class="electionmngmntsys.models.Candidate">
+                      <name>1</name>
+                      <dateOfBirth>2025-11-13</dateOfBirth>
+                      <party>1</party>
+                      <homeCounty>1</homeCounty>
+                      <imageURL>1</imageURL>
+                      <votesList/>
+                      <elections/>
+                      <associations/>
+                      <duplicateCheck>
+                        <currentCapacity>11</currentCapacity>
+                        <map>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                          <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        </map>
+                        <SEED1>6502211718346517023</SEED1>
+                        <SEED2>2273874890538647451</SEED2>
+                        <loadFactor>0.0</loadFactor>
+                        <size>0</size>
+                      </duplicateCheck>
+                      <election reference="../../../../.."/>
+                      <votes>0</votes>
+                      <ranking>2</ranking>
+                    </data>
+                  </next>
+                </head>
+              </candidates>
+              <politicians>
+                <head>
+                  <data class="electionmngmntsys.models.Politician">
+                    <name>12</name>
+                    <dateOfBirth>2025-11-13</dateOfBirth>
+                    <party>1</party>
+                    <homeCounty>1</homeCounty>
+                    <imageURL>1</imageURL>
+                    <votesList/>
+                    <elections>
+                      <head>
+                        <data class="electionmngmntsys.models.Election" reference="../../../../../.."/>
+                      </head>
+                    </elections>
+                    <associations/>
+                    <duplicateCheck>
+                      <currentCapacity>11</currentCapacity>
+                      <map>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                        <electionmngmntsys.mlinkedlist.mLinkedList/>
+                      </map>
+                      <SEED1>6502211718346517023</SEED1>
+                      <SEED2>2273874890538647451</SEED2>
+                      <loadFactor>0.0</loadFactor>
+                      <size>0</size>
+                    </duplicateCheck>
+                  </data>
+                  <next>
+                    <data class="electionmngmntsys.models.Politician" reference="../../../../../../.."/>
+                  </next>
+                </head>
+              </politicians>
+              <id>0</id>
+              <duplicateCheck>
+                <currentCapacity>11</currentCapacity>
+                <map>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList>
+                    <head>
+                      <data class="electionmngmntsys.mhashmap.mNodeH">
+                        <key class="electionmngmntsys.models.Politician" reference="../../../../../../politicians/head/data"/>
+                        <value class="int">1</value>
+                      </data>
+                    </head>
+                  </electionmngmntsys.mlinkedlist.mLinkedList>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList>
+                    <head>
+                      <data class="electionmngmntsys.mhashmap.mNodeH">
+                        <key class="electionmngmntsys.models.Politician" reference="../../../../../../../../.."/>
+                        <value class="int">1</value>
+                      </data>
+                    </head>
+                  </electionmngmntsys.mlinkedlist.mLinkedList>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                  <electionmngmntsys.mlinkedlist.mLinkedList/>
+                </map>
+                <SEED1>6502211718346517023</SEED1>
+                <SEED2>2273874890538647451</SEED2>
+                <loadFactor>0.18181818181818182</loadFactor>
+                <size>2</size>
+              </duplicateCheck>
+            </data>
+          </head>
+        </elections>
+        <associations/>
+        <duplicateCheck>
+          <currentCapacity>11</currentCapacity>
           <map>
             <electionmngmntsys.mlinkedlist.mLinkedList/>
             <electionmngmntsys.mlinkedlist.mLinkedList/>
@@ -33,72 +382,8 @@
         </duplicateCheck>
       </data>
       <next>
-        <data class="electionmngmntsys.models.Election">
-          <type>1</type>
-          <location>1</location>
-          <name>12</name>
-          <yearDate>2024-11-15</yearDate>
-          <numOfWinners>1</numOfWinners>
-          <candidates/>
-          <politicians/>
-          <id>0</id>
-          <duplicateCheck>
-            <INITIALCAPACITY>11</INITIALCAPACITY>
-            <CURRENTCAPACITY>11</CURRENTCAPACITY>
-            <map>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-              <electionmngmntsys.mlinkedlist.mLinkedList/>
-            </map>
-            <SEED1>6502211718346517023</SEED1>
-            <SEED2>2273874890538647451</SEED2>
-            <loadFactor>0.0</loadFactor>
-            <size>0</size>
-          </duplicateCheck>
-        </data>
-        <next>
-          <data class="electionmngmntsys.models.Election">
-            <type>1</type>
-            <location>12</location>
-            <name>12</name>
-            <yearDate>2025-10-29</yearDate>
-            <numOfWinners>1</numOfWinners>
-            <candidates/>
-            <politicians/>
-            <id>0</id>
-            <duplicateCheck>
-              <INITIALCAPACITY>11</INITIALCAPACITY>
-              <CURRENTCAPACITY>11</CURRENTCAPACITY>
-              <map>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-                <electionmngmntsys.mlinkedlist.mLinkedList/>
-              </map>
-              <SEED1>6502211718346517023</SEED1>
-              <SEED2>2273874890538647451</SEED2>
-              <loadFactor>0.0</loadFactor>
-              <size>0</size>
-            </duplicateCheck>
-          </data>
-        </next>
+        <data class="electionmngmntsys.models.Politician" reference="../../data/elections/head/data/politicians/head/data"/>
       </next>
     </head>
   </electionmngmntsys.mlinkedlist.mLinkedList>
-  <electionmngmntsys.mlinkedlist.mLinkedList/>
 </object-stream>
