@@ -27,14 +27,23 @@ public class Individual {
     public Election selectedElection;
     public Politician selectedPolitician;
     public Launcher launcher;
-    public ElectionListPage electionListPage;
+    public ListPage listPage;
+    public ElectionEdit electionEdit;
+    public PoliticianEdit politicianEdit;
 
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
     }
 
-    public void setElectionListPage(ElectionListPage electionListPage) {
-        this.electionListPage = electionListPage;
+    public void setElectionListPage(ListPage listPage) {
+        this.listPage = listPage;
+    }
+
+    public void setElectionEdit(ElectionEdit electionEdit) {
+        this.electionEdit = electionEdit;
+    }
+    public void setPoliticianEdit(PoliticianEdit politicianEdit) {
+        this.politicianEdit = politicianEdit;
     }
 
     public void setNameLabel (String name) {
@@ -133,26 +142,26 @@ public class Individual {
             contextMenu2.getItems().clear();
             MenuItem adding =new MenuItem("Add Content to this Table"), add=new MenuItem("Add Content to this Table"), visit=new MenuItem("Visit"), remove=new MenuItem("Remove from Election");
             adding.setOnAction(e -> {
-                electionListPage.adding=true;
+                listPage.adding=true;
                 if (election) {
-                    electionListPage.addingToElection = selectedElection;
-                    electionListPage.election=false;
+                    listPage.addingToElection = selectedElection;
+                    listPage.election=false;
                 }
                 else {
-                    electionListPage.addingToPolitician = selectedPolitician;
-                    electionListPage.election=true;
+                    listPage.addingToPolitician = selectedPolitician;
+                    listPage.election=true;
                 }
                 launcher.switchScene("electionList");
             });
             add.setOnAction(e -> {
-                electionListPage.adding=true;
+                listPage.adding=true;
                 if (election) {
-                    electionListPage.addingToElection = selectedElection;
-                    electionListPage.election=false;
+                    listPage.addingToElection = selectedElection;
+                    listPage.election=false;
                 }
                 else {
-                    electionListPage.addingToPolitician = selectedPolitician;
-                    electionListPage.election=true;
+                    listPage.addingToPolitician = selectedPolitician;
+                    listPage.election=true;
                 }
                 launcher.switchScene("electionList");
             });
@@ -161,34 +170,50 @@ public class Individual {
                 {
                     int index=currentCandidates.getIndex((Candidate) listView.getSelectionModel().getSelectedItem());
                     currentCandidates.remove(currentCandidates.get(index));
+                    selectedElection.getDuplicateCheck().remove(currentPoliticians.get(index));
+                    currentPoliticians.get(index).getElections().get(currentPoliticians.get(index).getElections().getIndex(selectedElection)).getDuplicateCheck().remove(currentPoliticians.get(index));
                     currentPoliticians.remove(currentPoliticians.get(index));
+                    currentPoliticians.get(index).getElections().remove(selectedElection);
+
                 }
                 else
                 {
-                    currentElections.remove(currentElections.get(currentElections.getIndex((Election) listView.getSelectionModel().getSelectedItem())));
+                    int index=currentElections.getIndex((Election) listView.getSelectionModel().getSelectedItem());
+                    currentElections.remove(currentElections.get(index));
+                    int i=currentElections.get(index).getPoliticians().getIndex(selectedPolitician);
+                    currentElections.get(index).getPoliticians().remove(selectedPolitician);
+                    currentElections.get(index).getPoliticians().get(i).getDuplicateCheck().remove(selectedElection);
+                    currentElections.get(index).getCandidates().remove(currentElections.get(index).getCandidates().get(i));
                 }
             });
             visit.setOnAction(e -> {
-                currentPoliticians=null;
-                currentCandidates=null;
-                currentElections=null;
-                selectedElection=null;
-                selectedPolitician=null;
                 if (election)
                 {
+                    selectedElection=null;
                     selectedPolitician=currentPoliticians.get(currentCandidates.getIndex((Candidate) listView.getSelectionModel().getSelectedItem()));
+                    currentPoliticians=null;
+                    currentCandidates=null;
+                    election=false;
                     init();
                 }
                 else
                 {
                     selectedElection= (Election) listView.getSelectionModel().getSelectedItem();
+                    currentElections=null;
+                    selectedPolitician=null;
+                    election=true;
                     init();
                 }
             });
-            contextMenu1.getItems().addAll(adding, visit);
+            contextMenu1.getItems().addAll(adding, visit, remove);
             contextMenu2.getItems().add(add);
-            contextMenu1.show(listView, event.getScreenX(), event.getScreenY()); //TODO
+            if (listView.getSelectionModel().getSelectedItem() != null)
+                contextMenu1.show(listView, event.getScreenX(), event.getScreenY());
+            else
+                contextMenu2.show(listView, event.getScreenX(), event.getScreenY());
         });
+        contextMenu1.setStyle("-fx-font-size: 20px;");
+        contextMenu2.setStyle("-fx-font-size: 20px;");
     }
 
     public void initListView()
@@ -291,14 +316,32 @@ public class Individual {
         currentElections=null;
         selectedElection=null;
         selectedPolitician=null;
-        electionListPage.election=election;
-        electionListPage.adding=false;
+        listPage.election=election;
+        listPage.adding=false;
         launcher.switchScene("electionList");
     }
 
     public void editSelected()
     {
-        //TODO
+        if (election) {
+            electionEdit.electionName.setText(selectedElection.getName());
+            electionEdit.electionLocation.setText(selectedElection.getLocation());
+            electionEdit.electionType.setValue(Utilities.electionTypeReverseMap.get(selectedElection.getType()).getValue());
+            electionEdit.electionWinnerCount.setValue(selectedElection.getNumOfWinners());
+            electionEdit.updateIndex = listPage.mainElectionList.getIndex(selectedElection);
+            listPage.adding=false;
+            launcher.switchScene("electionForm");
+        }
+        else
+        {
+            politicianEdit.politicianName.setText(selectedPolitician.getName());
+            politicianEdit.politicianHome.setText(selectedPolitician.getHomeCounty());
+            politicianEdit.politicianParty.setText(selectedPolitician.getParty());
+            politicianEdit.politicianURL.setText(selectedPolitician.getImageURL());
+            politicianEdit.updateIndex = listPage.mainPoliticianList.getIndex(selectedPolitician);
+            listPage.adding=false;
+            launcher.switchScene("politicianForm");
+        }
     }
 
     public void assignRanking()

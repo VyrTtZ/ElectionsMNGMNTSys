@@ -12,5 +12,8 @@ module main {
     exports electionmngmntsys.controllers;
     exports electionmngmntsys.models;
     exports electionmngmntsys;
-    opens electionmngmntsys.controllers to javafx.fxml;
+    opens electionmngmntsys.controllers to javafx.fxml, xstream;
+    opens electionmngmntsys.models to xstream;
+    opens electionmngmntsys.mhashmap to xstream;
+    opens electionmngmntsys.mlinkedlist to xstream;
 }

@@ -1,7 +1,7 @@
 package electionmngmntsys;
 
 import electionmngmntsys.controllers.ElectionEdit;
-import electionmngmntsys.controllers.ElectionListPage;
+import electionmngmntsys.controllers.ListPage;
 import electionmngmntsys.controllers.Individual;
 import electionmngmntsys.controllers.PoliticianEdit;
 import javafx.application.Application;
@@ -18,12 +18,12 @@ public class Launcher extends Application {
     public Scene electionList, electionEdit, politicianEdit, individual;
     public static Stage stage;
     public ElectionEdit electionEditController;
-    public ElectionListPage electionListPageController;
+    public ListPage listPageController;
     public PoliticianEdit politicianEditController;
     public Individual individualController;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader electionListLoader = new FXMLLoader(Launcher.class.getResource("/electionListPage.fxml"));
+        FXMLLoader electionListLoader = new FXMLLoader(Launcher.class.getResource("/listPage.fxml"));
         FXMLLoader electionEditLoader = new FXMLLoader(Launcher.class.getResource("/electionEdit.fxml"));
         FXMLLoader politicianEditLoader = new FXMLLoader(Launcher.class.getResource("/politicianEdit.fxml"));
         FXMLLoader individualLoader=new FXMLLoader(Launcher.class.getResource("/individualPage.fxml"));
@@ -34,20 +34,22 @@ public class Launcher extends Application {
         Parent individualParent=individualLoader.load();
 
         electionEditController = electionEditLoader.getController();
-        electionListPageController = electionListLoader.getController();
+        listPageController = electionListLoader.getController();
         politicianEditController = politicianEditLoader.getController();
         individualController=individualLoader.getController();
 
         electionEditController.setLauncher(this);
-        electionEditController.setElectionListPage(electionListPageController);
-        electionListPageController.setLauncher(this);
-        electionListPageController.setElectionEdit(electionEditController);
-        electionListPageController.setPoliticianEdit(politicianEditController);
-        electionListPageController.setIndividual(individualController);
+        electionEditController.setElectionListPage(listPageController);
+        listPageController.setLauncher(this);
+        listPageController.setElectionEdit(electionEditController);
+        listPageController.setPoliticianEdit(politicianEditController);
+        listPageController.setIndividual(individualController);
         politicianEditController.setLauncher(this);
-        politicianEditController.setElectionListPage(electionListPageController);
+        politicianEditController.setElectionListPage(listPageController);
         individualController.setLauncher(this);
-        individualController.setElectionListPage(electionListPageController);
+        individualController.setElectionListPage(listPageController);
+        individualController.setPoliticianEdit(politicianEditController);
+        individualController.setElectionEdit(electionEditController);
 
         electionList = new Scene(electionListParent, 1920, 1080);
         electionEdit = new Scene(electionEditParent, 1920, 1080);
@@ -90,7 +92,7 @@ public class Launcher extends Application {
             case "electionList":
                 stage.setScene(electionList);
                 stage.setTitle("Election List");
-                electionListPageController.draw();
+                listPageController.draw();
                 stage.setFullScreen(true);
                 break;
             case "politicianForm":
