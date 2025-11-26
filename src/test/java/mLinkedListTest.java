@@ -17,6 +17,9 @@ class mLinkedListTest {
     @BeforeEach
     void setUp() {
         linkedList = new mLinkedList<>();
+        first = new mNodeL<>("First", second);
+        second = new mNodeL<>("Second", third);
+        third = new mNodeL<>("Third", null);
     }
 
    //--------------------------------------------------------------------------------
@@ -40,19 +43,14 @@ class mLinkedListTest {
         assertEquals(3, linkedList.size());
 
         assertEquals(linkedList.getNode(0).getNext().getContent(), second.getContent()); //Checks order
-        assertEquals(linkedList.getNode(1).getPrev().getContent(), first.getContent());
         assertEquals(linkedList.getNode(1).getNext().getContent(), third.getContent());
-        assertEquals(linkedList.getNode(2).getPrev().getContent(), second.getContent());
 
         assertNull(linkedList.getNode(3)); //Non-existent elements
         assertNull(linkedList.getNode(-1));
 
     }
 
-    //--------------------------------------------------------------------------------------------
-    @Test
-    void add() {
-    }
+
    //----------------------------------------------------------------------------------------------
     @Test
     void remove() {
@@ -63,7 +61,6 @@ class mLinkedListTest {
 
         linkedList.remove(String.valueOf(second)); //Middle node
         assertEquals(2, linkedList.size());
-        assertEquals(first.getContent(), linkedList.searchNode(third).getPrev().getContent());
         assertEquals(third.getContent(), linkedList.searchNode(first).getNext().getContent());
         assertEquals(third.getContent(), linkedList.getNode(1).getContent());
 
@@ -146,8 +143,6 @@ class mLinkedListTest {
 
         // previous and next node checks if still correct after index swapping
         assertNull(linkedList.getNode(0).getNext());
-        assertEquals("Third", linkedList.getNode(1).getPrev().getContent());
-        assertEquals("Second", linkedList.getNode(2).getPrev().getContent());
 
     }
     //-----------------------------------------------------------------------------------------------

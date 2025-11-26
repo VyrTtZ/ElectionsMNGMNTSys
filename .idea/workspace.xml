@@ -4,20 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="Fixed updating bug, disabled buttons.">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="Still continuing individual accessing.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/Launcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ListPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/Individual.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/PoliticianEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/PoliticianEdit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Candidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Candidate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Politician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Politician.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/electionListPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/listPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,18 +24,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Bao6879"
-  }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/VyrTtZ/ElectionsMNGMNTSys.git",
-    "accountId": "d5ed36eb-2d6d-4c16-9a45-9e08235834cf"
-  }
-}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -55,28 +40,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Launcher.executor": "Run",
-    "JUnit.All in ElectionMNGMNTSys.executor": "Run",
-    "JUnit.mHashMapTest.containsValue.executor": "Run",
-    "JUnit.mHashMapTest.putNode.executor": "Run",
-    "JUnit.test in ElectionMNGMNTSys.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in ElectionMNGMNTSys.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.mHashMapTest.containsValue.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.mHashMapTest.putNode.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.test in ElectionMNGMNTSys.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/VyrTtZ/IdeaProjects/ElectionsMNGMNTSys&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Launcher">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="electionmngmntsys.Launcher" />
@@ -141,14 +121,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.26775.15" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.26775.15" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -157,7 +129,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1764098808933</updated>
-      <workItem from="1764111286177" duration="4660000" />
     </task>
     <task id="LOCAL-00001" summary="fixed tests file path">
       <option name="closed" value="true" />
@@ -207,19 +178,8 @@
       <option name="project" value="LOCAL" />
       <updated>1764103649699</updated>
     </task>
-    <task id="LOCAL-00007" summary="Fixed updating bug, disabled buttons.">
-      <option name="closed" value="true" />
-      <created>1764109358168</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1764109358168</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed tests file path" />
@@ -228,28 +188,6 @@
     <MESSAGE value="pushed updated deps in pom for xstream" />
     <MESSAGE value="Starting on the drill-down." />
     <MESSAGE value="Still continuing individual accessing." />
-    <MESSAGE value="Fixed updating bug, disabled buttons." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed updating bug, disabled buttons." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ListPage.java</url>
-          <line>558</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ListPage.java</url>
-          <line>825</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="Still continuing individual accessing." />
   </component>
 </project>
