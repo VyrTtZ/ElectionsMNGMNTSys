@@ -18,14 +18,14 @@ public class ElectionEdit {
     //Back End
     public int updateIndex=-1;
     public Launcher launcher;
-    public ElectionListPage electionListPage;
+    public ListPage listPage;
 
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
     }
 
-    public void setElectionListPage(ElectionListPage electionListPage) {
-        this.electionListPage = electionListPage;
+    public void setElectionListPage(ListPage listPage) {
+        this.listPage = listPage;
     }
 
     @FXML
@@ -44,14 +44,17 @@ public class ElectionEdit {
     @FXML
     public void submit() {
         Election tmp=new Election(electionName.getText(), Utilities.electionTypeMap.get(electionType.getValue()).getValue(), electionLocation.getText(), electionDate.getValue(), (int)electionWinnerCount.getValue());
-        if (!electionListPage.elections.containsKey(tmp)) {
-            electionListPage.mainElectionList.add(tmp);
-            electionListPage.elections.put(tmp, 1);
+        if (!listPage.elections.containsKey(tmp)) {
             if (updateIndex!=-1) {
-                Election rmv = electionListPage.mainElectionList.get(updateIndex);
-                electionListPage.mainElectionList.remove(rmv);
-                electionListPage.elections.remove(rmv);
+                Election rmv = listPage.mainElectionList.get(updateIndex);
+                listPage.elections.remove(rmv);
+                listPage.mainElectionList.get(updateIndex).set(tmp);
             }
+            else
+            {
+                listPage.mainElectionList.add(tmp);
+            }
+            listPage.elections.put(tmp, 1);
             launcher.switchScene("electionList");
         }
         else {

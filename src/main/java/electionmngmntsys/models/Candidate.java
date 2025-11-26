@@ -21,6 +21,14 @@ public class Candidate extends Politician implements Serializable{
         this.votes = votes;
     }
 
+    public void set(Candidate candidate) {
+        this.setName(candidate.getName());
+        this.setDateOfBirth(candidate.getDateOfBirth());
+        this.setHomeCounty(candidate.getHomeCounty());
+        this.setImageURL(candidate.getImageURL());
+        this.setElection(candidate.getElection());
+    }
+
     public Election getElection() {
         return election;
     }

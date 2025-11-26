@@ -6,7 +6,6 @@ import electionmngmntsys.Launcher;
 import electionmngmntsys.Utilities;
 import electionmngmntsys.mhashmap.mHashMap;
 import electionmngmntsys.mlinkedlist.mLinkedList;
-import electionmngmntsys.mlinkedlist.mNodeL;
 import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
@@ -20,19 +19,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
 
-public class ElectionListPage {
+public class ListPage {
 
     ///ELECTION STUFF
     //Front End
-    public ChoiceBox <String> sortCriteria;
+    public ChoiceBox <String> sortCriteria, saveLoad;
     public TextField searchBar;
     public Canvas canvas;
     public Label filters, listInfo;
     public CheckBox changeSortingType;
+    public ScrollPane scrollPane;
 
     public ContextMenu validContextMenu =new ContextMenu(), invalidContextMenu =new ContextMenu(), addContextMenu =new ContextMenu();
 
@@ -94,9 +95,34 @@ public class ElectionListPage {
         sortCriteria.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             draw();
         });
+        saveLoad.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (Objects.equals(saveLoad.getSelectionModel().getSelectedItem(), "Save"))
+            {
+                try {
+                    save();
+                    listInfo.setText("Saved!");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else if (Objects.equals(saveLoad.getSelectionModel().getSelectedItem(), "Load"))
+            {
+                try {
+                    load();
+                    reInit();
+                    draw();
+                    listInfo.setText("Loaded!");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             draw();
         });
+        saveLoad.getItems().clear();
+        saveLoad.getItems().addAll("Nothing", "Save", "Load");
+        saveLoad.setValue("Nothing");
         draw();
     }
 
@@ -124,14 +150,14 @@ public class ElectionListPage {
         draw();
     }
 
-    private void reInit()
+    private void initTabs()
     {
-        if (election) {
+        if (election && !adding) {
             electionTab.setDisable(true);
             politicianTab.setDisable(false);
             changeSortingType.setText("Search by Location");
         }
-        else
+        else if (!election && !adding)
         {
             changeSortingType.setText("Search by Home");
             electionTab.setDisable(false);
@@ -141,6 +167,11 @@ public class ElectionListPage {
             electionTab.setDisable(true);
             politicianTab.setDisable(true);
         }
+    }
+
+    private void reInit()
+    {
+        initTabs();
         initSortingChoiceBox();
         initContextMenus();
         filters.setOnMousePressed(event -> {
@@ -268,26 +299,42 @@ public class ElectionListPage {
         });
         validContextMenu.getItems().add(add);
         canvas.setOnContextMenuRequested(event -> {
-            int index=getIndexOfMouse((int) event.getScreenX(), (int) event.getScreenY()-104); //top buttons and stuff
+            double scrollOffset=scrollPane.getVvalue()*Math.max(0, canvas.getHeight()-scrollPane.getViewportBounds().getHeight());
+            double actualY=event.getScreenY()-104+scrollOffset;
+            int index=getIndexOfMouse((int) event.getX(), (int) actualY); //scrolled
             MenuItem addTo=new MenuItem("Add");
 
             if (index!=-1 && ((election && index<= currentElectionList.size()-1) || (!election && index<=currentPoliticianList.size()-1)))  {
                 addTo.setOnAction(e -> {
                     if (!election) {
-                        addingToElection.getPoliticians().add(currentPoliticianList.get(index));
-                        addingToElection.getCandidates().add(new Candidate(currentPoliticianList.get(index), addingToElection, 0));
-                        Politician curPol=currentPoliticianList.get(index);
-                        int i=mainPoliticianList.getIndex(curPol);
-                        mainPoliticianList.get(i).getElections().add(addingToElection);
+                        if (!addingToElection.getDuplicateCheck().containsKey(currentPoliticianList.get(index))) {
+                            addingToElection.getPoliticians().add(currentPoliticianList.get(index));
+                            addingToElection.getDuplicateCheck().put(currentPoliticianList.get(index), 1);
+                            addingToElection.getCandidates().add(new Candidate(currentPoliticianList.get(index), addingToElection, 0));
+                            Politician curPol = currentPoliticianList.get(index);
+                            int i = mainPoliticianList.getIndex(curPol);
+                            mainPoliticianList.get(i).getElections().add(addingToElection);
+                        }
+                        else
+                        {
+                            listInfo.setText("That politician is in the election already!");
+                        }
                     }
                     else
                     {
-                        addingToPolitician.getVotesList().add(0);
-                        addingToPolitician.getAssociations().add(addingToPolitician.getParty()); //TODO hash map verify
-                        addingToPolitician.getElections().add(currentElectionList.get(index));
-                        int i=mainElectionList.getIndex(currentElectionList.get(index));
-                        mainElectionList.get(i).getPoliticians().add(addingToPolitician);
-                        mainElectionList.get(i).getCandidates().add(new Candidate(addingToPolitician, addingToElection, 0));
+                        if (!addingToPolitician.getDuplicateCheck().containsKey(currentElectionList.get(index))) {
+                            addingToPolitician.getDuplicateCheck().put(currentElectionList.get(index), 1);
+                            addingToPolitician.getVotesList().add(0);
+                            addingToPolitician.getAssociations().add(addingToPolitician.getParty());
+                            addingToPolitician.getElections().add(currentElectionList.get(index));
+                            int i=mainElectionList.getIndex(currentElectionList.get(index));
+                            mainElectionList.get(i).getPoliticians().add(addingToPolitician);
+                            mainElectionList.get(i).getCandidates().add(new Candidate(addingToPolitician, addingToElection, 0));
+                        }
+                        else
+                        {
+                            listInfo.setText("This politician is in that election already!");
+                        }
                     }
                 });
                 delete.setOnAction(e -> {
@@ -322,7 +369,7 @@ public class ElectionListPage {
                         electionEdit.electionLocation.setText(tmp.getLocation());
                         electionEdit.electionType.setValue(Utilities.electionTypeReverseMap.get(tmp.getType()).getValue());
                         electionEdit.electionWinnerCount.setValue(tmp.getNumOfWinners());
-                        electionEdit.updateIndex = index;
+                        electionEdit.updateIndex = mainElectionList.getIndex(tmp);
                         launcher.switchScene("electionForm");
                     }
                     else
@@ -332,22 +379,20 @@ public class ElectionListPage {
                         politicianEdit.politicianHome.setText(tmp.getHomeCounty());
                         politicianEdit.politicianParty.setText(tmp.getParty());
                         politicianEdit.politicianURL.setText(tmp.getImageURL());
-                        politicianEdit.updateIndex = index;
-                        mainPoliticianList.remove(tmp);
-                        politicians.remove(tmp);
+                        politicianEdit.updateIndex = mainPoliticianList.getIndex(tmp);
                         launcher.switchScene("politicianForm");
                     }
                 });
                 visit.setOnAction(e -> {
                     if (election)
                     {
-                        individual.selectedElection=currentElectionList.get(index); //TODO COPY THAT
+                        individual.selectedElection=currentElectionList.get(index);
                         individual.selectedPolitician=null;
                         individual.election=true;
                     }
                     else
                     {
-                        individual.selectedPolitician=currentPoliticianList.get(index); //TODO COPY THAT
+                        individual.selectedPolitician=currentPoliticianList.get(index);
                         individual.selectedElection=null;
                         individual.election=false;
                     }
@@ -380,11 +425,13 @@ public class ElectionListPage {
 
         invalidContextMenu.setStyle("-fx-font-size: 20px;");
         validContextMenu.setStyle("-fx-font-size: 20px;");
+        addContextMenu.setStyle("-fx-font-size: 20px;");
     }
 
     @FXML
     public void draw() {
         int x=50, y=20;
+        initTabs();
         searchFilterAndSort();
         String imagePath;
         if (election) {
@@ -510,24 +557,28 @@ public class ElectionListPage {
         }
         if (election) {
             for (Election e : currentElectionList) {
-                if (changeSortingType.isSelected())
+                if (changeSortingType.isSelected()) {
                     if (e.getLocation().contains(searchBar.getText()))
                         newList.add(e);
-                else
+                }
+                else {
                     if (e.getName().contains(searchBar.getText()))
                         newList.add(e);
+                }
             }
             currentElectionList=Utilities.copyList(newList);
         }
         else
         {
             for (Politician p : currentPoliticianList) {
-                if (changeSortingType.isSelected())
+                if (changeSortingType.isSelected()) {
                     if (p.getHomeCounty().contains(searchBar.getText()))
                         newList.add(p);
-                else
+                }
+                else {
                     if (p.getName().contains(searchBar.getText()))
                         newList.add(p);
+                }
             }
             currentPoliticianList=Utilities.copyList(newList);
         }
@@ -790,11 +841,12 @@ public class ElectionListPage {
         XStream xstream=new XStream(new DomDriver());
         ObjectOutputStream out=xstream.createObjectOutputStream(new FileWriter("Elections.xml"));
         out.writeObject(mainElectionList);
+        out.writeObject(mainPoliticianList);
         out.close();
     }
 
     public void load() throws Exception {
-        Class<?>[] classes = new Class[] { mNodeL.class, mLinkedList.class, ElectionEdit.class, PoliticianEdit.class, PoliticianFilterEdit.class, Individual.class, ElectionFilterEdit.class};
+        Class<?>[] classes = new Class[] { ListPage.class, mLinkedList.class, Election.class, Politician.class, Candidate.class};
 
         //setting up the xstream object with default security and the above classes
         XStream xstream = new XStream(new DomDriver());
@@ -803,11 +855,8 @@ public class ElectionListPage {
 
         //doing the actual serialisation to an XML file
         ObjectInputStream in = xstream.createObjectInputStream(new FileReader("Elections.xml"));
-        mainElectionList = (mLinkedList<Election>) in.readObject();
+        mainElectionList=Utilities.copyList((mLinkedList <Election>) in.readObject());
+        mainPoliticianList=Utilities.copyList((mLinkedList <Election>) in.readObject());
         in.close();
     }
-
-
-
-
 }

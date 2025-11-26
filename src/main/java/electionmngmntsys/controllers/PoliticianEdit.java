@@ -1,6 +1,7 @@
 package electionmngmntsys.controllers;
 
 import electionmngmntsys.Launcher;
+import electionmngmntsys.models.Candidate;
 import electionmngmntsys.models.Election;
 import electionmngmntsys.models.Politician;
 import javafx.fxml.FXML;
@@ -16,14 +17,14 @@ public class PoliticianEdit {
     //Back End
     public int updateIndex=-1;
     public Launcher launcher;
-    public ElectionListPage electionListPage;
+    public ListPage listPage;
 
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
     }
 
-    public void setElectionListPage(ElectionListPage electionListPage) {
-        this.electionListPage = electionListPage;
+    public void setElectionListPage(ListPage listPage) {
+        this.listPage = listPage;
     }
 
     @FXML
@@ -32,15 +33,22 @@ public class PoliticianEdit {
     @FXML
     public void submit() {
         Politician tmp=new Politician(politicianName.getText(), politicianDateOfBirth.getValue(), politicianParty.getText(), politicianHome.getText(), politicianURL.getText());
-        if (!electionListPage.politicians.containsKey(tmp)) {
-            electionListPage.mainPoliticianList.add(tmp);
-            electionListPage.politicians.put(tmp, 1);
-            launcher.switchScene("electionList");
+        if (!listPage.politicians.containsKey(tmp)) {
             if (updateIndex!=-1) {
-                Politician rmv = electionListPage.mainPoliticianList.get(updateIndex);
-                electionListPage.mainPoliticianList.remove(rmv);
-                electionListPage.politicians.remove(rmv);
+                Politician rmv = listPage.mainPoliticianList.get(updateIndex);
+                listPage.politicians.remove(rmv);
+                listPage.mainPoliticianList.get(updateIndex).set(tmp);
+                for (Election election: listPage.mainPoliticianList.get(updateIndex).getElections()) {
+                    int i=election.getPoliticians().getIndex(tmp);
+                    election.getCandidates().get(i).set(new Candidate(tmp, election, 0));
+                }
             }
+            else
+            {
+                listPage.mainPoliticianList.add(tmp);
+            }
+            listPage.politicians.put(tmp, 1);
+            launcher.switchScene("electionList");
         }
         else {
             politicianFormMainLabel.setText("Politician already exists!");

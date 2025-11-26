@@ -29,7 +29,16 @@ public class Election implements Serializable {
         this.numOfWinners = numOfWinners;
         this.candidates=new mLinkedList<>();
         this.politicians = new mLinkedList<>();
+    }
 
+    public void set(Election other)
+    {
+        this.type = other.getType();
+        this.location = other.getLocation();
+        this.name = other.getName();
+        this.yearDate = other.getYearDate();
+        this.numOfWinners = other.getNumOfWinners();
+        this.id = other.getId();
     }
 
     public String getName() {

@@ -27,6 +27,15 @@ public class Politician implements Serializable {
         this.imageURL = imageURL;
     }
 
+    public void set(Politician politician)
+    {
+        this.name = politician.getName();
+        this.dateOfBirth = politician.getDateOfBirth();
+        this.party = politician.getParty();
+        this.homeCounty = politician.getHomeCounty();
+        this.imageURL = politician.getImageURL();
+    }
+
     public String getName() {
         return name;
     }
