@@ -41,7 +41,6 @@ public class PoliticianEdit {
                 for (Election election: listPage.mainPoliticianList.get(updateIndex).getElections()) {
                     int i=election.getPoliticians().getIndex(tmp);
                     election.getCandidates().get(i).set(new Candidate(tmp, election, 0));
-                    election.getCandidates().get(i).setParty(rmv.getParty());
                 }
             }
             else

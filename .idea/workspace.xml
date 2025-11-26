@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="Still continuing individual accessing.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/ElectionListPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/Individual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/PoliticianEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/controllers/PoliticianEdit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/mlinkedlist/mNodeL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Candidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Candidate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Election.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Politician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/electionmngmntsys/models/Politician.java" afterDir="false" />
-    </list>
+    <list default="true" id="9a384d4e-c96a-4132-845a-95ed4f21fe8d" name="Changes" comment="Fixed all bugs." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -178,8 +167,27 @@
       <option name="project" value="LOCAL" />
       <updated>1764103649699</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed all bugs.">
+      <option name="closed" value="true" />
+      <created>1764116257695</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764116257695</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed tests file path" />
@@ -188,6 +196,7 @@
     <MESSAGE value="pushed updated deps in pom for xstream" />
     <MESSAGE value="Starting on the drill-down." />
     <MESSAGE value="Still continuing individual accessing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Still continuing individual accessing." />
+    <MESSAGE value="Fixed all bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed all bugs." />
   </component>
 </project>
